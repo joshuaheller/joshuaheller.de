@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { SITE } from '../site';
 ---
 
 <Layout
@@ -11,16 +10,11 @@ import { SITE } from '../site';
   <section class="container-page max-w-3xl py-16">
     <h1 class="text-4xl font-extrabold tracking-tight text-ink">Impressum</h1>
     <div class="prose-jh mt-8">
-      <p class="rounded-xl border border-dashed border-line bg-surface-2 p-4 text-sm text-muted">
-        Platzhalter — bitte vor Live-Schaltung mit den finalen Firmendaten (HRB-Nummer, vollständige Anschrift,
-        USt-IdNr.) füllen und anwaltlich prüfen lassen.
-      </p>
-
       <h2>Angaben gemäß § 5 TMG</h2>
       <p>
         TAISC – The AI Software Company GmbH<br />
-        [Straße und Hausnummer]<br />
-        [PLZ] Pforzheim<br />
+        Haid-und-Neu-Str. 18<br />
+        76131 Karlsruhe<br />
         Deutschland
       </p>
 
@@ -29,18 +23,18 @@ import { SITE } from '../site';
 
       <h2>Kontakt</h2>
       <p>
-        E-Mail: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        E-Mail: <a href="mailto:info@theaisoftwarecompany.com">info@theaisoftwarecompany.com</a>
       </p>
 
       <h2>Registereintrag</h2>
       <p>
         Eintragung im Handelsregister.<br />
-        Registergericht: [Amtsgericht]<br />
-        Registernummer: HRB [Nummer]
+        Registergericht: Amtsgericht Mannheim<br />
+        Registernummer: HRB 755216
       </p>
 
       <h2>Umsatzsteuer-ID</h2>
-      <p>Umsatzsteuer-Identifikationsnummer gemäß § 27 a UStG: [USt-IdNr.]</p>
+      <p>Umsatzsteuer-Identifikationsnummer gemäß § 27 a UStG: DE367222175</p>
 
       <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
       <p>Joshua Heller (Anschrift wie oben)</p>

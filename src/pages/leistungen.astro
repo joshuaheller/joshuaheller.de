@@ -1,0 +1,86 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Cta from '../components/Cta.astro';
+import { MEGA_MENU, SERVICES } from '../site';
+
+const byIntent = {
+  verstaendnis: 'Ich brauche KI-Verständnis',
+  engineer: 'Ich brauche einen KI-Engineer',
+  fuehrung: 'Ich brauche KI-Führung',
+};
+
+const columns = (Object.keys(byIntent) as (keyof typeof byIntent)[]).map((intent) => ({
+  title: byIntent[intent],
+  services: SERVICES.filter((s) => s.intent === intent),
+}));
+
+const situations = [
+  { s: 'Ihr habt ein KI-Feature, das in wenigen Wochen live muss.', r: 'Forward Deployed Engineer', href: '/forward-deployed-engineer' },
+  { s: 'Ihr wollt eine Idee schnell und günstig validieren.', r: 'MVP-Service', href: '/mvp' },
+  { s: 'Ihr braucht dauerhafte KI-Führung, aber keinen Vollzeit-Chief-AI-Officer.', r: 'Fractional CAIO', href: '/fractional-caio' },
+  { s: 'Ihr wisst noch nicht, wo ihr mit KI anfangen sollt.', r: 'KI-Workshop', href: '/ki-workshop' },
+  { s: 'Ihr braucht punktuell eine unabhängige zweite Meinung.', r: 'KI-Sparring', href: '/ki-sparring' },
+];
+const _ = MEGA_MENU; // kept for parity with nav structure
+---
+
+<Layout
+  title="Alle Leistungen — Joshua Heller, AI Engineer & Fractional CAIO"
+  description="Forward Deployed Engineer, MVP-Service, Fractional CAIO, KI-Workshop und KI-Sparring. Drei Intents: KI-Verständnis, KI-Engineer, KI-Führung. Für Mittelstand, Konzerne, Scaleups & Private Equity im DACH-Raum."
+  path="/leistungen"
+>
+  <section class="bg-blobs">
+    <div class="container-page py-16 md:py-20">
+      <p class="eyebrow mb-4">Leistungen</p>
+      <h1 class="max-w-3xl text-4xl font-extrabold tracking-tight text-ink md:text-5xl">
+        Drei Wege, wie ich helfe.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg text-body">
+        Je nachdem, wo ihr steht: Klarheit schaffen, KI bauen oder KI führen. Alle Preise sind Einstiegspreise netto —
+        das Genaue klären wir im Erstgespräch.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-page py-16">
+    <div class="grid gap-8 lg:grid-cols-3">
+      {
+        columns.map((col) => (
+          <div>
+            <p class="mb-5 text-sm font-semibold uppercase tracking-wide text-muted">{col.title}</p>
+            <div class="space-y-5">
+              {col.services.map((s) => (
+                <a href={`/${s.slug}`} class="card-line block p-6 transition hover:border-electric">
+                  <h2 class="text-lg font-bold text-ink">{s.name}</h2>
+                  <p class="mt-1 text-sm text-body">{s.tagline}</p>
+                  <div class="mt-4 flex items-center justify-between">
+                    <span class="pill">{s.price}</span>
+                    <span class="font-semibold text-electric">Mehr erfahren →</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="bg-surface-2 py-20">
+    <div class="container-page">
+      <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Welche Leistung passt zu mir?</h2>
+      <div class="mt-10 divide-y divide-line overflow-hidden rounded-[20px] border border-line bg-white">
+        {
+          situations.map((row) => (
+            <div class="flex flex-col gap-3 p-5 sm:flex-row sm:items-center sm:justify-between">
+              <p class="text-body">{row.s}</p>
+              <a href={row.href} class="shrink-0 font-semibold text-electric">{row.r} →</a>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <Cta heading="Noch unsicher, was passt?" sub="Genau dafür ist das Erstgespräch. 30 Minuten, unverbindlich." />
+</Layout>

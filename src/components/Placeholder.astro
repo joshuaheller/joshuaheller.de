@@ -1,0 +1,32 @@
+---
+// Bild-Platzhalter bis echte Assets geliefert sind.
+// label beschreibt, welches Bild hier später hinkommt.
+interface Props {
+  label: string;
+  ratio?: string; // e.g. "4/3", "16/9", "1/1"
+  class?: string;
+  rounded?: string;
+}
+const { label, ratio = '4/3', class: cls = '', rounded = 'rounded-[24px]' } = Astro.props;
+---
+
+<div
+  class:list={['relative overflow-hidden border border-line bg-surface-3', rounded, cls]}
+  style={`aspect-ratio:${ratio}`}
+  role="img"
+  aria-label={`Platzhalter: ${label}`}
+>
+  <div
+    class="absolute inset-0"
+    style="background:radial-gradient(30rem 20rem at 20% 10%, rgba(0,255,255,0.18), transparent 60%), radial-gradient(28rem 18rem at 90% 100%, rgba(97,47,248,0.16), transparent 60%);"
+  >
+  </div>
+  <div class="absolute inset-0 flex flex-col items-center justify-center gap-2 p-6 text-center">
+    <svg class="size-8 text-muted/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+      <circle cx="8.5" cy="8.5" r="1.5"></circle>
+      <path d="m21 15-5-5L5 21"></path>
+    </svg>
+    <span class="text-xs font-medium text-muted">{label}</span>
+  </div>
+</div>

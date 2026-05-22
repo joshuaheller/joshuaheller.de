@@ -1,0 +1,43 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+const images = import.meta.glob<{ default: ImageMetadata }>('../assets/joshua/*.{jpg,jpeg,png}', {
+  eager: true,
+});
+
+interface Props {
+  name: string; // filename in src/assets/joshua, e.g. "hero.jpg"
+  alt: string;
+  ratio?: string;
+  class?: string;
+  rounded?: string;
+  priority?: boolean;
+  /** CSS object-position, e.g. "center 65%" */
+  position?: string;
+}
+const {
+  name,
+  alt,
+  ratio = '4/3',
+  class: cls = '',
+  rounded = 'rounded-[24px]',
+  priority = false,
+  position = 'center',
+} = Astro.props;
+
+const entry = images[`../assets/joshua/${name}`];
+if (!entry) throw new Error(`Photo not found in src/assets/joshua: ${name}`);
+const img = entry.default;
+---
+<div class:list={['overflow-hidden border border-line', rounded, cls]} style={`aspect-ratio:${ratio}`}>
+  <Image
+    src={img}
+    alt={alt}
+    widths={[480, 800, 1200]}
+    sizes="(max-width: 1024px) 100vw, 600px"
+    class="h-full w-full object-cover"
+    style={`object-position:${position}`}
+    loading={priority ? 'eager' : 'lazy'}
+  />
+</div>

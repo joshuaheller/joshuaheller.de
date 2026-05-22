@@ -1,0 +1,46 @@
+---
+import Placeholder from './Placeholder.astro';
+import Photo from './Photo.astro';
+interface Props {
+  eyebrow?: string;
+  title: string;
+  sub: string;
+  primary?: { label: string; href: string };
+  secondary?: { label: string; href: string };
+  /** Placeholder label (used when no photo is given) */
+  image: string;
+  /** Optional real photo filename in src/assets/joshua */
+  photo?: string;
+  /** CSS object-position for the photo */
+  photoPosition?: string;
+  price?: string;
+}
+const {
+  eyebrow,
+  title,
+  sub,
+  primary = { label: 'Erstgespräch vereinbaren →', href: '/kontakt' },
+  secondary,
+  image,
+  photo,
+  photoPosition = 'center',
+  price,
+} = Astro.props;
+---
+<section class="bg-blobs">
+  <div class="container-page grid items-center gap-12 py-16 md:py-24 lg:grid-cols-2">
+    <div>
+      {eyebrow && <p class="eyebrow mb-4">{eyebrow}</p>}
+      <h1 class="text-4xl font-extrabold leading-[1.05] tracking-tight text-ink md:text-5xl lg:text-6xl">
+        {title}
+      </h1>
+      <p class="mt-6 max-w-xl text-lg text-body">{sub}</p>
+      {price && <span class="pill mt-6">{price}</span>}
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a href={primary.href} class="btn btn-primary">{primary.label}</a>
+        {secondary && <a href={secondary.href} class="btn btn-ghost">{secondary.label}</a>}
+      </div>
+    </div>
+    {photo ? <Photo name={photo} alt={title} ratio="4/3" position={photoPosition} priority /> : <Placeholder label={image} ratio="4/3" />}
+  </div>
+</section>

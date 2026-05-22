@@ -1,0 +1,44 @@
+---
+import { CLIENTS, PARTNERS } from '../site';
+---
+<section class="border-y border-line bg-white">
+  <div class="container-page py-12">
+    <p class="text-center text-sm font-medium text-muted">Vertraut von Teams bei</p>
+    <div class="mt-8 grid grid-cols-2 items-center gap-x-10 gap-y-8 sm:grid-cols-3 lg:grid-cols-6">
+      {
+        CLIENTS.map((c) => (
+          <div class="flex h-14 items-center justify-center">
+            <img
+              src={c.file}
+              alt={`${c.name} Logo`}
+              loading="lazy"
+              decoding="async"
+              class:list={[
+                'w-auto object-contain transition',
+                c.boost ? 'max-h-14 max-w-[11rem]' : 'max-h-10 max-w-[8rem]',
+                c.color ? 'opacity-90 hover:opacity-100' : 'opacity-70 grayscale hover:opacity-100 hover:grayscale-0',
+              ]}
+            />
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-12 border-t border-line pt-10">
+      <p class="text-center text-sm font-medium text-muted">Partner & Förderung</p>
+      <div class="mt-6 flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
+        {
+          PARTNERS.map((p) => (
+            <img
+              src={p.file}
+              alt={`${p.name} Logo`}
+              loading="lazy"
+              decoding="async"
+              class="max-h-14 w-auto max-w-[14rem] object-contain"
+            />
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

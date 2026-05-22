@@ -1,0 +1,28 @@
+---
+import { SITE } from '../site';
+interface Props {
+  heading: string;
+  sub?: string;
+  showEmail?: boolean;
+}
+const { heading, sub, showEmail = true } = Astro.props;
+---
+<section class="container-page py-20">
+  <div class="bg-blobs overflow-hidden rounded-[28px] border border-line bg-surface-2 px-6 py-16 text-center md:px-16">
+    <h2 class="mx-auto max-w-2xl text-3xl font-extrabold tracking-tight text-ink md:text-4xl">{heading}</h2>
+    {sub && <p class="mx-auto mt-4 max-w-xl text-lg text-body">{sub}</p>}
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+      <a href="/kontakt" class="btn btn-primary">Erstgespräch vereinbaren →</a>
+    </div>
+    {
+      showEmail && (
+        <p class="mt-6 text-sm text-muted">
+          Lieber erstmal schreiben?{' '}
+          <a href={`mailto:${SITE.email}`} class="font-medium text-electric">
+            {SITE.email}
+          </a>
+        </p>
+      )
+    }
+  </div>
+</section>

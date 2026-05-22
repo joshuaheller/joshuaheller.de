@@ -1,0 +1,54 @@
+---
+import '@fontsource-variable/inter';
+import '../styles/global.css';
+import Seo from '../components/Seo.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../site';
+
+interface Props {
+  title: string;
+  description: string;
+  path?: string;
+  ogImage?: string;
+  type?: 'website' | 'article';
+  jsonLd?: Record<string, unknown>[];
+  noindex?: boolean;
+}
+
+const props = Astro.props;
+
+// Person JSON-LD ships on every page
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Joshua Heller',
+  url: SITE.url,
+  jobTitle: 'AI Engineer & Fractional CAIO',
+  worksFor: { '@type': 'Organization', name: 'TAISC – The AI Software Company GmbH', url: SITE.taisc },
+  sameAs: [SITE.linkedin, SITE.taisc],
+};
+
+const jsonLd = [personLd, ...(props.jsonLd ?? [])];
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <Seo {...props} jsonLd={jsonLd} />
+  </head>
+  <body>
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-electric focus:px-4 focus:py-2 focus:text-white">
+      Zum Inhalt springen
+    </a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

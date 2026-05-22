@@ -1,0 +1,55 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../site';
+---
+
+<Layout
+  title="Datenschutzerklärung — Joshua Heller"
+  description="Informationen zur Verarbeitung personenbezogener Daten auf joshuaheller.de."
+  path="/datenschutz"
+>
+  <section class="container-page max-w-3xl py-16">
+    <h1 class="text-4xl font-extrabold tracking-tight text-ink">Datenschutzerklärung</h1>
+    <div class="prose-jh mt-8">
+      <p class="rounded-xl border border-dashed border-line bg-surface-2 p-4 text-sm text-muted">
+        Platzhalter-Gerüst — bitte vor Live-Schaltung mit einem Datenschutz-Generator (z.&nbsp;B. eRecht24) oder
+        anwaltlich finalisieren. Die folgenden Abschnitte bilden den Rahmen ab.
+      </p>
+
+      <h2>1. Verantwortlicher</h2>
+      <p>
+        Verantwortlich für die Datenverarbeitung auf dieser Website ist die TAISC – The AI Software Company GmbH,
+        vertreten durch Joshua Heller, {SITE.location}. Kontakt: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+      </p>
+
+      <h2>2. Hosting</h2>
+      <p>Die Website wird statisch ausgeliefert (z.&nbsp;B. Vercel / Cloudflare Pages). Beim Aufruf werden Server-Logfiles verarbeitet (IP-Adresse, Zeitpunkt, abgerufene Ressource) auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO.</p>
+
+      <h2>3. Kontaktformular & Terminbuchung</h2>
+      <p>
+        Wenn du das Kontaktformular nutzt oder einen Termin buchst, verarbeiten wir die von dir angegebenen Daten zur
+        Bearbeitung deiner Anfrage auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen).
+      </p>
+
+      <h2>4. Webanalyse</h2>
+      <p>
+        Zum Einsatz kommt ein cookieloses, datenschutzfreundliches Analyse-Tool (Plausible bzw. PostHog self-hosted).
+        Es werden keine personenbezogenen Profile gebildet; ein Cookie-Banner ist hierfür nicht erforderlich.
+      </p>
+
+      <h2>5. Interaktive KI-Tools</h2>
+      <p>
+        Bei interaktiven Demos werden Eingaben zur Verarbeitung an den jeweiligen LLM-Anbieter (z.&nbsp;B. OpenAI,
+        Anthropic) übermittelt und nicht dauerhaft gespeichert. Beim AI-Readiness-Audit werden Eingaben in einer
+        Datenbank gespeichert, sofern du dies durch Angabe deiner E-Mail-Adresse ausdrücklich anforderst.
+      </p>
+
+      <h2>6. Deine Rechte</h2>
+      <p>
+        Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und
+        Widerspruch sowie ein Beschwerderecht bei einer Aufsichtsbehörde. Für Anfragen wende dich an
+        <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+      </p>
+    </div>
+  </section>
+</Layout>

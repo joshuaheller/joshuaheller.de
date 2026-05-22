@@ -1,0 +1,212 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ServiceHero from '../components/ServiceHero.astro';
+import Steps from '../components/Steps.astro';
+import Faq from '../components/Faq.astro';
+import Cta from '../components/Cta.astro';
+import { SITE } from '../site';
+
+const tasks = [
+  { title: 'LLM-Integration', body: 'OpenAI, Anthropic, Azure OpenAI, AWS Bedrock, lokale LLMs. Prompt Engineering, Token-Optimierung, Streaming.' },
+  { title: 'RAG-Systeme', body: 'Vector-Stores (pgvector, Pinecone, ChromaDB), Embedding-Strategien, Hybrid-Search, Re-Ranking, Eval-Pipelines.' },
+  { title: 'Agentic Workflows', body: 'LangGraph, MCP-Server, Tool-Calling, Multi-Agent-Architekturen, Human-in-the-Loop.' },
+  { title: 'AI-native Features', body: 'Chatbots, Co-Piloten, Klassifikatoren, Generatoren — eingebettet in eure bestehende Web-App.' },
+  { title: 'DevOps für KI', body: 'Deployment auf Azure / AWS, Observability, Logging für LLMs, Cost-Tracking, Latenz-Optimierung.' },
+  { title: 'Refactoring & Modernisierung', body: 'Legacy-Codebase, Migration auf moderne Stacks, AI-assisted Refactoring mit Cursor, Claude Code, Copilot.' },
+];
+
+const scenarios = [
+  { title: 'Ihr habt ein KI-Feature, das in 4–12 Wochen live muss.', body: 'Euer Team kann es nicht alleine in der Zeit — ich werde Teil des Teams, baue es mit, ziehe mich raus, sobald es läuft.' },
+  { title: 'Ihr habt einen funktionierenden Prototypen, aber keinen Weg in Production.', body: 'Vom Streamlit-Demo zum skalierbaren System ist ein anderer Berg. Ich kenne diesen Berg — mehrfach erklommen mit imagetocaption.ai und Kundenprojekten.' },
+  { title: 'Ihr wollt KI-Expertise aufbauen, ohne 6 Monate zu rekrutieren.', body: 'Statt einen Senior AI Engineer zu hiren (12+ Monate Time-to-Productivity), nehmt ihr mich für 3–6 Monate und schult euer Team parallel.' },
+];
+
+const steps = [
+  { title: 'Erstgespräch', body: 'Wir prüfen, ob das FDE-Modell zu eurer Situation passt.', meta: '⏱ 30 Min' },
+  { title: 'Discovery', body: 'Code-Walkthrough, Stakeholder-Calls, erste Empfehlungen.', meta: '⏱ 1–2 Wochen' },
+  { title: 'Angebot & Vertrag', body: 'Stundenkontingent, Scope, Start-Termin.', meta: '⏱ wenige Tage' },
+  { title: 'Laufendes Engagement', body: 'Eure Tools, wöchentliche Calls, Code in eurem Repo.', meta: '⏱ je nach Bedarf' },
+];
+
+const faqs = [
+  { q: 'Was unterscheidet einen FDE von einem normalen Freelancer?', a: 'Ein FDE übernimmt Verantwortung — für Architektur, Code-Qualität, Entscheidungen. Ein klassischer Freelancer arbeitet Tickets ab. Ich tue beides, je nach Kontext, aber der Default ist: ich denke mit, nicht nur runter.' },
+  { q: 'Wie viele Stunden pro Woche bist du da?', a: 'Standard sind 10–20 Stunden, das funktioniert für die meisten Setups. Bei intensiven Phasen auch 30–40. Ich gehe nie Vollzeit auf ein einzelnes Engagement — sonst verliert ihr den FDE-Vorteil.' },
+  { q: 'Wo und womit arbeitest du?', a: 'Primär remote aus Karlsruhe/Pforzheim, regelmäßig vor Ort im DACH-Raum. Ich arbeite mit den Tools, die ihr habt — Microsoft Teams, GitHub, Cursor, Claude Code, Notion — und bin offen für eure Cloud (Azure, AWS, Supabase, Google Cloud). Alles digital, alles dokumentiert.' },
+  { q: 'Bist du allein, oder bringst du ein Team mit?', a: 'In FDE-Engagements bin ich selbst die Person. Bei größeren Engagements ziehe ich nach Absprache TAISC-Engineers hinzu. Aber niemals ohne dich zu fragen.' },
+  { q: 'Was, wenn das Engagement nach 4 Wochen nicht passt?', a: 'Du kannst jederzeit aufhören, ohne Vorlauf — abgerechnet werden nur geleistete Stunden. Es gibt nur einen sinnvollen Mindestumfang, damit das Modell funktioniert. Mein Geschäftsmodell baut auf Empfehlungen — ein unzufriedener Kunde ist für mich teurer als ein gekündigter Vertrag.' },
+  { q: 'Hast du Referenzen?', a: 'Ja, gerne auf Anfrage und nach Vertraulichkeitsabsprache. Bisherige FDE-artige Engagements: BCT Technology (Logify), i40 (SkillDuck), Bitwerft, Onventis.' },
+];
+
+const serviceLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Forward Deployed Engineer',
+  serviceType: 'AI Engineering',
+  provider: { '@type': 'Person', name: 'Joshua Heller', url: SITE.url },
+  areaServed: 'DACH',
+  offers: {
+    '@type': 'Offer',
+    price: '200',
+    priceCurrency: 'EUR',
+    priceSpecification: { '@type': 'UnitPriceSpecification', price: '200', priceCurrency: 'EUR', unitText: 'HUR' },
+  },
+};
+---
+
+<Layout
+  title="Forward Deployed Engineer für KI-Projekte | Joshua Heller"
+  description="Forward Deployed Engineer: Ich werde Teil deines Teams und baue KI-Features bis zur Production. Stundenbasis oder Monthly Retainer. Ab 200 €/h netto."
+  path="/forward-deployed-engineer"
+  jsonLd={[serviceLd]}
+>
+  <ServiceHero
+    eyebrow="Forward Deployed Engineer"
+    title="Dein KI-Engineer in deiner Codebase — auf Zeit."
+    sub="Forward Deployed Engineering ist das, was OpenAI, Anthropic und Palantir mit ihren wichtigsten Kunden machen: ein Senior-Engineer wird Teil eures Teams, baut konkrete Features bis Production und verschwindet, sobald ihr eigenständig weitermacht."
+    secondary={{ label: "So funktioniert's", href: '#was-ist-fde' }}
+    image="Joshua mit Laptop im Team-Setting"
+    photo="laptop.jpg"
+    photoPosition="center 72%"
+    price="ab 200 €/h netto"
+  />
+
+  <!-- F2 Was ist ein FDE -->
+  <section id="was-ist-fde" class="container-page py-20">
+    <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Forward Deployed Engineer — was bedeutet das eigentlich?</h2>
+    <div class="mt-8 grid gap-10 lg:grid-cols-2">
+      <div class="space-y-5 text-body">
+        <p>
+          Ein Forward Deployed Engineer (FDE) ist ein erfahrener Software-Engineer, der nicht aus der Ferne berät,
+          sondern direkt in eurer Codebase, eurem Team und eurem Kontext arbeitet. Der Begriff stammt aus dem US-Markt —
+          Palantir hat ihn geprägt, OpenAI, Anthropic, Scale AI und Lovable haben ihn übernommen.
+        </p>
+        <p>In den USA ist das Modell bei jedem KI-First-Unternehmen Standard. In DACH ist es noch jung — und genau deswegen für euch eine Chance.</p>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div class="card-line p-6">
+          <p class="font-bold text-ink">vs. klassischer Berater</p>
+          <ul class="mt-3 space-y-2 text-sm text-body">
+            <li>schreibt Code, nicht Folien</li>
+            <li>sitzt im selben Chat (z. B. Teams) wie das Team</li>
+            <li>kennt Codebase, Backlog, Stakeholder</li>
+            <li>liefert Features, nicht Empfehlungen</li>
+          </ul>
+        </div>
+        <div class="card-line p-6">
+          <p class="font-bold text-ink">vs. Body-Leasing-Freelancer</p>
+          <ul class="mt-3 space-y-2 text-sm text-body">
+            <li>übernimmt Architektur-Verantwortung</li>
+            <li>Senior-Expertise statt nur Hände</li>
+            <li>dokumentiert und schult</li>
+            <li>Ansprechpartner für Strategie</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- F3 Was ich tue -->
+  <section class="bg-surface-2 py-20">
+    <div class="container-page">
+      <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Was ich als FDE konkret tue</h2>
+      <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {
+          tasks.map((t) => (
+            <div class="card-line p-6">
+              <h3 class="font-bold text-ink">{t.title}</h3>
+              <p class="mt-2 text-sm text-body">{t.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- F4 Auf einen Blick -->
+  <section class="container-page py-16">
+    <div class="grid grid-cols-2 gap-8 rounded-[24px] border border-line bg-surface-2 p-10 md:grid-cols-4">
+      {
+        [
+          { v: 'ab 200 €/h', l: 'Stundensatz netto' },
+          { v: 'ab 20 h', l: 'Mindestumfang pro Monat' },
+          { v: 'Retainer', l: 'planbar, mit Mengenrabatt' },
+          { v: 'Senior', l: '5+ Jahre Software, 3 Jahre KI exklusiv' },
+        ].map((s) => (
+          <div>
+            <div class="text-2xl font-extrabold text-ink md:text-3xl">{s.v}</div>
+            <div class="mt-1 text-sm text-muted">{s.l}</div>
+          </div>
+        ))
+      }
+    </div>
+    <p class="mt-4 text-center text-sm text-muted">Jederzeit kündbar, ohne Vorlauf — ab einem Mindestumfang, damit das Modell für beide Seiten Sinn ergibt.</p>
+  </section>
+
+  <!-- F5 Modelle -->
+  <section class="container-page py-12">
+    <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Ein klares Modell</h2>
+    <div class="mt-10 grid gap-6 md:grid-cols-2">
+      <div class="card-line p-7">
+        <h3 class="text-xl font-bold text-ink">Stundensatz</h3>
+        <ul class="mt-4 space-y-2 text-body">
+          <li><strong class="text-ink">200 €/h</strong> netto — ab einem Mindestumfang von rund 20 Stunden pro Monat</li>
+          <li>Brauchst du nur ein paar Stunden für eine Einschätzung? Dann ist das <a href="/ki-sparring" class="font-medium text-electric">KI-Sparring</a> (ab 300 €/h) der richtige Weg</li>
+          <li>Jederzeit kündbar, ohne Vorlauf</li>
+          <li><em>Ideal für: konkrete Features, Architektur, laufende KI-Entwicklung in eurer Codebase</em></li>
+        </ul>
+      </div>
+      <div class="card-line p-7">
+        <h3 class="text-xl font-bold text-ink">Als Retainer</h3>
+        <ul class="mt-4 space-y-2 text-body">
+          <li>Festes monatliches Stundenkontingent für planbare Kapazität</li>
+          <li><strong class="text-ink">Mengenrabatt</strong> auf den Stundensatz, je nach Umfang</li>
+          <li>Planbar, monatlich abgerechnet</li>
+          <li><em>Ideal für: dauerhafte Codebase-Begleitung über mehrere Monate</em></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- F6 Wann FDE -->
+  <section class="bg-surface-2 py-20">
+    <div class="container-page">
+      <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Wann FDE Sinn ergibt — und wann nicht</h2>
+      <div class="mt-10 grid gap-5 lg:grid-cols-3">
+        {
+          scenarios.map((s, i) => (
+            <div class="card-line p-6">
+              <span class="text-sm font-bold text-electric">0{i + 1}</span>
+              <h3 class="mt-2 font-bold text-ink">{s.title}</h3>
+              <p class="mt-2 text-sm text-body">{s.body}</p>
+            </div>
+          ))
+        }
+      </div>
+      <div class="mt-8 rounded-[20px] border border-line bg-white p-7">
+        <p class="font-bold text-ink">Wann nicht:</p>
+        <ul class="mt-3 space-y-2 text-body">
+          <li>Ihr braucht primär Strategie, kein Code → <a href="/fractional-caio" class="font-medium text-electric">Fractional CAIO</a> ist passender</li>
+          <li>Ihr habt eine Idee, aber noch keine Klarheit → <a href="/ki-workshop" class="font-medium text-electric">KI-Workshop</a> ist der erste Schritt</li>
+          <li>Ihr braucht reine Body-Leasing-Hände ohne strategischen Anteil → da bin ich schlicht zu teuer; ich vermittle gerne</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <Steps heading="So starten wir" steps={steps} />
+
+  <!-- F8 Quote -->
+  <section class="my-8 bg-ink py-20 text-white">
+    <div class="container-page max-w-4xl text-center">
+      <p class="text-2xl font-medium leading-snug md:text-3xl">
+        „Ein FDE ist nicht der externe Berater, der von draußen reinguckt. Er ist der Senior-Engineer, den du gerade
+        nicht in deinem Team hast — auf Zeit."
+      </p>
+      <p class="mt-6 text-sm text-white/60">— Joshua Heller</p>
+    </div>
+  </section>
+
+  <Faq items={faqs} />
+
+  <Cta heading="Klingt nach dem, was du brauchst?" sub="Lass uns 30 Minuten reden. Wenn FDE nicht passt, sage ich das auch." />
+</Layout>

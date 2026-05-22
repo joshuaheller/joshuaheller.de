@@ -1,0 +1,312 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Photo from '../components/Photo.astro';
+import LogoWall from '../components/LogoWall.astro';
+import Stats from '../components/Stats.astro';
+import Steps from '../components/Steps.astro';
+import Faq from '../components/Faq.astro';
+import Cta from '../components/Cta.astro';
+import { SITE } from '../site';
+
+const clusters = [
+  {
+    title: 'KI-Verständnis schaffen',
+    body: 'KI-Workshop, KI-Strategie und Use-Case-Discovery. Ihr wisst, dass KI wichtig wird — aber nicht wo anfangen.',
+    href: '/ki-workshop',
+    cta: 'Mehr über KI-Workshop',
+  },
+  {
+    title: 'KI bauen',
+    body: 'Forward Deployed Engineer und MVP-Service. Ihr wisst, was ihr bauen wollt — aber braucht jemanden, der wirklich liefert.',
+    href: '/forward-deployed-engineer',
+    cta: 'Mehr über FDE',
+  },
+  {
+    title: 'KI führen',
+    body: 'Fractional CAIO und KI-Sparring. Ihr braucht KI-Führung auf Teilzeit, ohne 200k im Jahr für einen Chief AI Officer auszugeben.',
+    href: '/fractional-caio',
+    cta: 'Mehr über Fractional CAIO',
+  },
+];
+
+const pains = [
+  {
+    title: 'Prototyp läuft, Produkt nicht',
+    body: 'Ihr habt ein Notebook gebaut, eine ChatGPT-Integration, einen RAG-Demo. Es funktioniert lokal. Aber zum Live-System ist es ein Berg, an dem sich euer Team verheddert.',
+  },
+  {
+    title: 'Euer Team ist gut, aber nicht in KI tief',
+    body: 'Frontend, Backend, DevOps — alles drauf. Aber Vector-DBs, LangGraph, Eval-Pipelines? Da fehlt die Praxis. Und Hiring dauert 6 Monate.',
+  },
+  {
+    title: 'Die Architektur ist Bauch-Entscheidung',
+    body: '„Nehmen wir OpenAI oder Anthropic?" „Brauchen wir einen Agent oder reicht ein Prompt-Chain?" Niemand im Team kann das mit Erfahrung beantworten — also wird gewürfelt.',
+  },
+  {
+    title: 'Eure Beratung verkauft Folien',
+    body: 'Ihr habt ein 100-seitiges Strategiepapier bekommen. Lesen kostet eine Woche. Umsetzen kostet 12 Monate. Code: 0 Zeilen.',
+  },
+  {
+    title: 'Die Geschäftsleitung wartet auf Ergebnisse',
+    body: '„Wo ist unser KI-Mehrwert?" — gute Frage. Aber wer im Tech-Team hat den Kopf, das nebenbei zu klären? Und wer übersetzt es fürs C-Level?',
+  },
+  {
+    title: 'Vollzeit-CIO ist nicht drin',
+    body: 'Ihr bräuchtet jemanden, der die KI-Strategie verantwortet. Aber 200k im Jahr für einen erfahrenen CIO ist nicht refinanzierbar — und es würde 9 Monate dauern, ihn zu finden.',
+  },
+];
+
+const tabs = [
+  { n: '01', name: 'Forward Deployed Engineer', head: 'Ich baue in deiner Codebase', body: 'Wochentakt oder Retainer. Ich werde Teil eures Teams, baue konkrete KI-Features bis Production, dokumentiere alles, ziehe mich raus, sobald euer Team eigenständig weitermachen kann.', price: 'ab 200 €/h', href: '/forward-deployed-engineer' },
+  { n: '02', name: 'MVP-Service', head: 'Vom Prototyp zum Produkt in 2–6 Wochen', body: 'Festpreis, fixer Scope, ein lauffähiger MVP am Ende. Validierung mit echten Nutzern statt 6 Monaten Konzeptionsphase.', price: 'ab 8.000 €', href: '/mvp' },
+  { n: '03', name: 'Fractional CAIO', head: 'KI-Führung auf Teilzeit', body: 'Strategische KI-Führung 1–2 Tage pro Woche als Retainer. Roadmap, Architektur, Vendor-Management. Wie ein Chief AI Officer, nur ohne 200k Vollzeit-Gehalt.', price: 'ab 2.000 €/Monat', href: '/fractional-caio' },
+  { n: '04', name: 'KI-Workshop', head: 'Vom Buzzword zur Roadmap', body: '1- bis 2-tägiger Workshop mit deinem Team. Use-Case-Mapping, Tool-Auswahl, konkrete nächste Schritte als Deliverable.', price: 'ab 3.000 €', href: '/ki-workshop' },
+  { n: '05', name: 'KI-Sparring', head: 'Externer Sparringspartner', body: 'Ein unabhängiger Kopf für Tech-Entscheider — für einzelne Stunden, wenn du den fehlenden Außenblick brauchst. Kein Vendor-Lock-in.', price: 'ab 300 €/h', href: '/ki-sparring' },
+];
+
+const principles = [
+  { title: 'Ich sage, was Sache ist.', body: 'Wenn euer Use Case keine KI braucht, sage ich das. Wenn euer Tech-Stack-Plan ein Fehler ist, sage ich das. Kein Buzzword-Bingo, keine geschönten Roadmaps.', sub: 'Ehrliche Einschätzung, auch wenn sie unbequem ist.' },
+  { title: 'Ich liefere Code, nicht Decks.', body: 'Jedes Engagement endet mit einem Artefakt: laufender MVP, Architektur-Doc, ein Stück produktiver Code, eine Roadmap mit Tickets.', sub: 'Wirkung vor Folien.' },
+  { title: 'Ich mache mich überflüssig.', body: 'Mein Ziel ist nicht, mich in euer Team einzunisten. Es ist, euch so weit zu befähigen, dass ihr alleine weitermacht. Wissenstransfer ist Teil jedes Projekts.', sub: 'Kein Lock-in, kein Herrschaftswissen.' },
+  { title: 'Ich nehme keine Provisionen.', body: 'Ich empfehle OpenAI, Anthropic, Azure, AWS, Lovable, n8n, Supabase — nach Fit, nicht nach Kickback.', sub: 'Objektive Bewertung, keine Verkaufsgespräche.' },
+];
+
+const steps = [
+  { title: 'Erstgespräch', body: '30–45 Min. Videocall. Du erzählst, wo es klemmt. Ich höre zu und stelle Fragen. Am Ende wissen wir beide, ob und wie ich helfen kann.', meta: '⏱ 30–45 Min · Klarheit über Fit' },
+  { title: 'Discovery', body: 'Ich schaue mir euer Setup an: Codebase, Architektur, Team, vorhandene KI-Ansätze. Daraus entsteht eine Einschätzung, kein 100-seitiges Doc.', meta: '⏱ 1–2 Wochen · Fundiertes Bild' },
+  { title: 'Angebot', body: 'Du bekommst ein konkretes Angebot: Stundenkontingent für FDE, Festpreis für MVP, Retainer für Fractional CAIO. Mit Scope, Preis, Lieferterminen.', meta: '⏱ wenige Tage · Schriftliches Angebot' },
+  { title: 'Umsetzung', body: 'Wir starten. Wöchentliche Calls, durchgängige Erreichbarkeit, Code in eurem Repo. Ich arbeite mit den Tools, die ihr nutzt — und bin Teil eures Teams für die Dauer der Zusammenarbeit.', meta: '⏱ je nach Engagement · Code, MVP, Roadmap' },
+];
+
+const faqs = [
+  { q: 'Was kostet eine Zusammenarbeit?', a: 'Das hängt vom Modell ab. Forward Deployed Engineer ab 200 €/h netto (ab einem Mindestumfang, als Retainer mit Rabatt). KI-Sparring für einzelne Stunden ab 300 €/h. MVP-Festpreis ab 8.000 €. Fractional CAIO als Retainer ab 2.000 €/Monat. Die genauen Konditionen klären wir im Erstgespräch je nach Scope.' },
+  { q: 'In welchen Branchen und mit welchen Firmengrößen hast du schon gearbeitet?', a: 'Quer durch: Automotive und Industrie (u.&nbsp;a. Daimler-Trucks-Kontext, STIHL, WM aquatec), B2B-SaaS und Software (Onventis, Bitwerft, BCT, mimacom), Bildung (i40) sowie Family-Office- und Private-Equity-Umfeld. Von Solo-Startups über Mittelständler und Scaleups bis zu Konzernen. Dass ich mehrere Kunden in derselben Branche begleite, ist dabei ein Vorteil — ich bringe Muster aus vergleichbaren Projekten mit.' },
+  { q: 'Bist du eine Agentur?', a: 'Nein. Ich bin Geschäftsführer der TAISC – The AI Software Company GmbH. TAISC hat ein kleines Team aus erfahrenen Engineers, aber meine persönlichen Engagements als FDE oder Fractional CAIO mache ich selbst — nicht delegiert.' },
+  { q: 'Wie schnell kannst du anfangen?', a: 'In der Regel 1–3 Wochen nach Vertragsabschluss. Bei kurzfristigem Bedarf finde ich oft eine Lücke.' },
+  { q: 'Arbeitest du remote oder vor Ort?', a: 'Primär remote. Für Workshops, Discovery-Phasen und kritische Projektphasen komme ich auch ins Büro — Sitz in Karlsruhe/Pforzheim, Aktionsradius DACH.' },
+  { q: 'Was, wenn ich noch nicht weiß, was ich brauche?', a: 'Genau dafür ist das Erstgespräch. 30 Minuten. Unverbindlich. Wir schauen, was Sinn macht. Manchmal ist es ein 1-Tages-Workshop, manchmal ein MVP, manchmal nichts — und ich verweise dich an jemanden, der besser passt.' },
+];
+---
+
+<Layout
+  title={SITE.title}
+  description={SITE.description}
+  path="/"
+  ogImage="/og/de/og-default.png"
+>
+  <!-- H1 Hero -->
+  <section class="bg-blobs">
+    <div class="container-page grid items-center gap-12 py-16 md:py-24 lg:grid-cols-2">
+      <div>
+        <h1 class="text-4xl font-extrabold leading-[1.05] tracking-tight text-ink md:text-5xl lg:text-6xl">
+          Ich bringe deine KI vom Prototyp zum Produkt.
+        </h1>
+        <p class="mt-6 max-w-xl text-lg text-body">
+          Ich bin Joshua — AI Engineer, Founder von TAISC und seit 3 Jahren ausschließlich in KI. Als
+          <strong class="text-ink">Forward Deployed Engineer</strong> baue ich direkt in deiner Codebase. Als
+          <strong class="text-ink">Fractional CAIO</strong> führe ich deine KI-Strategie. Keine Slide-Decks. Echte Systeme.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a href="/kontakt" class="btn btn-primary">Erstgespräch vereinbaren →</a>
+          <a href="/leistungen" class="btn btn-ghost">Alle Leistungen</a>
+        </div>
+      </div>
+      <Photo name="cafe.jpg" alt="Joshua Heller, AI Engineer und Fractional CAIO, am Laptop" ratio="4/3" priority />
+    </div>
+  </section>
+
+  <!-- H2 Logo wall -->
+  <LogoWall />
+
+  <!-- H3 Wer ich bin -->
+  <section class="container-page grid gap-12 py-20 lg:grid-cols-2 lg:items-center">
+    <div>
+      <p class="eyebrow mb-4">Wer ich bin</p>
+      <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Wer ich bin und was ich mache</h2>
+      <div class="mt-6 space-y-4 text-body">
+        <p>
+          Ich bin Bachelor in Digital Enterprise Management, habe als Developer bei Daimler Trucks angefangen, war AI
+          Engineer bei generic.de, habe 2023 mein eigenes SaaS gebaut
+          (<a href="https://imagetocaption.ai" class="font-medium text-electric" target="_blank" rel="noopener">imagetocaption.ai</a>,
+          350.000+ Nutzer, solo, ohne Funding), und führe heute TAISC.
+        </p>
+        <p>
+          Ich kenne beide Seiten: Enterprise-Software mit Compliance, Legacy und 10-Jahres-Roadmaps — und Solo-SaaS, wo
+          jeder Tag zählt. Diese Mischung hilft mir, in deinem Projekt schnell zu sehen, wo KI wirklich einen
+          Unterschied macht.
+        </p>
+        <p>
+          Meine Mission: <strong class="text-ink">den deutschen Mittelstand, Konzerne und Software-Firmen mit KI
+          wettbewerbsfähiger machen.</strong> Nicht durch Buzzwords. Durch Code, der läuft.
+        </p>
+      </div>
+      <a href="/ueber-mich" class="btn btn-ghost mt-8">Mehr über mich</a>
+    </div>
+    <Photo name="event.jpg" alt="Joshua Heller bei einem KI-Event auf der Bühne" ratio="4/3" />
+  </section>
+
+  <!-- H4 Drei Leistungs-Cluster -->
+  <section class="container-page py-12">
+    <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Meine Leistungsbereiche</h2>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {
+        clusters.map((c) => (
+          <div class="card-line flex flex-col p-7">
+            <h3 class="text-xl font-bold text-ink">{c.title}</h3>
+            <p class="mt-3 flex-1 text-body">{c.body}</p>
+            <a href={c.href} class="mt-6 inline-flex items-center gap-1 font-semibold text-electric">{c.cta} →</a>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- H5 Quote -->
+  <section class="my-12 bg-ink py-20 text-white">
+    <div class="container-page max-w-4xl text-center">
+      <p class="text-2xl font-medium leading-snug md:text-3xl">
+        „Die meisten KI-Projekte scheitern nicht an der Technik. Sie scheitern an der Distanz zwischen denen, die die
+        Strategie schreiben, und denen, die den Code schreiben. Ich schließe diese Distanz — weil ich beides selbst
+        tue."
+      </p>
+      <p class="mt-6 text-sm text-white/60">— Joshua Heller</p>
+    </div>
+  </section>
+
+  <!-- H6 Stats -->
+  <Stats />
+
+  <!-- H7 Pain points -->
+  <section class="bg-surface-2 py-20">
+    <div class="container-page">
+      <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Kommt dir das bekannt vor?</h2>
+      <p class="mt-4 max-w-2xl text-body">
+        Die meisten Teams, mit denen ich spreche, haben ähnliche Probleme. Nicht weil sie schlecht arbeiten — sondern
+        weil KI eine neue Disziplin ist, in der die Spielregeln noch geschrieben werden.
+      </p>
+      <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {
+          pains.map((p) => (
+            <div class="card-line p-6">
+              <h3 class="font-bold text-ink">{p.title}</h3>
+              <p class="mt-2 text-sm text-body">{p.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- H8 Tab-switcher (CSS-only via radio) -->
+  <section class="container-page py-20">
+    <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Wie kann ich helfen?</h2>
+    <div class="mt-10 grid gap-8 lg:grid-cols-[18rem_1fr]" id="svc-tabs">
+      <div class="flex flex-col gap-2" role="tablist">
+        {
+          tabs.map((t, i) => (
+            <button
+              class="svc-tab flex items-center gap-3 rounded-2xl border border-line bg-white px-4 py-3 text-left text-sm font-semibold text-ink transition aria-selected:border-electric aria-selected:bg-surface-2"
+              data-tab={i}
+              aria-selected={i === 0 ? 'true' : 'false'}
+            >
+              <span class="text-electric">{t.n}</span> {t.name}
+            </button>
+          ))
+        }
+      </div>
+      <div>
+        {
+          tabs.map((t, i) => (
+            <div class="svc-panel card-glass flex-col gap-4 p-8" data-panel={i} style={i === 0 ? '' : 'display:none'}>
+              <h3 class="text-2xl font-bold text-ink">{t.head}</h3>
+              <p class="mt-3 text-body">{t.body}</p>
+              <div class="mt-6 flex flex-wrap items-center gap-4">
+                <span class="pill">{t.price}</span>
+                <a href={t.href} class="font-semibold text-electric">Mehr erfahren →</a>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- H9 Principles -->
+  <section class="bg-surface-2 py-20">
+    <div class="container-page">
+      <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Meine Prinzipien</h2>
+      <div class="mt-10 grid gap-6 md:grid-cols-2">
+        {
+          principles.map((p, i) => (
+            <div class="card-line p-7">
+              <span class="text-sm font-bold text-electric">0{i + 1}</span>
+              <h3 class="mt-2 text-xl font-bold text-ink">{p.title}</h3>
+              <p class="mt-2 text-body">{p.body}</p>
+              <p class="mt-3 text-sm font-medium text-muted">{p.sub}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- H10 Steps -->
+  <Steps steps={steps} />
+
+  <!-- H12 Wie ich arbeite -->
+  <section class="container-page grid gap-12 py-20 lg:grid-cols-2">
+    <div>
+      <p class="eyebrow mb-4">Wie ich arbeite</p>
+      <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">
+        Software-Firmen brauchen jemanden, der die richtigen Fragen stellt.
+      </h2>
+      <blockquote class="mt-8 border-l-2 border-electric pl-5 text-xl font-medium text-ink">
+        „Die beste KI ist die, die euer Team versteht und betreiben kann."
+        <footer class="mt-2 text-sm font-normal text-muted">— Joshua Heller</footer>
+      </blockquote>
+    </div>
+    <div class="space-y-5 text-body">
+      <p>
+        „Soll ich Claude Opus 4.7, ein OpenAI- oder ein Gemini-Modell nehmen?" „Brauche ich überhaupt RAG, oder reicht
+        das Context-Window?" „Lokales LLM ja oder nein?" Das sind die Fragen, bei denen ich helfe.
+      </p>
+      <p>
+        Mein täglicher Stack: Claude Code und Claude Cowork, CLI-first, LangChain und LangGraph für agentische Workflows
+        — deploybar auf Azure, AWS, Supabase oder Google Cloud. Ich arbeite mit dem, was zu eurem Setup passt.
+      </p>
+      <p>
+        Ich nehme keine Provisionen. Wenn ich Anthropic empfehle, dann weil es passt. Wenn ich sage, ihr braucht keine
+        KI für diesen Use Case, dann meine ich das.
+      </p>
+      <h3 class="pt-2 text-lg font-bold text-ink">Was mich von einer Agentur unterscheidet</h3>
+      <p>
+        Eine Agentur lebt von Stunden. Viele Kunden, viele Tickets. Ich arbeite mit wenigen Kunden intensiv. Das ist ein
+        anderes Modell — und es passt zu KI besser als das Agentur-Modell. Mein Ziel ist es, mich überflüssig zu machen.
+      </p>
+    </div>
+  </section>
+
+  <!-- H13 FAQ -->
+  <Faq items={faqs} />
+
+  <!-- H14 Final CTA -->
+  <Cta
+    heading="Bereit, KI in Produktion zu bringen?"
+    sub="30 Minuten. Du erzählst, was anliegt. Ich sage, ob und wie ich helfen kann. Unverbindlich."
+  />
+</Layout>
+
+<script>
+  const root = document.getElementById('svc-tabs');
+  if (root) {
+    const tabs = root.querySelectorAll<HTMLButtonElement>('.svc-tab');
+    const panels = root.querySelectorAll<HTMLElement>('.svc-panel');
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const idx = tab.dataset.tab;
+        tabs.forEach((t) => t.setAttribute('aria-selected', String(t === tab)));
+        panels.forEach((p) => (p.style.display = p.dataset.panel === idx ? 'flex' : 'none'));
+      });
+    });
+  }
+</script>

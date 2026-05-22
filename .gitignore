@@ -1,0 +1,29 @@
+# build output
+dist/
+.output/
+
+# dependencies
+node_modules/
+
+# generated types
+.astro/
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# environment
+.env
+.env.production
+.env.*.local
+
+# macOS
+.DS_Store
+
+# editor
+.vscode/
+.idea/
+
+# local tooling
+.claude/

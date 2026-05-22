@@ -1,0 +1,52 @@
+---
+import { SITE } from '../site';
+
+interface Props {
+  title: string;
+  description: string;
+  /** path-relative canonical, e.g. "/forward-deployed-engineer" */
+  path?: string;
+  ogImage?: string;
+  type?: 'website' | 'article';
+  /** any JSON-LD objects to inline */
+  jsonLd?: Record<string, unknown>[];
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  path = new URL(Astro.request.url).pathname,
+  ogImage = '/og/de/og-default.png',
+  type = 'website',
+  jsonLd = [],
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(path, SITE.url).href;
+const ogImageUrl = new URL(ogImage, SITE.url).href;
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex,nofollow" />}
+
+<meta property="og:type" content={type} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:locale" content="de_DE" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageUrl} />
+
+{
+  jsonLd.map((obj) => (
+    <script type="application/ld+json" set:html={JSON.stringify(obj)} />
+  ))
+}

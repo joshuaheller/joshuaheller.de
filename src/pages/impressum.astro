@@ -1,0 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../site';
+---
+
+<Layout
+  title="Impressum — Joshua Heller"
+  description="Impressum und Anbieterkennzeichnung nach § 5 TMG."
+  path="/impressum"
+>
+  <section class="container-page max-w-3xl py-16">
+    <h1 class="text-4xl font-extrabold tracking-tight text-ink">Impressum</h1>
+    <div class="prose-jh mt-8">
+      <p class="rounded-xl border border-dashed border-line bg-surface-2 p-4 text-sm text-muted">
+        Platzhalter — bitte vor Live-Schaltung mit den finalen Firmendaten (HRB-Nummer, vollständige Anschrift,
+        USt-IdNr.) füllen und anwaltlich prüfen lassen.
+      </p>
+
+      <h2>Angaben gemäß § 5 TMG</h2>
+      <p>
+        TAISC – The AI Software Company GmbH<br />
+        [Straße und Hausnummer]<br />
+        [PLZ] Pforzheim<br />
+        Deutschland
+      </p>
+
+      <h2>Vertreten durch</h2>
+      <p>Geschäftsführer: Joshua Heller</p>
+
+      <h2>Kontakt</h2>
+      <p>
+        E-Mail: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+      </p>
+
+      <h2>Registereintrag</h2>
+      <p>
+        Eintragung im Handelsregister.<br />
+        Registergericht: [Amtsgericht]<br />
+        Registernummer: HRB [Nummer]
+      </p>
+
+      <h2>Umsatzsteuer-ID</h2>
+      <p>Umsatzsteuer-Identifikationsnummer gemäß § 27 a UStG: [USt-IdNr.]</p>
+
+      <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+      <p>Joshua Heller (Anschrift wie oben)</p>
+
+      <h2>Haftung für Inhalte</h2>
+      <p>
+        Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen
+        Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet,
+        übermittelte oder gespeicherte fremde Informationen zu überwachen.
+      </p>
+
+      <h2>Hinweis zu Markenlogos</h2>
+      <p>
+        Auf dieser Website genannte Logos und Marken sind Eigentum der jeweiligen Markeninhaber. Die Nennung impliziert
+        keine Empfehlung der Markeninhaber.
+      </p>
+    </div>
+  </section>
+</Layout>

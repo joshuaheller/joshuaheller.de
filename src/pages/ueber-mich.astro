@@ -1,0 +1,161 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ServiceHero from '../components/ServiceHero.astro';
+import Photo from '../components/Photo.astro';
+import Stats from '../components/Stats.astro';
+import Cta from '../components/Cta.astro';
+
+const drivers = [
+  { title: 'Klarheit schaffen', body: 'KI ist ein neues Feld voller Buzzwords. Ich übersetze es in konkrete Entscheidungen für euer Team.' },
+  { title: 'Wirkung erzielen', body: 'Keine Theorie ohne Praxis. Jedes Engagement endet mit einem Artefakt: Code, MVP oder Roadmap.' },
+  { title: 'Befähigen statt binden', body: 'Mein Ziel ist eure Unabhängigkeit. Ich dokumentiere und übergebe so, dass ihr danach allein weitermacht.' },
+  { title: 'Europa stärken', body: 'Deutschlands Software-Firmen müssen mit US-Spielern mithalten. Ich bin gerne Teil dieser Aufgabe.' },
+];
+
+const skills = [
+  { title: 'AI Engineering & Agentic Software', body: 'LLM-Integration, RAG, Multi-Agent-Systeme, MCP, LangGraph, Eval-Pipelines. Vom Notebook zur produktiven Architektur.' },
+  { title: 'Full-Stack-Entwicklung', body: 'React + TypeScript + Node, Python, AWS und Azure. Stack-Wahl nach Use Case, nicht nach Religion.' },
+  { title: 'Strategische KI-Beratung', body: 'Use-Case-Discovery, KI-Roadmap, Tool- und Plattformauswahl. Übersetzer zwischen Geschäftsführung und Tech-Team.' },
+  { title: 'Workshops & Enablement', body: 'KI-Workshops, KI-Führerschein, Team-Trainings. Vom C-Level bis zum Junior-Developer.' },
+];
+
+const timeline = [
+  { org: 'TAISC – The AI Software Company GmbH', role: 'Founder & Geschäftsführer', time: '05/2023 – heute', body: 'KI-Beratung, KI-Engineering und KI-Schulung für DACH-Mittelstand und Software-Firmen.' },
+  { org: 'generic.de software technologies AG', role: 'AI & Innovation Engineer', time: '08/2024 – 03/2025', body: 'Enterprise-RAG, GitHub-Copilot-Enablement, KI-Lead-Scoring, Generative-AI-Trainings.' },
+  { org: 'S-IT Application Engineering & Consulting GmbH', role: 'Frontend Developer / DevOps', time: '12/2021 – 10/2023', body: 'Daimler-Trucks-Kontext: Wiring-Harness-Toolchain, Komponenten-Bibliothek, CI/CD (Jenkins, GitHub Actions).' },
+  { org: 'Mercedes-Benz Tech Motion GmbH', role: 'IT Consultant', time: '12/2019 – 01/2021', body: 'Testkonzepte, Release Notes, Requirements Engineering im Automotive-Umfeld.' },
+];
+---
+
+<Layout
+  title="Über mich — Joshua Heller, AI Engineer & Founder TAISC"
+  description="Founder von TAISC, AI Engineer mit über 5 Jahren Software- und 3 Jahren KI-Erfahrung. SaaS auf 350k Nutzer solo skaliert. So denke ich, so arbeite ich."
+  path="/ueber-mich"
+>
+  <ServiceHero
+    eyebrow="Über mich"
+    title="Ich spreche Code, KI und Geschäftsmodell."
+    sub="Angefangen als Frontend-Developer, heute Founder, AI Engineer und Fractional CAIO. Diese Mischung — Code, Produkt, Business — ist mein Hebel: Ich verstehe, was Tech-Teams brauchen, und was die Geschäftsführung sehen will."
+    primary={{ label: 'Kontakt aufnehmen', href: '/kontakt' }}
+    secondary={{ label: 'Meine Leistungen', href: '/leistungen' }}
+    image="Joshua bei Talk / Workshop (großes Format)"
+    photo="hero.jpg"
+  />
+
+  <!-- A2 Mein Weg -->
+  <section class="container-page py-20">
+    <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Vom Entwickler zum Founder</h2>
+    <div class="mt-8 grid gap-6 text-lg text-body lg:grid-cols-2">
+      <div class="space-y-5">
+        <p>Meine Karriere fing dort an, wo Tech und Business sich treffen — im Code für eine der weltgrößten Automotive-Companies.</p>
+        <p>
+          Während meines Studiums an der Hochschule Pforzheim (B.Sc. Digital Enterprise Management) arbeitete ich als IT
+          Consultant bei der Mercedes-Benz Tech Motion und später als Frontend Developer und DevOps Engineer bei S-IT
+          (Daimler-Trucks-Kontext). Ich habe dort gelernt, wie Enterprise-Software wirklich funktioniert: mit Legacy,
+          Compliance, 10-Jahres-Roadmaps und Teams, die größer sind als ganze Startups.
+        </p>
+      </div>
+      <div class="space-y-5">
+        <p>
+          2023 habe ich parallel zur Anstellung <strong class="text-ink">imagetocaption.ai</strong> gebaut — ein
+          SaaS-Tool, das Social-Media-Captions automatisch generiert. Solo. Ohne Funding. Innerhalb von 12 Monaten haben
+          es 350.000 Menschen genutzt.
+        </p>
+        <p>
+          2024 wechselte ich als AI Engineer zu generic.de und baute Enterprise-RAG-Systeme, GitHub-Copilot-Rollouts und
+          KI-Lead-Scoring. 2025 habe ich aus imagetocaption die <strong class="text-ink">TAISC – The AI Software Company
+          GmbH</strong> geformt, mit Sitz in Pforzheim/Karlsruhe. Heute kombiniere ich beides: das tiefe Verständnis
+          dafür, wie Enterprise-IT tickt — und die Geschwindigkeit, mit der ein Solo-Founder Software baut.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- A3 Drivers -->
+  <section class="bg-surface-2 py-20">
+    <div class="container-page">
+      <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Was mich antreibt</h2>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          drivers.map((d) => (
+            <div class="card-line p-6">
+              <h3 class="font-bold text-ink">{d.title}</h3>
+              <p class="mt-2 text-sm text-body">{d.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- A4 Stats -->
+  <Stats />
+
+  <!-- A5 Aus der Praxis -->
+  <section class="container-page grid gap-12 py-20 lg:grid-cols-2 lg:items-center">
+    <Photo name="notizen.jpg" alt="Joshua Heller bei der Arbeit, macht Notizen" ratio="4/3" />
+    <div>
+      <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Aus der Praxis, für die Praxis</h2>
+      <div class="mt-6 space-y-4 text-body">
+        <p>
+          Ich kenne KI nicht nur aus Papers oder LinkedIn-Posts. Ich habe selbst Prototypen verworfen, Architekturen
+          umgebaut, Modelle in Production gebracht und nachts gemerkt, dass die Token-Kosten doppelt so hoch sind wie
+          geplant.
+        </p>
+        <p>
+          Diese Erfahrung fließt in jede Beratung ein — ob bei der Auswahl der richtigen LLM-Plattform, der Architektur
+          eines Multi-Agent-Systems oder der Frage, ob euer Use Case überhaupt KI braucht.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- A6 Bildung + A7 Skills -->
+  <section class="bg-surface-2 py-20">
+    <div class="container-page grid gap-12 lg:grid-cols-[20rem_1fr]">
+      <div>
+        <p class="eyebrow mb-3">Bildung</p>
+        <h3 class="text-xl font-bold text-ink">B.Sc. Digital Enterprise Management</h3>
+        <p class="mt-2 text-sm text-muted">Hochschule Pforzheim · 2018 – 2022</p>
+        <p class="mt-3 text-sm text-body">Schwerpunkte: Wirtschaftsinformatik · Software Engineering · Business Integration</p>
+      </div>
+      <div>
+        <h2 class="text-2xl font-extrabold tracking-tight text-ink md:text-3xl">Kernkompetenzen</h2>
+        <div class="mt-8 grid gap-6 sm:grid-cols-2">
+          {
+            skills.map((s, i) => (
+              <div class="card-line p-6">
+                <span class="text-sm font-bold text-electric">0{i + 1}</span>
+                <h3 class="mt-1 font-bold text-ink">{s.title}</h3>
+                <p class="mt-2 text-sm text-body">{s.body}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- A8 Timeline -->
+  <section class="container-page py-20">
+    <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Bisherige Stationen</h2>
+    <div class="mt-10 space-y-0 border-l border-line pl-6">
+      {
+        timeline.map((t) => (
+          <div class="relative pb-10">
+            <span class="absolute -left-[1.7rem] top-1.5 size-3 rounded-full border-2 border-white bg-electric" />
+            <p class="text-sm font-medium text-muted">{t.time}</p>
+            <h3 class="mt-1 text-lg font-bold text-ink">{t.org}</h3>
+            <p class="text-sm font-semibold text-electric">{t.role}</p>
+            <p class="mt-2 max-w-2xl text-body">{t.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <Cta
+    heading="Lass uns sprechen"
+    sub="Du hast ein KI-Projekt oder eine Idee, die strategische und technische Unterstützung braucht?"
+  />
+</Layout>

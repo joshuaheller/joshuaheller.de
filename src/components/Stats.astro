@@ -1,0 +1,19 @@
+---
+import { STATS } from '../site';
+interface Props { dark?: boolean }
+const { dark = false } = Astro.props;
+---
+<section class:list={[dark ? 'bg-ink text-white' : '']}>
+  <div class="container-page grid grid-cols-2 gap-8 py-16 md:grid-cols-4">
+    {
+      STATS.map((s) => (
+        <div>
+          <div class:list={['text-4xl font-extrabold tracking-tight md:text-5xl', dark ? 'text-white' : 'text-ink']}>
+            {s.value}
+          </div>
+          <div class:list={['mt-2 text-sm', dark ? 'text-white/60' : 'text-muted']}>{s.label}</div>
+        </div>
+      ))
+    }
+  </div>
+</section>

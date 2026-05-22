@@ -1,0 +1,152 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ServiceHero from '../components/ServiceHero.astro';
+import Steps from '../components/Steps.astro';
+import Faq from '../components/Faq.astro';
+import Cta from '../components/Cta.astro';
+import { SITE } from '../site';
+
+const reality = [
+  ['Kein eigener Chief AI Officer oder Head of AI', 'Strategische KI-Führung im Wochentakt'],
+  ['Vollzeit-CAIO zu teuer (150–300k/Jahr)', 'Klare Tech- und KI-Roadmap'],
+  ['KI-Entscheidungen aus dem Bauch', 'Unabhängige Bewertung von Vendors, Tools, Architekturen'],
+  ['Dev-Team ohne strategische KI-Führung', 'Dev-Team-Coaching und -Mentoring'],
+  ['Abhängigkeit von einer Agentur', 'Professionelles Vendor-Management'],
+];
+
+const tasks = [
+  { title: 'KI-Strategie', body: 'KI-Roadmap entwickeln, Use-Case-Priorisierung, Make-or-Buy-Analysen, Tech-Vision in Worte fassen, die das C-Level versteht.' },
+  { title: 'Tech-Stack-Auswahl', body: 'LLM-Provider, Vector-DBs, Orchestrierungs-Frameworks, Cloud-Plattformen — evaluiert nach eurem Use Case, nicht nach Hype.' },
+  { title: 'Dev-Team-Führung', body: 'Technische Leitung, Code-Review-Kultur, Hiring-Support für AI-Engineering-Profile, Onboarding-Strukturen.' },
+  { title: 'Vendor- & Agentur-Management', body: 'Eure externen Dienstleister steuern: Verträge, SLAs, Qualität, Eskalationspfade.' },
+  { title: 'Compliance & Risiko', body: 'DSGVO, EU AI Act, Datenresidenz, Audit-Logs, Risiko-Bewertung für KI-Use-Cases.' },
+  { title: 'Reporting an die GF', body: 'Monatliche Updates für Geschäftsführung und Beirat — was läuft, was kostet wie viel, was ist nächster Schritt.' },
+];
+
+const steps = [
+  { title: 'Erstgespräch & Fit-Check', body: 'Passt das Modell zu eurer Situation?', meta: '⏱ 30 Min' },
+  { title: 'KI-Audit & Status-Quo', body: 'Bestehende Systeme, Team, Prozesse, Vendor-Landschaft.', meta: '⏱ 2–4 Wochen' },
+  { title: 'Strategie & Roadmap', body: 'KI-Vision, Quartals-Roadmap, Budget-Empfehlung, Quick Wins.', meta: '📤 Roadmap' },
+  { title: 'Laufende Zusammenarbeit', body: 'Wöchentliche Calls, monatliches Reporting, direkter Draht über eure Tools (Teams, Notion, GitHub).', meta: '⏱ unbefristet' },
+];
+
+const faqs = [
+  { q: 'Was kostet ein Fractional CAIO?', a: 'Ich arbeite als Fractional CAIO ausschließlich im Retainer, ab 2.000 € netto pro Monat — die genaue Höhe hängt vom vereinbarten Stundenkontingent ab. Im Vergleich zu einer Vollzeit-Position (150–300k Jahresgehalt plus Nebenkosten) eine planbare, deutlich günstigere Investition.' },
+  { q: 'Wie viele Stunden pro Woche?', a: 'Typisch 8–16 Stunden. Wir definieren das Commitment gemeinsam und passen es quartalsweise an.' },
+  { q: 'Wie läuft die Kommunikation?', a: 'Über die Tools, die ihr ohnehin nutzt — z. B. Microsoft Teams, Notion, GitHub. Wöchentlicher Call mit GF oder Tech-Lead, monatliches schriftliches Reporting, quartalsweises Strategie-Review.' },
+  { q: 'Was unterscheidet dich von einer Beratungsfirma?', a: 'Eine Beratungsfirma liefert Empfehlungen. Ich übernehme Verantwortung. Ich entscheide mit (oder allein, je nach Vollmacht), und ich bin in 12 Monaten noch da, wenn die Konsequenzen meiner Entscheidungen sichtbar werden.' },
+  { q: 'Was ist der Unterschied zu FDE?', a: 'FDE = ich baue Code in eurer Codebase. Fractional CAIO = ich treffe und kommuniziere KI-Entscheidungen mit/für eure GF. Viele Engagements kombinieren beides.' },
+  { q: 'In welchen Branchen und Firmengrößen arbeitest du?', a: 'Von Mittelständlern und Scaleups bis zu Konzernen und Private-Equity-Portfolios — quer durch Industrie, B2B-SaaS und Software. Dass ich mehrere Kunden in einer Branche begleite, ist ein Vorteil: ich bringe Muster aus vergleichbaren Setups mit.' },
+];
+
+const serviceLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Fractional CAIO',
+  serviceType: 'AI Leadership',
+  provider: { '@type': 'Person', name: 'Joshua Heller', url: SITE.url },
+  areaServed: 'DACH',
+  offers: { '@type': 'Offer', price: '2000', priceCurrency: 'EUR' },
+};
+---
+
+<Layout
+  title="Fractional CAIO für KI | Chief AI Officer auf Teilzeit | Joshua Heller"
+  description="Fractional CAIO (Chief AI Officer) für KI-Strategie, Tech-Stack-Entscheidungen und KI-Führung. Als Retainer. Für Mittelstand, Konzerne, Scaleups und Private Equity im DACH-Raum. Ab 2.000 €/Monat."
+  path="/fractional-caio"
+  jsonLd={[serviceLd]}
+>
+  <ServiceHero
+    eyebrow="Fractional CAIO"
+    title="Dein Chief AI Officer — flexibel und strategisch."
+    sub="KI-Führung auf Teilzeit, als monatlicher Retainer. Für Mittelständler, Konzerne, Scaleups und Private-Equity-Portfolios, die KI-Entscheidungen nicht dem Zufall überlassen wollen — aber keinen Vollzeit-CAIO finanzieren können oder wollen."
+    secondary={{ label: "So funktioniert's", href: '#was-ist' }}
+    image="Joshua im Strategie-Meeting"
+    photo="videocall.jpg"
+    price="ab 2.000 €/Monat netto"
+  />
+
+  <!-- C2 Realität vs. Mit Fractional CAIO -->
+  <section class="container-page py-20">
+    <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">KI braucht Führung</h2>
+    <div class="mt-10 overflow-hidden rounded-[20px] border border-line">
+      <div class="grid grid-cols-2 bg-surface-2 text-sm font-bold text-ink">
+        <div class="p-4">Die Realität</div>
+        <div class="border-l border-line p-4 text-electric">Mit Fractional CAIO</div>
+      </div>
+      {
+        reality.map(([a, b]) => (
+          <div class="grid grid-cols-2 border-t border-line text-sm">
+            <div class="p-4 text-muted">{a}</div>
+            <div class="border-l border-line p-4 text-ink">{b}</div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- C3 Was ich übernehme -->
+  <section class="bg-surface-2 py-20">
+    <div class="container-page">
+      <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Was ich als Fractional CAIO übernehme</h2>
+      <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {
+          tasks.map((t) => (
+            <div class="card-line p-6">
+              <h3 class="font-bold text-ink">{t.title}</h3>
+              <p class="mt-2 text-sm text-body">{t.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- C4 Was ist ein Fractional CAIO -->
+  <section id="was-ist" class="container-page py-20">
+    <div class="grid gap-10 lg:grid-cols-2">
+      <div>
+        <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Was ist eigentlich ein Fractional CAIO?</h2>
+        <div class="mt-6 space-y-4 text-body">
+          <p>Ein Fractional CAIO (Chief AI Officer) ist ein erfahrener KI- und Tech-Führer, der für mehrere Unternehmen gleichzeitig arbeitet — jeweils auf Teilzeit, aber mit echter strategischer Verantwortung.</p>
+          <p>Im Unterschied zu einem Interim CAIO, der eine Vakanz überbrückt: ich bin keine Übergangslösung. Ich bin eure langfristige Lösung. Es gibt kein Enddatum und keine Nachfolgersuche.</p>
+          <p>Der Vorteil: ihr bekommt Senior-Expertise, die als Vollzeit-Position 150.000 bis 300.000 Euro pro Jahr kosten würde — zu einem Bruchteil davon.</p>
+        </div>
+      </div>
+      <div class="space-y-4">
+        <div class="card-line p-6"><p class="font-bold text-ink">Flexibles Commitment.</p><p class="mt-1 text-sm text-body">1–2 Tage pro Woche, je nach Bedarf. Remote-first mit regelmäßigen Vor-Ort-Tagen.</p></div>
+        <div class="card-line p-6"><p class="font-bold text-ink">Unbefristete Zusammenarbeit.</p><p class="mt-1 text-sm text-body">Kein Projekt mit Enddatum. So lange, wie es Sinn ergibt.</p></div>
+        <div class="card-line p-6"><p class="font-bold text-ink">Monatlicher Retainer.</p><p class="mt-1 text-sm text-body">Planbare Kosten statt Tagessatz-Überraschungen. Ab 2.000 €/Monat netto.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- C6 Abgrenzung -->
+  <section class="bg-surface-2 py-20">
+    <div class="container-page">
+      <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Fractional CAIO vs. Interim CAIO vs. Consultant</h2>
+      <div class="mt-10 grid gap-5 lg:grid-cols-3">
+        <div class="card-line p-6"><h3 class="font-bold text-ink">Fractional CAIO</h3><p class="mt-2 text-sm text-body">Dauerhafte externe KI-Führung auf Teilzeit (1–2 Tage/Woche). Strategischer Fokus. Unbefristet. Monatlicher Retainer.</p></div>
+        <div class="card-line p-6"><h3 class="font-bold text-ink">Interim CAIO</h3><p class="mt-2 text-sm text-body">Überbrückt Krise oder Vakanz. Oft Vollzeit, befristet, operativer Fokus, hoher Tagessatz. <strong class="text-ink">Mache ich nicht.</strong></p></div>
+        <div class="card-line p-6"><h3 class="font-bold text-ink">Tech-Consultant</h3><p class="mt-2 text-sm text-body">Analysiert, bewertet, empfiehlt — ohne laufende Verantwortung. Für einmalige Fragen: siehe <a href="/ki-sparring" class="font-medium text-electric">KI-Sparring</a>.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <Steps heading="So starten wir" steps={steps} />
+
+  <!-- Quote -->
+  <section class="my-8 bg-ink py-20 text-white">
+    <div class="container-page max-w-4xl text-center">
+      <p class="text-2xl font-medium leading-snug md:text-3xl">
+        „KI-Strategie auf 100 Folien ist kein Strategie-Output. Strategie-Output ist eine Entscheidung mit einem Datum
+        und einem Verantwortlichen."
+      </p>
+      <p class="mt-6 text-sm text-white/60">— Joshua Heller</p>
+    </div>
+  </section>
+
+  <Faq items={faqs} />
+
+  <Cta heading="KI-Führung flexibel und strategisch?" sub="30 Minuten Erstgespräch. Wir klären, ob Fractional CAIO zu euch passt." />
+</Layout>

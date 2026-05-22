@@ -1,0 +1,61 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const entries = (await getCollection('glossar')).sort((a, b) => a.data.term.localeCompare(b.data.term, 'de'));
+
+// group by first letter
+const groups: Record<string, typeof entries> = {};
+for (const e of entries) {
+  const letter = (e.data.letter || e.data.term[0]).toUpperCase();
+  (groups[letter] ??= []).push(e);
+}
+const letters = Object.keys(groups).sort();
+---
+
+<Layout
+  title="KI-Glossar — Begriffe rund um KI, verständlich erklärt | Joshua Heller"
+  description="Von RAG über Forward Deployed Engineer bis EU AI Act: KI-Begriffe technisch und geschäftlich erklärt — mit Beispiel-Use-Cases."
+  path="/ki-glossar"
+>
+  <section class="bg-blobs">
+    <div class="container-page py-16 md:py-20">
+      <p class="eyebrow mb-4">KI-Glossar</p>
+      <h1 class="max-w-3xl text-4xl font-extrabold tracking-tight text-ink md:text-5xl">
+        KI-Begriffe, verständlich erklärt.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg text-body">
+        Technisch und geschäftlich gemischt — von RAG und Embeddings bis Forward Deployed Engineer und EU AI Act.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-page py-12">
+    {
+      letters.length === 0 ? (
+        <p class="rounded-xl border border-dashed border-line bg-surface-2 p-8 text-center text-muted">
+          Die ersten Glossar-Einträge erscheinen mit dem Launch.
+        </p>
+      ) : (
+        <div class="space-y-12">
+          {letters.map((letter) => (
+            <div>
+              <h2 class="text-2xl font-extrabold text-electric">{letter}</h2>
+              <div class="mt-4 grid gap-4 md:grid-cols-2">
+                {groups[letter].map((e) => (
+                  <a href={`/ki-glossar/${e.id}`} class="card-line block p-5 transition hover:border-electric">
+                    <h3 class="font-bold text-ink">
+                      {e.data.term}
+                      {e.data.abbr && <span class="text-muted"> ({e.data.abbr})</span>}
+                    </h3>
+                    <p class="mt-1 line-clamp-2 text-sm text-body">{e.data.tldr}</p>
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )
+    }
+  </section>
+</Layout>

@@ -1,0 +1,87 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ServiceHero from '../components/ServiceHero.astro';
+import Cta from '../components/Cta.astro';
+import { SITE } from '../site';
+
+const outcomes = [
+  ['Use-Case-Mapping', 'für eure Domain (eure Prozesse, eure Daten)'],
+  ['Tool- und Plattform-Empfehlung', 'OpenAI vs. Azure vs. lokal — was passt zu eurer Compliance'],
+  ['Priorisierte Roadmap', 'mit Quick Wins (4 Wochen) und strategischen Initiativen (6+ Monate)'],
+  ['Architektur-Skizze', 'für 1–2 konkrete Initiativen'],
+  ['Schriftliche Doku', 'nach dem Workshop — ein nutzbares Working Document, kein 100-Seiten-Deck'],
+];
+
+const formats = [
+  { name: 'KI-Discovery', target: 'Geschäftsführung, Strategie, Produkt', dur: '0,5 Tag (3–4 h)', out: 'Eure Top 3 Use Cases identifiziert. Erste Tool-Hypothese.' },
+  { name: 'KI-Strategie', target: 'C-Level + Tech-Lead', dur: '1 Tag', out: 'Use-Case-Backlog, Tool-Stack-Entscheidung, Roadmap-Skizze.' },
+  { name: 'KI-Sprint', target: 'Cross-functional Team (5–12 MA)', dur: '2 Tage', out: 'Wie KI-Strategie + Architektur-Skizze + Hands-on-Demo.' },
+];
+
+const serviceLd = {
+  '@context': 'https://schema.org', '@type': 'Service', name: 'KI-Workshop',
+  serviceType: 'Workshop', provider: { '@type': 'Person', name: 'Joshua Heller', url: SITE.url }, areaServed: 'DACH',
+};
+---
+
+<Layout
+  title="KI-Workshop für dein Team | Vom Buzzword zur Roadmap"
+  description="1- bis 2-tägiger KI-Workshop für Geschäftsführung und Teams. Use-Case-Mapping, Tool-Auswahl, konkrete nächste Schritte als Deliverable."
+  path="/ki-workshop"
+  jsonLd={[serviceLd]}
+>
+  <ServiceHero
+    eyebrow="KI-Workshop"
+    title="KI-Workshop: Vom Buzzword zur Roadmap."
+    sub="1 oder 2 Tage mit deinem Team. Am Ende habt ihr eine priorisierte Liste von Use Cases, eine Tech-Empfehlung und einen konkreten nächsten Schritt — nicht 80 Folien zum Diskutieren."
+    primary={{ label: 'Workshop anfragen →', href: '/kontakt' }}
+    image="Joshua im Workshop / am Whiteboard"
+    photo="whiteboard.jpg"
+  />
+
+  <section class="container-page py-20">
+    <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Was du bekommst</h2>
+    <div class="mt-10 grid gap-5 md:grid-cols-2">
+      {
+        outcomes.map(([k, v]) => (
+          <div class="card-line p-6">
+            <h3 class="font-bold text-ink">{k}</h3>
+            <p class="mt-1 text-sm text-body">{v}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="bg-surface-2 py-20">
+    <div class="container-page">
+      <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Drei Workshop-Formate</h2>
+      <div class="mt-10 grid gap-6 lg:grid-cols-3">
+        {
+          formats.map((f) => (
+            <div class="card-line flex flex-col p-7">
+              <h3 class="text-xl font-bold text-ink">{f.name}</h3>
+              <span class="pill mt-3 w-fit">{f.dur}</span>
+              <p class="mt-4 text-sm font-medium text-muted">{f.target}</p>
+              <p class="mt-2 flex-1 text-sm text-body">{f.out}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="container-page grid gap-10 py-20 lg:grid-cols-2">
+    <div>
+      <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Wie ich arbeite</h2>
+      <p class="mt-4 text-body">Mein Workshop ist kein PowerPoint-Marathon. Maximal 30% meine Inputs, 70% strukturierte Arbeit am Whiteboard und am Laptop.</p>
+      <p class="mt-3 text-body">Werkzeuge: Miro oder Mural, Microsoft Teams für Async, Notion oder Confluence für Doku, manchmal Cursor oder Claude Code live für eine Mini-Demo.</p>
+    </div>
+    <div class="rounded-[20px] border border-line bg-surface-2 p-8">
+      <h3 class="text-xl font-bold text-ink">Preise</h3>
+      <p class="mt-3 text-body">Ein KI-Workshop startet <strong class="text-ink">ab 3.000 €</strong> netto — der genaue Preis hängt von Format, Dauer und Teilnehmerzahl ab. Konditionen klären wir im Erstgespräch.</p>
+    </div>
+  </section>
+
+  <Cta heading="Bereit für den ersten Schritt?" sub="Workshop anfragen — 30 Minuten Erstgespräch, unverbindlich." />
+</Layout>

@@ -1,0 +1,184 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ServiceHero from '../components/ServiceHero.astro';
+import Steps from '../components/Steps.astro';
+import Faq from '../components/Faq.astro';
+import Cta from '../components/Cta.astro';
+import { SITE } from '../site';
+
+const outcomes = [
+  { title: 'Lauffähiges Produkt', body: 'Ein deploytes Web- oder Mobile-Produkt, live auf eurer Domain oder einer Test-URL.' },
+  { title: 'Echte Nutzer-Daten', body: 'Ein Setup, mit dem ihr in 2 Wochen 100 echte User testen könnt — mit Analytics, Feedback-Loop, Eval-Daten.' },
+  { title: 'Klarheit', body: 'Eine fundierte Antwort auf „Sollten wir das ausbauen?" — basierend auf Daten, nicht auf Bauchgefühl.' },
+];
+
+const stack = [
+  ['Frontend', 'React + TypeScript, oft via Next.js oder Vite. Tailwind. shadcn/ui.'],
+  ['Backend', 'Supabase oder Node + Postgres. Lovable für UI-First-Iterationen.'],
+  ['KI-Stack', 'OpenAI / Anthropic / Azure OpenAI, LangChain oder direkte SDK-Integration, pgvector für RAG.'],
+  ['Deployment', 'Vercel oder Cloudflare. Domain via euch oder via mir.'],
+  ['Analytics', 'PostHog (Open Source) oder Plausible. Eval-Logs in Notion oder Langfuse.'],
+];
+
+const useCases = [
+  { title: 'AI-Search / RAG', body: 'Interne Wissensbasis durchsuchen mit natürlicher Sprache. Anbindung an PDF, SharePoint, Confluence.' },
+  { title: 'Klassifikator / Co-Pilot', body: 'E-Mails, Tickets, Leads automatisch klassifizieren und vorpriorisieren.' },
+  { title: 'Generator / Editor', body: 'Marketing-Content, Berichte, Captions, Code-Doku — generiert auf Basis eurer Daten, mit Human-Review.' },
+];
+
+const packages = [
+  { name: 'Spike', scope: 'Single-Page-App, 1 KI-Feature, Basic-Auth, einfaches Deployment', dur: '2 Wochen', price: 'ab 8.000 €' },
+  { name: 'MVP', scope: 'Multi-Page, 2–3 KI-Features, Auth, Datenbank, Analytics, Eval-Setup', dur: '3–4 Wochen', price: 'ab 16.000 €' },
+  { name: 'MVP+', scope: 'Komplexer Workflow, Multi-Agent oder RAG mit eigenem Datenbestand, vollständiges Deployment, Übergabe-Doku, Team-Onboarding', dur: '5–6 Wochen', price: 'ab 30.000 €' },
+];
+
+const steps = [
+  { title: 'Erstgespräch', body: 'Idee, Use Case, Budget — ist MVP-Service der richtige Ansatz?', meta: '⏱ 30 Min' },
+  { title: 'Discovery', body: 'Scope-Workshop, technische Architektur, Festpreis-Angebot.', meta: '⏱ 1–3 Tage' },
+  { title: 'Build', body: 'Wöchentliche Demos, durchgängige Erreichbarkeit, kontinuierliche Auslieferung.', meta: '⏱ 2–6 Wochen' },
+  { title: 'Hypercare', body: 'Bug-Fixing, Onboarding eures Teams, Übergabe-Doku.', meta: '⏱ 2 Wochen' },
+];
+
+const faqs = [
+  { q: 'Was, wenn der MVP fertig ist und ich weiter entwickle?', a: 'Drei Möglichkeiten: (1) euer Team übernimmt — Code-Übergabe ist Teil des Pakets. (2) Ich bleibe als FDE im Retainer. (3) Ich übergebe an ein anderes Team mit Walk-Through.' },
+  { q: 'Ich habe bisher kein Tech-Team. Geht das trotzdem?', a: 'Ja — aber dann sollten wir den Übergabe-Aspekt ehrlich besprechen. Ohne Tech-Team bist du nach dem MVP entweder bei einem laufenden Retainer mit mir oder du brauchst danach ein internes Setup.' },
+  { q: 'Können wir das Risiko teilen — Erfolgsbeteiligung statt Festpreis?', a: 'In Ausnahmen, ja. Voraussetzung: konkretes Marktmodell, transparente Metriken, vertrauliche Vereinbarung. Für 80% der Fälle ist Festpreis das fairere Modell für beide Seiten.' },
+  { q: 'Welche Branchen machst du nicht?', a: 'Glücksspiel, Adult, Waffen, politisch toxische Domains. Sonst: weitgehend offen, von B2B-SaaS über Industrie bis Public Sector.' },
+];
+
+const serviceLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'MVP-Service',
+  serviceType: 'Software Development',
+  provider: { '@type': 'Person', name: 'Joshua Heller', url: SITE.url },
+  areaServed: 'DACH',
+  offers: { '@type': 'Offer', price: '8000', priceCurrency: 'EUR' },
+};
+---
+
+<Layout
+  title="MVP-Service: Vom Prototyp zum Produkt in 2–6 Wochen | Joshua Heller"
+  description="Festpreis-MVP für KI-Produkte und -Features. Validierung mit echten Nutzern statt 6-Monats-Konzept. Ab 8.000 € netto."
+  path="/mvp"
+  jsonLd={[serviceLd]}
+>
+  <ServiceHero
+    eyebrow="MVP-Service"
+    title="Dein MVP in 2–6 Wochen. Festpreis. Lauffähig."
+    sub="Bevor du 6 Monate entwickelst, teste, ob es sich überhaupt lohnt. Ich baue dir einen MVP, mit dem du echte Nutzer-Daten sammelst — nicht eine 100-seitige Konzeptphase mit Maybe-Outcome."
+    secondary={{ label: "So funktioniert's", href: '#ablauf' }}
+    image="MVP-Screenshot / Build-Setting"
+    photo="pitch.jpg"
+    price="ab 8.000 € netto"
+  />
+
+  <!-- M2 Was du bekommst -->
+  <section class="container-page py-20">
+    <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Was du bekommst</h2>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {
+        outcomes.map((o) => (
+          <div class="card-line p-7">
+            <h3 class="text-lg font-bold text-ink">{o.title}</h3>
+            <p class="mt-2 text-body">{o.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- M3 Stack -->
+  <section class="bg-surface-2 py-20">
+    <div class="container-page grid gap-10 lg:grid-cols-2">
+      <div>
+        <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Wie ich MVPs baue</h2>
+        <p class="mt-4 text-body">Geschwindigkeit kommt nicht durch Magie, sondern durch einen bewussten Tech-Stack. Wenn ihr ein anderes Backend habt (Django, Rails, .NET), passe ich mich an — aber die Geschwindigkeit kommt aus konsequenter Vereinfachung.</p>
+      </div>
+      <div class="divide-y divide-line rounded-[20px] border border-line bg-white">
+        {
+          stack.map(([k, v]) => (
+            <div class="flex gap-4 p-4">
+              <span class="w-28 shrink-0 font-bold text-ink">{k}</span>
+              <span class="text-sm text-body">{v}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- M4 Use cases -->
+  <section class="container-page py-20">
+    <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Beispiel-Use-Cases</h2>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {
+        useCases.map((u) => (
+          <div class="card-line p-6">
+            <h3 class="font-bold text-ink">{u.title}</h3>
+            <p class="mt-2 text-sm text-body">{u.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- M5 Pakete -->
+  <section class="bg-surface-2 py-20">
+    <div class="container-page">
+      <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Drei Größen</h2>
+      <div class="mt-10 grid gap-6 lg:grid-cols-3">
+        {
+          packages.map((p) => (
+            <div class="card-line flex flex-col p-7">
+              <h3 class="text-xl font-bold text-ink">{p.name}</h3>
+              <span class="pill mt-3 w-fit">{p.dur}</span>
+              <p class="mt-4 flex-1 text-sm text-body">{p.scope}</p>
+              <p class="mt-6 text-2xl font-extrabold text-electric">{p.price}</p>
+            </div>
+          ))
+        }
+      </div>
+      <div class="mt-8 grid gap-6 md:grid-cols-2">
+        <div class="rounded-[20px] border border-line bg-white p-6">
+          <p class="font-bold text-ink">Alle Pakete enthalten</p>
+          <ul class="mt-3 space-y-1.5 text-sm text-body">
+            <li>1 Discovery-Workshop (vor Projektstart)</li>
+            <li>Wöchentliche Demo-Calls</li>
+            <li>Code-Übergabe in eurem Repo</li>
+            <li>Architektur-Doku</li>
+            <li>2 Wochen Hypercare nach Launch</li>
+          </ul>
+        </div>
+        <div class="rounded-[20px] border border-line bg-white p-6">
+          <p class="font-bold text-ink">Was nicht enthalten ist</p>
+          <ul class="mt-3 space-y-1.5 text-sm text-body">
+            <li>Token-Kosten (OpenAI/Anthropic — typisch 200–2.000 €/Monat)</li>
+            <li>Hosting-Kosten (Vercel/Cloudflare — typisch 20–500 €/Monat)</li>
+            <li>Drittanbieter-Lizenzen</li>
+            <li>Laufende Wartung nach Hypercare (optional als FDE-Retainer)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="ablauf"></div>
+  <Steps heading="Ablauf" steps={steps} />
+
+  <!-- M7 Was es nicht ist -->
+  <section class="container-page pb-20">
+    <div class="rounded-[20px] border border-line bg-surface-2 p-8">
+      <h2 class="text-2xl font-bold text-ink">Was MVP-Service nicht ist</h2>
+      <ul class="mt-4 space-y-2 text-body">
+        <li>✕ Kein perfektes Production-Setup für 100.000 User/Monat ab Tag 1. Wir bauen für Validierung, nicht für Hyperscale.</li>
+        <li>✕ Kein Designer-Festival. Sauberes, funktionales UI-Design (Tailwind + shadcn). High-End-Design auf Wunsch mit Designerin.</li>
+        <li>✕ Keine 6-Monats-Roadmap. Nach dem MVP entscheidet ihr neu.</li>
+      </ul>
+    </div>
+  </section>
+
+  <Faq items={faqs} />
+
+  <Cta heading="Hast du eine Idee, die getestet werden will?" />
+</Layout>

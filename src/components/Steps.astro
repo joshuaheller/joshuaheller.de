@@ -1,0 +1,27 @@
+---
+interface Step {
+  title: string;
+  body: string;
+  meta?: string;
+}
+interface Props {
+  heading?: string;
+  steps: Step[];
+}
+const { heading = 'So läuft eine Zusammenarbeit ab', steps } = Astro.props;
+---
+<section class="container-page py-20">
+  <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">{heading}</h2>
+  <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+    {
+      steps.map((step, i) => (
+        <div class="card-line flex flex-col p-6">
+          <span class="text-sm font-bold text-electric">0{i + 1}</span>
+          <h3 class="mt-2 text-lg font-bold text-ink">{step.title}</h3>
+          <p class="mt-2 flex-1 text-sm text-body">{step.body}</p>
+          {step.meta && <p class="mt-4 text-xs font-medium text-muted">{step.meta}</p>}
+        </div>
+      ))
+    }
+  </div>
+</section>

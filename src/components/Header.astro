@@ -1,0 +1,139 @@
+---
+import { Icon } from 'astro-icon/components';
+import { MEGA_MENU, RESOURCES } from '../site';
+
+const path = new URL(Astro.request.url).pathname;
+const isActive = (href: string) => path === href || (href !== '/' && path.startsWith(href));
+---
+
+<header class="sticky top-0 z-40 border-b border-line/70 bg-white/80 backdrop-blur-md">
+  <div class="container-page flex h-16 items-center justify-between gap-4">
+    <a href="/" class="flex items-baseline gap-2 text-ink" aria-label="Joshua Heller — Startseite">
+      <span class="text-lg font-extrabold tracking-tight">Joshua Heller</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden items-center gap-1 lg:flex" aria-label="Hauptnavigation">
+      <!-- Leistungen mega-menu -->
+      <div class="group relative">
+        <button
+          class="flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium text-ink transition hover:bg-surface-3"
+          aria-haspopup="true"
+        >
+          Leistungen
+          <Icon name="lucide:chevron-down" class="size-4 transition group-hover:rotate-180" />
+        </button>
+        <div
+          class="invisible absolute left-1/2 top-full z-50 w-[44rem] -translate-x-1/2 pt-3 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
+        >
+          <div class="card-glass grid grid-cols-3 gap-5 p-6">
+            {
+              MEGA_MENU.map((col) => (
+                <div>
+                  <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-muted">{col.title}</p>
+                  <ul class="space-y-3">
+                    {col.items.map((item) => (
+                      <li>
+                        <a href={item.href} class="block rounded-xl px-2 py-1.5 transition hover:bg-white/70">
+                          <span class="block text-sm font-semibold text-ink">{item.label}</span>
+                          <span class="block text-xs text-muted">{item.desc}</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Ressourcen dropdown -->
+      <div class="group relative">
+        <button
+          class="flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium text-ink transition hover:bg-surface-3"
+          aria-haspopup="true"
+        >
+          Ressourcen
+          <Icon name="lucide:chevron-down" class="size-4 transition group-hover:rotate-180" />
+        </button>
+        <div class="invisible absolute left-0 top-full z-50 w-56 pt-3 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+          <div class="card-glass p-3">
+            <ul class="space-y-1">
+              {
+                RESOURCES.map((r) => (
+                  <li>
+                    <a href={r.href} class="block rounded-lg px-3 py-2 text-sm font-medium text-ink transition hover:bg-white/70">
+                      {r.label}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <a
+        href="/ueber-mich"
+        class:list={[
+          'rounded-full px-3 py-2 text-sm font-medium transition hover:bg-surface-3',
+          isActive('/ueber-mich') ? 'text-electric' : 'text-ink',
+        ]}>Über mich</a
+      >
+
+      <a href="/kontakt" class="btn btn-primary ml-2">Erstgespräch vereinbaren</a>
+    </nav>
+
+    <!-- Mobile toggle -->
+    <button
+      id="menu-toggle"
+      class="rounded-full p-2 text-ink lg:hidden"
+      aria-label="Menü öffnen"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <Icon name="lucide:menu" class="size-6" />
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden border-t border-line bg-white lg:hidden">
+    <nav class="container-page space-y-5 py-6" aria-label="Mobile Navigation">
+      {
+        MEGA_MENU.map((col) => (
+          <div>
+            <p class="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">{col.title}</p>
+            <ul class="space-y-1">
+              {col.items.map((item) => (
+                <li>
+                  <a href={item.href} class="block py-1.5 font-semibold text-ink">
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+      <div>
+        <p class="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">Ressourcen</p>
+        <ul class="space-y-1">
+          {RESOURCES.map((r) => <li><a href={r.href} class="block py-1.5 font-semibold text-ink">{r.label}</a></li>)}
+          <li><a href="/ueber-mich" class="block py-1.5 font-semibold text-ink">Über mich</a></li>
+        </ul>
+      </div>
+      <a href="/kontakt" class="btn btn-primary w-full justify-center">Erstgespräch vereinbaren</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  toggle?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('hidden') === false;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+  });
+</script>

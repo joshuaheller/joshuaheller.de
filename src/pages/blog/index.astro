@@ -1,0 +1,54 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Placeholder from '../../components/Placeholder.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+);
+const fmt = (d: Date) => d.toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<Layout
+  title="Blog — Joshua Heller über AI Engineering, KI-Strategie & Build in Public"
+  description="Tiefe Artikel zu AI Engineering, Tools & Stacks, KI-Strategie und Build in Public. Praxis statt Buzzwords."
+  path="/blog"
+>
+  <section class="bg-blobs">
+    <div class="container-page py-16 md:py-20">
+      <p class="eyebrow mb-4">Blog</p>
+      <h1 class="max-w-3xl text-4xl font-extrabold tracking-tight text-ink md:text-5xl">Aus der Praxis, für die Praxis.</h1>
+      <p class="mt-6 max-w-2xl text-lg text-body">
+        Lange Artikel zu AI Engineering, Tools, Strategie und Lessons Learned. Tiefe statt Hot-Takes.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-page py-12">
+    {
+      posts.length === 0 ? (
+        <p class="rounded-xl border border-dashed border-line bg-surface-2 p-8 text-center text-muted">
+          Die ersten Cornerstone-Artikel erscheinen mit dem Launch.
+        </p>
+      ) : (
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {posts.map((post) => (
+            <article class="card-line overflow-hidden transition hover:border-electric">
+              <a href={`/blog/${post.id}`}>
+                <Placeholder label="Blog-Cover" ratio="16/9" rounded="rounded-none" />
+                <div class="p-6">
+                  <p class="text-xs text-muted">
+                    {fmt(post.data.pubDate)} · {post.data.readingTime} · {post.data.category}
+                  </p>
+                  <h2 class="mt-2 text-lg font-bold text-ink">{post.data.title}</h2>
+                  <p class="mt-2 line-clamp-2 text-sm text-body">{post.data.description}</p>
+                  <span class="mt-4 inline-block font-semibold text-electric">Artikel lesen →</span>
+                </div>
+              </a>
+            </article>
+          ))}
+        </div>
+      )
+    }
+  </section>
+</Layout>

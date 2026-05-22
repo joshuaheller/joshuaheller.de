@@ -1,0 +1,62 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Cta from '../../components/Cta.astro';
+import { getCollection, render } from 'astro:content';
+import { SITE } from '../../site';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('glossar');
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const defLd = {
+  '@context': 'https://schema.org',
+  '@type': 'DefinedTerm',
+  name: entry.data.term,
+  description: entry.data.tldr,
+  inDefinedTermSet: `${SITE.url}/ki-glossar`,
+};
+---
+
+<Layout
+  title={`${entry.data.term}${entry.data.abbr ? ` (${entry.data.abbr})` : ''} — KI-Glossar | Joshua Heller`}
+  description={entry.data.tldr}
+  path={`/ki-glossar/${entry.id}`}
+  jsonLd={[defLd]}
+>
+  <article class="container-page max-w-3xl py-16">
+    <p class="text-sm text-muted"><a href="/ki-glossar" class="hover:text-electric">KI-Glossar</a></p>
+    <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-ink md:text-5xl">
+      {entry.data.term}{entry.data.abbr && <span class="text-muted"> ({entry.data.abbr})</span>}
+    </h1>
+
+    <div class="mt-6 rounded-2xl border border-line bg-surface-2 p-5">
+      <p class="text-xs font-semibold uppercase tracking-wide text-electric">TL;DR</p>
+      <p class="mt-1 text-body">{entry.data.tldr}</p>
+    </div>
+
+    <div class="prose-jh mt-10">
+      <Content />
+    </div>
+
+    {
+      entry.data.related.length > 0 && (
+        <div class="mt-10">
+          <p class="text-sm font-semibold text-ink">Verwandte Begriffe</p>
+          <div class="mt-3 flex flex-wrap gap-2">
+            {entry.data.related.map((slug) => (
+              <a href={`/ki-glossar/${slug}`} class="pill hover:bg-surface-2">
+                {slug.replace(/-/g, ' ')}
+              </a>
+            ))}
+          </div>
+        </div>
+      )
+    }
+  </article>
+
+  <Cta heading="Willst du das mit mir durchsprechen?" sub="30 Minuten Erstgespräch, unverbindlich." />
+</Layout>

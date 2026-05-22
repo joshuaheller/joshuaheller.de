@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "astro build && npx --yes gh-pages@6 -d dist -b gh-pages -t true"
+    "deploy": "astro build && npx --yes gh-pages@6 -d dist -b gh-pages -t"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.2.0",

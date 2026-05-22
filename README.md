@@ -71,6 +71,32 @@ Noch offen:
 Noch nicht gebaut (spätere Sprints lt. Spec): interaktive Tools (Token-Rechner, AI-Readiness-Audit,
 RAG-vs-Fine-Tuning), englische Version, „Frage Joshua"-RAG-Chatbot.
 
-## Deployment
+## Deployment (GitHub Pages)
 
-Statisches `dist/` → Vercel oder Cloudflare Pages. `site` in `astro.config.mjs` steht auf `https://joshuaheller.de`.
+Live über GitHub Pages, Custom Domain **joshuaheller.de**, ausgeliefert aus dem `gh-pages`-Branch.
+`site` in `astro.config.mjs` = `https://joshuaheller.de`, `public/CNAME` + `public/.nojekyll` sorgen für Domain & korrekte Auslieferung des `_astro/`-Ordners.
+
+**Redeploy** (baut und pusht `dist/` nach `gh-pages`):
+
+```bash
+pnpm deploy
+```
+
+### DNS (einmalig beim Domain-Provider setzen)
+
+Apex-Domain `joshuaheller.de` → GitHub-Pages-A-Records:
+
+```
+A    @  185.199.108.153
+A    @  185.199.109.153
+A    @  185.199.110.153
+A    @  185.199.111.153
+AAAA @  2606:50c0:8000::153
+AAAA @  2606:50c0:8001::153
+AAAA @  2606:50c0:8002::153
+AAAA @  2606:50c0:8003::153
+```
+
+Optional `www` → `CNAME  www  joshuaheller.github.io.`
+
+Nach der DNS-Umstellung in den Repo-Einstellungen unter *Settings → Pages* „Enforce HTTPS" aktivieren.

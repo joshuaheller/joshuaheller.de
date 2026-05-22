@@ -40,6 +40,7 @@ const jsonLd = [personLd, ...(props.jsonLd ?? [])];
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <Seo {...props} jsonLd={jsonLd} />
+    <script is:inline defer data-domain="joshuaheller.de" src="https://analytics.taisc.de/js/script.js"></script>
   </head>
   <body>
     <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-electric focus:px-4 focus:py-2 focus:text-white">

@@ -1,0 +1,52 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Placeholder from '../../../components/Placeholder.astro';
+import Cta from '../../../components/Cta.astro';
+import { getCollection, render } from 'astro:content';
+import { SITE } from '../../../site';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blogEn', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const fmt = (d: Date) => d.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString(),
+  author: { '@type': 'Person', name: 'Joshua Heller', url: SITE.url },
+  publisher: { '@type': 'Organization', name: 'TAISC – The AI Software Company GmbH' },
+};
+---
+
+<Layout
+  title={`${post.data.title} | Joshua Heller`}
+  description={post.data.description}
+  path={`/en/blog/${post.id}`}
+  lang="en"
+  alternatePath={`/blog/${post.id}`}
+  type="article"
+  jsonLd={[articleLd]}
+>
+  <article class="container-page max-w-3xl py-16">
+    <p class="text-sm text-muted">
+      <a href="/en/blog" class="hover:text-electric">Blog</a> · {fmt(post.data.pubDate)} · {post.data.readingTime} · {post.data.category}
+    </p>
+    <h1 class="mt-4 text-4xl font-extrabold leading-tight tracking-tight text-ink md:text-5xl">{post.data.title}</h1>
+    <p class="mt-5 text-xl text-body">{post.data.description}</p>
+    <div class="mt-8">
+      <Placeholder label="Hero Image (1200×630)" ratio="16/9" />
+    </div>
+    <div class="prose-jh mt-10">
+      <Content />
+    </div>
+  </article>
+
+  <Cta heading="Want to talk through this in your context?" sub="30-minute intro call, no commitment." lang="en" />
+</Layout>

@@ -1,0 +1,56 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Placeholder from '../../../components/Placeholder.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blogEn', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+);
+const fmt = (d: Date) => d.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<Layout
+  title="Blog — Joshua Heller on AI Engineering, AI Strategy & Build in Public"
+  description="In-depth articles on AI engineering, tools & stacks, AI strategy, and build in public. Practice over buzzwords."
+  path="/en/blog"
+  lang="en"
+  alternatePath="/blog"
+>
+  <section class="bg-blobs">
+    <div class="container-page py-16 md:py-20">
+      <p class="eyebrow mb-4">Blog</p>
+      <h1 class="max-w-3xl text-4xl font-extrabold tracking-tight text-ink md:text-5xl">From practice, for practice.</h1>
+      <p class="mt-6 max-w-2xl text-lg text-body">
+        Long-form articles on AI engineering, tools, strategy, and lessons learned. Depth over hot takes.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-page py-12">
+    {
+      posts.length === 0 ? (
+        <p class="rounded-xl border border-dashed border-line bg-surface-2 p-8 text-center text-muted">
+          The first cornerstone articles appear with launch.
+        </p>
+      ) : (
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {posts.map((post) => (
+            <article class="card-line overflow-hidden transition hover:border-electric">
+              <a href={`/en/blog/${post.id}`}>
+                <Placeholder label="Blog Cover" ratio="16/9" rounded="rounded-none" />
+                <div class="p-6">
+                  <p class="text-xs text-muted">
+                    {fmt(post.data.pubDate)} · {post.data.readingTime} · {post.data.category}
+                  </p>
+                  <h2 class="mt-2 text-lg font-bold text-ink">{post.data.title}</h2>
+                  <p class="mt-2 line-clamp-2 text-sm text-body">{post.data.description}</p>
+                  <span class="mt-4 inline-block font-semibold text-electric">Read article →</span>
+                </div>
+              </a>
+            </article>
+          ))}
+        </div>
+      )
+    }
+  </section>
+</Layout>

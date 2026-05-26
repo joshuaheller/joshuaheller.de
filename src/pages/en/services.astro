@@ -1,0 +1,123 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Cta from '../../components/Cta.astro';
+
+const services = [
+  {
+    slug: '/en/ai-workshop',
+    name: 'AI Workshop',
+    tagline: 'From buzzword to roadmap',
+    price: 'from €3,000',
+    intent: 'understanding',
+  },
+  {
+    slug: '/en/ai-sparring',
+    name: 'AI Sparring',
+    tagline: 'External sparring partner',
+    price: 'from €300/h',
+    intent: 'understanding',
+  },
+  {
+    slug: '/en/forward-deployed-engineer',
+    name: 'Forward Deployed Engineer',
+    tagline: 'I build inside your codebase',
+    price: 'from €200/h',
+    intent: 'engineer',
+  },
+  {
+    slug: '/en/mvp',
+    name: 'MVP Service',
+    tagline: 'From prototype to product in 2–6 weeks',
+    price: 'from €8,000',
+    intent: 'engineer',
+  },
+  {
+    slug: '/en/fractional-caio',
+    name: 'Fractional CAIO',
+    tagline: 'Part-time AI leadership',
+    price: 'from €3,000/month',
+    intent: 'leadership',
+  },
+] as const;
+
+const byIntent = {
+  understanding: 'I need AI understanding',
+  engineer: 'I need an AI engineer',
+  leadership: 'I need AI leadership',
+};
+
+const columns = (Object.keys(byIntent) as (keyof typeof byIntent)[]).map((intent) => ({
+  title: byIntent[intent],
+  services: services.filter((s) => s.intent === intent),
+}));
+
+const situations = [
+  { s: 'You have an AI feature that needs to go live within weeks.', r: 'Forward Deployed Engineer', href: '/en/forward-deployed-engineer' },
+  { s: 'You want to validate an idea quickly and cost-effectively.', r: 'MVP Service', href: '/en/mvp' },
+  { s: 'You need ongoing AI leadership without a full-time Chief AI Officer.', r: 'Fractional CAIO', href: '/en/fractional-caio' },
+  { s: 'You don\'t know where to start with AI yet.', r: 'AI Workshop', href: '/en/ai-workshop' },
+  { s: 'You need an independent second opinion on a specific decision.', r: 'AI Sparring', href: '/en/ai-sparring' },
+];
+---
+
+<Layout
+  title="All Services — Joshua Heller, AI Engineer & Fractional CAIO"
+  description="Forward Deployed Engineer, MVP Service, Fractional CAIO, AI Workshop, and AI Sparring. Three intents: AI understanding, AI engineering, AI leadership."
+  path="/en/services"
+  lang="en"
+  alternatePath="/leistungen"
+>
+  <section class="bg-blobs">
+    <div class="container-page py-16 md:py-20">
+      <p class="eyebrow mb-4">Services</p>
+      <h1 class="max-w-3xl text-4xl font-extrabold tracking-tight text-ink md:text-5xl">
+        Three ways I can help.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg text-body">
+        Depending on where you are: build understanding, build AI, or lead AI. All prices are starting prices net — we'll nail down the details in the intro call.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-page py-16">
+    <div class="grid gap-8 lg:grid-cols-3">
+      {
+        columns.map((col) => (
+          <div>
+            <p class="mb-5 text-sm font-semibold uppercase tracking-wide text-muted">{col.title}</p>
+            <div class="space-y-5">
+              {col.services.map((s) => (
+                <a href={s.slug} class="card-line block p-6 transition hover:border-electric">
+                  <h2 class="text-lg font-bold text-ink">{s.name}</h2>
+                  <p class="mt-1 text-sm text-body">{s.tagline}</p>
+                  <div class="mt-4 flex items-center justify-between">
+                    <span class="pill">{s.price}</span>
+                    <span class="font-semibold text-electric">Learn more →</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="bg-surface-2 py-20">
+    <div class="container-page">
+      <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Which service is right for you?</h2>
+      <div class="mt-10 divide-y divide-line overflow-hidden rounded-[20px] border border-line bg-white">
+        {
+          situations.map((row) => (
+            <div class="flex flex-col gap-3 p-5 sm:flex-row sm:items-center sm:justify-between">
+              <p class="text-body">{row.s}</p>
+              <a href={row.href} class="shrink-0 font-semibold text-electric">{row.r} →</a>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <Cta heading="Not sure which fits?" sub="That's exactly what the intro call is for. 30 minutes, no commitment." lang="en" />
+</Layout>

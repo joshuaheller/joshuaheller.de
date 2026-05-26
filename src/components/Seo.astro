@@ -1,5 +1,6 @@
 ---
 import { SITE } from '../site';
+import type { Lang } from '../i18n';
 
 interface Props {
   title: string;
@@ -11,6 +12,9 @@ interface Props {
   /** any JSON-LD objects to inline */
   jsonLd?: Record<string, unknown>[];
   noindex?: boolean;
+  lang?: Lang;
+  /** The path of the equivalent page in the other language */
+  alternatePath?: string;
 }
 
 const {
@@ -21,10 +25,17 @@ const {
   type = 'website',
   jsonLd = [],
   noindex = false,
+  lang = 'de',
+  alternatePath,
 } = Astro.props;
 
 const canonical = new URL(path, SITE.url).href;
 const ogImageUrl = new URL(ogImage, SITE.url).href;
+const ogLocale = lang === 'en' ? 'en_US' : 'de_DE';
+
+// Determine hreflang URLs
+const dePath = lang === 'de' ? path : alternatePath;
+const enPath = lang === 'en' ? path : alternatePath;
 ---
 
 <title>{title}</title>
@@ -38,12 +49,22 @@ const ogImageUrl = new URL(ogImage, SITE.url).href;
 <meta property="og:url" content={canonical} />
 <meta property="og:image" content={ogImageUrl} />
 <meta property="og:site_name" content={SITE.name} />
-<meta property="og:locale" content="de_DE" />
+<meta property="og:locale" content={ogLocale} />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImageUrl} />
+
+{
+  dePath && enPath && (
+    <>
+      <link rel="alternate" hreflang="de" href={new URL(dePath, SITE.url).href} />
+      <link rel="alternate" hreflang="en" href={new URL(enPath, SITE.url).href} />
+      <link rel="alternate" hreflang="x-default" href={new URL(dePath, SITE.url).href} />
+    </>
+  )
+}
 
 {
   jsonLd.map((obj) => (

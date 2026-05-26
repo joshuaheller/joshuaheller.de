@@ -1,12 +1,18 @@
 ---
-import { STATS } from '../site';
-interface Props { dark?: boolean }
-const { dark = false } = Astro.props;
+import { useTranslations, type Lang } from '../i18n';
+
+interface Props {
+  dark?: boolean;
+  lang?: Lang;
+}
+
+const { dark = false, lang = 'de' } = Astro.props;
+const t = useTranslations(lang);
 ---
 <section class:list={[dark ? 'bg-ink text-white' : '']}>
   <div class="container-page grid grid-cols-2 gap-8 py-16 md:grid-cols-4">
     {
-      STATS.map((s) => (
+      t.stats.map((s) => (
         <div>
           <div class:list={['text-4xl font-extrabold tracking-tight md:text-5xl', dark ? 'text-white' : 'text-ink']}>
             {s.value}

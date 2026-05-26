@@ -1,7 +1,16 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { SITE } from '../site';
+import { useTranslations, type Lang } from '../i18n';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'de' } = Astro.props;
+const t = useTranslations(lang);
 const year = new Date().getFullYear();
+const { footer: f } = t;
 ---
 
 <footer class="border-t border-line bg-surface-2">
@@ -9,7 +18,7 @@ const year = new Date().getFullYear();
     <div>
       <p class="text-lg font-extrabold tracking-tight text-ink">Joshua Heller</p>
       <p class="mt-3 max-w-xs text-sm text-muted">
-        AI Engineer & Fractional CAIO. Vom Prototyp zum Produkt — direkt in deiner Codebase.
+        {f.tagline}
       </p>
       <a
         href={SITE.linkedin}
@@ -22,31 +31,31 @@ const year = new Date().getFullYear();
     </div>
 
     <div>
-      <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-muted">KI-Verständnis</p>
+      <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-muted">{f.col1}</p>
       <ul class="space-y-2 text-sm">
-        <li><a href="/ki-workshop" class="text-body hover:text-electric">KI-Workshop</a></li>
-        <li><a href="/ki-sparring" class="text-body hover:text-electric">KI-Sparring</a></li>
+        <li><a href={f.links.workshop.href} class="text-body hover:text-electric">{f.links.workshop.label}</a></li>
+        <li><a href={f.links.sparring.href} class="text-body hover:text-electric">{f.links.sparring.label}</a></li>
       </ul>
     </div>
 
     <div>
-      <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-muted">Engineering & Führung</p>
+      <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-muted">{f.col2}</p>
       <ul class="space-y-2 text-sm">
-        <li><a href="/forward-deployed-engineer" class="text-body hover:text-electric">Forward Deployed Engineer</a></li>
-        <li><a href="/mvp" class="text-body hover:text-electric">MVP-Service</a></li>
-        <li><a href="/fractional-caio" class="text-body hover:text-electric">Fractional CAIO</a></li>
+        <li><a href={f.links.fde.href} class="text-body hover:text-electric">{f.links.fde.label}</a></li>
+        <li><a href={f.links.mvp.href} class="text-body hover:text-electric">{f.links.mvp.label}</a></li>
+        <li><a href={f.links.caio.href} class="text-body hover:text-electric">{f.links.caio.label}</a></li>
       </ul>
     </div>
 
     <div>
-      <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-muted">Mehr</p>
+      <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-muted">{f.col3}</p>
       <ul class="space-y-2 text-sm">
-        <li><a href="/ueber-mich" class="text-body hover:text-electric">Über mich</a></li>
-        <li><a href="/blog" class="text-body hover:text-electric">Blog</a></li>
-        <li><a href="/ki-glossar" class="text-body hover:text-electric">KI-Glossar</a></li>
-        <li><a href="/kontakt" class="text-body hover:text-electric">Kontakt</a></li>
-        <li><a href="/impressum" class="text-body hover:text-electric">Impressum</a></li>
-        <li><a href="/datenschutz" class="text-body hover:text-electric">Datenschutz</a></li>
+        <li><a href={f.links.about.href} class="text-body hover:text-electric">{f.links.about.label}</a></li>
+        <li><a href={f.links.blog.href} class="text-body hover:text-electric">{f.links.blog.label}</a></li>
+        <li><a href={f.links.glossar.href} class="text-body hover:text-electric">{f.links.glossar.label}</a></li>
+        <li><a href={f.links.contact.href} class="text-body hover:text-electric">{f.links.contact.label}</a></li>
+        <li><a href={f.links.impressum.href} class="text-body hover:text-electric">{f.links.impressum.label}</a></li>
+        <li><a href={f.links.datenschutz.href} class="text-body hover:text-electric">{f.links.datenschutz.label}</a></li>
       </ul>
     </div>
   </div>
@@ -54,12 +63,12 @@ const year = new Date().getFullYear();
   <div class="border-t border-line">
     <div class="container-page flex flex-col gap-2 py-6 text-xs text-muted md:flex-row md:items-center md:justify-between">
       <p>
-        Joshua Heller ist Geschäftsführer der
+        {f.credit}{' '}
         <a href={SITE.taisc} target="_blank" rel="noopener" class="font-medium text-body hover:text-electric"
           >TAISC – The AI Software Company GmbH</a
         >.
       </p>
-      <p>© {year} Joshua Heller · Logos der jeweiligen Markeninhaber.</p>
+      <p>© {year} Joshua Heller · {f.logos}</p>
     </div>
   </div>
 </footer>

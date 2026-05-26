@@ -25,6 +25,8 @@ const defLd = {
   title={`${entry.data.term}${entry.data.abbr ? ` (${entry.data.abbr})` : ''} — KI-Glossar | Joshua Heller`}
   description={entry.data.tldr}
   path={`/ki-glossar/${entry.id}`}
+  lang="de"
+  alternatePath={`/en/glossary/${entry.id}`}
   jsonLd={[defLd]}
 >
   <article class="container-page max-w-3xl py-16">
@@ -58,5 +60,5 @@ const defLd = {
     }
   </article>
 
-  <Cta heading="Willst du das mit mir durchsprechen?" sub="30 Minuten Erstgespräch, unverbindlich." />
+  <Cta heading="Willst du das mit mir durchsprechen?" sub="30 Minuten Erstgespräch, unverbindlich." lang="de" />
 </Layout>

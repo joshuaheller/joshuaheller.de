@@ -1,0 +1,88 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ServiceHero from '../../components/ServiceHero.astro';
+import Cta from '../../components/Cta.astro';
+import { SITE } from '../../site';
+
+const when = [
+  'You\'re a tech lead or founder who regularly faces AI decisions — but your team is too deep in day-to-day work for an outside perspective',
+  'You\'re not planning a 12-month implementation, but need a sparring session every 1–2 weeks',
+  'You want a second opinion on your architecture, tool, or vendor choice',
+  'You have an important tech decision you want to present to someone outside your team who will give you an honest answer',
+];
+
+const included = [
+  'One- or multi-hour sparring calls, scheduled on your timeline',
+  'An honest second opinion on architecture, tool, and vendor choices',
+  'Code and architecture reviews within the agreed scope',
+  'Prepared recommendations on specific questions (no 50-page doc — bullet points with rationale)',
+  'No implementation component. If you need code, that\'s the Forward Deployed Engineer.',
+];
+
+const serviceLd = {
+  '@context': 'https://schema.org', '@type': 'Service', name: 'AI Sparring',
+  serviceType: 'Advisory', provider: { '@type': 'Person', name: 'Joshua Heller', url: SITE.url }, areaServed: 'DACH',
+  offers: {
+    '@type': 'Offer', price: '300', priceCurrency: 'EUR',
+    priceSpecification: { '@type': 'UnitPriceSpecification', price: '300', priceCurrency: 'EUR', unitText: 'HUR' },
+  },
+};
+---
+
+<Layout
+  title="AI Sparring: Your External AI Advisor for Tech Decisions"
+  description="An independent AI expert for tech decision-makers — by the hour, when you need that outside view. From €300/h, no vendor lock-in."
+  path="/en/ai-sparring"
+  lang="en"
+  alternatePath="/ki-sparring"
+  jsonLd={[serviceLd]}
+>
+  <ServiceHero
+    eyebrow="AI Sparring"
+    title="A mind that thinks alongside you — when you need it."
+    sub="No implementation engagement, no roadmap ownership. Just an experienced AI engineer who gives you the outside perspective you're missing on tricky decisions — bookable by the hour."
+    primary={{ label: 'Book a Sparring Session →', href: '/en/contact' }}
+    image="Joshua on video call / sparring"
+    photo="cafe.jpg"
+    price="from €300/h"
+  />
+
+  <section class="container-page py-20">
+    <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">When AI Sparring makes sense</h2>
+    <ul class="mt-8 grid gap-4 md:grid-cols-2">
+      {when.map((w) => <li class="card-line p-6 text-body">{w}</li>)}
+    </ul>
+  </section>
+
+  <section class="bg-surface-2 py-20">
+    <div class="container-page grid gap-10 lg:grid-cols-2 lg:items-center">
+      <div>
+        <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">What's included</h2>
+      </div>
+      <ul class="space-y-3">
+        {included.map((i) => <li class="rounded-xl border border-line bg-white p-4 text-sm text-body">{i}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="container-page py-20">
+    <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Pricing</h2>
+    <div class="mt-10 grid gap-6 lg:grid-cols-[1fr_1.4fr]">
+      <div class="card-line flex flex-col justify-center p-8">
+        <p class="text-4xl font-extrabold text-electric">from €300/h</p>
+        <p class="mt-2 text-sm text-muted">net, for individual sparring hours</p>
+      </div>
+      <div class="card-line p-8 text-body">
+        <p>
+          AI Sparring is billed simply by the hour — no fixed packages, no monthly commitment. You book exactly as much as you need.
+        </p>
+        <p class="mt-3">
+          If you regularly need larger hour banks or actual implementation in your codebase, the
+          <a href="/en/forward-deployed-engineer" class="font-medium text-electric">Forward Deployed Engineer</a> (from €200/h with a minimum commitment) is the more cost-effective and appropriate path.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Cta heading="Need a mind that thinks alongside you?" sub="Book a sparring session — straightforward, billed by the hour." lang="en" />
+</Layout>

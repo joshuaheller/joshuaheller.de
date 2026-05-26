@@ -1,0 +1,282 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ServiceHero from '../../components/ServiceHero.astro';
+import Steps from '../../components/Steps.astro';
+import Faq from '../../components/Faq.astro';
+import Cta from '../../components/Cta.astro';
+import { SITE } from '../../site';
+
+const businessTasks = [
+  { title: 'Product-oriented thinking', body: 'What drives ROI? What\'s nice-to-have? I prioritize by business impact, not technical elegance.' },
+  { title: 'Architecture & product ownership', body: 'I take responsibility for decisions — not just implementing tickets.' },
+  { title: 'End-to-end ownership', body: 'From the first idea through architecture, implementation, and deployment to actual adoption by the team.' },
+  { title: 'Knowledge transfer', body: 'Your team learns along the way — not just your system. After the engagement, you\'re more self-sufficient than before.' },
+];
+
+const techTasks = [
+  { title: 'LLM integration', body: 'OpenAI, Anthropic, Azure OpenAI, AWS Bedrock, local LLMs — with a focus on production-readiness.' },
+  { title: 'RAG systems', body: 'From embedding strategy to eval pipeline — with measurable quality KPIs.' },
+  { title: 'Agentic workflows', body: 'LangGraph, MCP servers, tool calling, multi-agent — designed for real business processes.' },
+  { title: 'AI-native features', body: 'Chatbots, co-pilots, classifiers — embedded in your existing web app, not bolted on.' },
+  { title: 'DevOps for AI', body: 'Deployment, observability, LLM logging, cost tracking, and latency optimization.' },
+  { title: 'Refactoring & modernization', body: 'Legacy codebase, migration to modern stacks, AI-assisted refactoring with Cursor, Claude Code, and Copilot.' },
+];
+
+const scenarios = [
+  { title: 'You have an AI feature that needs to go live in 4–12 weeks.', body: 'Your team can\'t do it alone in that time — I don\'t just build alongside them, I make sure it actually gets used.' },
+  { title: 'You have a working prototype but no path to production.', body: 'From a Streamlit demo to a scalable system is a different mountain. I also check: is the prototype the right thing, or does the scope need rethinking?' },
+  { title: 'You want to build AI expertise without 6 months of recruiting.', body: 'Instead of hiring a senior AI engineer, you bring me in for 3–6 months. Your team learns in every sprint — that\'s part of the deal, not a bonus.' },
+  { title: 'You know AI can change things — but not exactly where or how.', body: 'I help identify the right initiatives and prioritize by real business impact.' },
+];
+
+const questions = [
+  { title: 'Is it worth it?', body: 'Before we start building, I clarify: what\'s the concrete business value? What changes — in processes, costs, customer experience? I don\'t build features that have no impact.' },
+  { title: 'What actually needs to ship?', body: 'Not everything that sounds good needs to be in version 1. I help with scope-setting: what\'s MVP, what\'s nice-to-have, what\'s technical debt?' },
+  { title: 'Who uses it afterward?', body: 'A feature nobody uses has no ROI. I think about adoption from day one: who are the users? What do they need? How does the knowledge get into your team?' },
+];
+
+const steps = [
+  { title: 'Intro call', body: 'We check whether the FDE model fits your situation.', meta: '⏱ 30 min' },
+  { title: 'Discovery', body: 'Code walkthrough, stakeholder calls, initial recommendations.', meta: '⏱ 1–2 weeks' },
+  { title: 'Proposal & contract', body: 'Hour bank, scope, start date.', meta: '⏱ a few days' },
+  { title: 'Ongoing engagement', body: 'Your tools, weekly calls, code in your repo.', meta: '⏱ as needed' },
+];
+
+const faqs = [
+  { q: 'What sets an FDE apart from a regular freelancer?', a: 'An FDE takes ownership — for architecture, code quality, and decisions. A regular freelancer works through tickets. I do both depending on context, but the default is: I think along, not just execute.' },
+  { q: 'How many hours per week will you be available?', a: 'Standard is 10–20 hours, which works for most setups. During intensive phases, up to 30–40. I never go full-time on a single engagement — otherwise you lose the FDE advantage.' },
+  { q: 'Do you only work on AI projects that are already clearly defined?', a: 'No — a large part of my work is exactly the opposite: figuring out which AI initiatives actually make sense. I help with scope-setting, ROI assessment, and whether the planned approach is the right one. That often saves more than any hour of implementation.' },
+  { q: 'What happens if an AI initiative has no ROI in your assessment?', a: 'Then I say so. An honest conversation before the engagement beats six months of development for a feature nobody uses. My business model runs on referrals — short, successful projects beat long, unclear engagements.' },
+  { q: 'How do you ensure our team can work independently after the engagement?', a: 'Knowledge transfer isn\'t a bonus — it\'s part of the work. Every sprint includes documentation, pair programming, and explanatory sessions. By the end, your team should understand the architecture, follow the decisions, and be able to continue developing — without me.' },
+  { q: 'Where and how do you work?', a: 'Primarily remote, on-site regularly throughout the DACH region. I work with your tools — Microsoft Teams, GitHub, Cursor, Claude Code, Notion — and I\'m open to your cloud (Azure, AWS, Supabase, Google Cloud). Everything digital, everything documented.' },
+  { q: 'Are you alone, or do you bring a team?', a: 'In FDE engagements, I am the person. For larger engagements, I bring in TAISC engineers by agreement — but never without asking you first.' },
+  { q: 'What if the engagement isn\'t working after 4 weeks?', a: 'You can stop at any time without notice — you only pay for hours delivered. There\'s a sensible minimum commitment for the model to work. My business model runs on referrals — an unhappy client costs me more than a canceled contract.' },
+  { q: 'Do you have references?', a: 'Yes, available on request with a confidentiality agreement. Past FDE-style engagements: BCT Technology (Logify), i40 (SkillDuck), Bitwerft, Onventis.' },
+];
+
+const serviceLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Forward Deployed Engineer',
+  serviceType: 'AI Engineering',
+  provider: { '@type': 'Person', name: 'Joshua Heller', url: SITE.url },
+  areaServed: 'DACH',
+  offers: {
+    '@type': 'Offer',
+    price: '200',
+    priceCurrency: 'EUR',
+    priceSpecification: { '@type': 'UnitPriceSpecification', price: '200', priceCurrency: 'EUR', unitText: 'HUR' },
+  },
+};
+---
+
+<Layout
+  title="Forward Deployed Engineer — AI with Business Impact | Joshua Heller"
+  description="Forward Deployed Engineer: I think from the outcome, not the stack. AI initiatives from idea to production — with architecture and ROI ownership. From €200/h."
+  path="/en/forward-deployed-engineer"
+  lang="en"
+  alternatePath="/forward-deployed-engineer"
+  jsonLd={[serviceLd]}
+>
+  <ServiceHero
+    eyebrow="Forward Deployed Engineer"
+    title="Not just an AI engineer — one who thinks from the outcome."
+    sub="Forward Deployed Engineering is what OpenAI, Anthropic, and Palantir do with their most important customers: a senior engineer becomes part of your team — with real ownership of the result, not just the code. The difference: an FDE thinks in business impact and ROI, guides AI initiatives from the first idea to production, and ensures solutions actually get adopted."
+    primary={{ label: 'Book a Call →', href: '/en/contact' }}
+    secondary={{ label: "How it works", href: '#what-is-fde' }}
+    image="Joshua with laptop in team setting"
+    photo="laptop.jpg"
+    photoPosition="center 54%"
+    price="from €200/h net"
+  />
+
+  <!-- What is an FDE -->
+  <section id="what-is-fde" class="container-page py-20">
+    <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Forward Deployed Engineer — what does that actually mean?</h2>
+    <div class="mt-8 grid gap-10 lg:grid-cols-2">
+      <div class="space-y-5 text-body">
+        <p>
+          A Forward Deployed Engineer (FDE) is an experienced software engineer who doesn't advise from the outside,
+          but works directly inside your codebase, your team, and your context. The term comes from the US market —
+          Palantir coined it, and OpenAI, Anthropic, Scale AI, and Lovable adopted it.
+        </p>
+        <p>In the US, the model is standard at every AI-first company. In the DACH region, it's still emerging — which is exactly why it's an opportunity for the first companies to use it.</p>
+        <p>What that means for you: you get a model that's standard at the most successful AI companies in the world — at a time when your competitors are still working with classical consulting.</p>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div class="card-line p-6">
+          <p class="font-bold text-ink">vs. traditional consultant</p>
+          <ul class="mt-3 space-y-2 text-sm text-body">
+            <li>writes code, not slides</li>
+            <li>sits in the same chat (e.g., Teams) as the team</li>
+            <li>knows the codebase, backlog, stakeholders</li>
+            <li>delivers features, not recommendations</li>
+            <li>thinks in ROI and business impact</li>
+            <li>drives adoption, not just deployment</li>
+          </ul>
+        </div>
+        <div class="card-line p-6">
+          <p class="font-bold text-ink">vs. body-leasing freelancer</p>
+          <ul class="mt-3 space-y-2 text-sm text-body">
+            <li>owns architecture decisions</li>
+            <li>senior expertise, not just hands</li>
+            <li>documents and trains</li>
+            <li>point of contact for strategy</li>
+            <li>asks: is this worth building?</li>
+            <li>knowledge transfer as explicit goal</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What I ask first -->
+  <section class="bg-surface-2 py-20">
+    <div class="container-page">
+      <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">What I ask first — before writing a single line of code</h2>
+      <div class="mt-10 grid gap-5 lg:grid-cols-3">
+        {
+          questions.map((q, i) => (
+            <div class="card-line p-6">
+              <span class="text-sm font-bold text-electric">0{i + 1}</span>
+              <h3 class="mt-2 font-bold text-ink">{q.title}</h3>
+              <p class="mt-2 text-sm text-body">{q.body}</p>
+            </div>
+          ))
+        }
+      </div>
+      <blockquote class="mt-10 rounded-[20px] border border-line bg-white p-7 text-xl font-medium text-ink">
+        "AI features don't fail because of the code. They fail because nobody needs them — or nobody knows how to use them."
+        <footer class="mt-3 text-sm font-normal text-muted">— Joshua Heller</footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- What an FDE brings -->
+  <section class="container-page py-20">
+    <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">What an FDE brings</h2>
+    <div class="mt-10">
+      <p class="eyebrow mb-4">Business & Product</p>
+      <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        {
+          businessTasks.map((t) => (
+            <div class="card-line p-6">
+              <h3 class="font-bold text-ink">{t.title}</h3>
+              <p class="mt-2 text-sm text-body">{t.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+    <div class="mt-12">
+      <p class="eyebrow mb-4">Tech Stack</p>
+      <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {
+          techTasks.map((t) => (
+            <div class="card-line p-6">
+              <h3 class="font-bold text-ink">{t.title}</h3>
+              <p class="mt-2 text-sm text-body">{t.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-ink py-20 text-white">
+    <div class="container-page">
+      <p class="mx-auto max-w-4xl text-center text-2xl font-medium leading-snug md:text-3xl">
+        "The most common mistake in AI projects: building the right thing wrong, or the wrong thing right. My job is to prevent both."
+      </p>
+      <p class="mt-6 text-center text-sm text-white/60">— Joshua Heller</p>
+    </div>
+  </section>
+
+  <!-- At a glance -->
+  <section class="container-page py-16">
+    <div class="grid grid-cols-2 gap-8 rounded-[24px] border border-line bg-surface-2 p-10 md:grid-cols-5">
+      {
+        [
+          { v: 'from €200/h', l: 'hourly rate net' },
+          { v: 'from 20 h', l: 'minimum per month' },
+          { v: 'Retainer', l: 'predictable, with volume discount' },
+          { v: 'End-to-End', l: 'from definition to adoption' },
+          { v: 'Senior', l: '5+ years software, 3 years AI exclusively' },
+        ].map((s) => (
+          <div>
+            <div class="text-2xl font-extrabold text-ink md:text-3xl">{s.v}</div>
+            <div class="mt-1 text-sm text-muted">{s.l}</div>
+          </div>
+        ))
+      }
+    </div>
+    <p class="mt-4 text-center text-sm text-muted">Cancel anytime, no notice required — from a minimum commitment so the model makes sense for both sides.</p>
+  </section>
+
+  <!-- Pricing model -->
+  <section class="container-page py-12">
+    <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">A clear model</h2>
+    <div class="mt-10 grid gap-6 md:grid-cols-2">
+      <div class="card-line p-7">
+        <h3 class="text-xl font-bold text-ink">Hourly rate</h3>
+        <ul class="mt-4 space-y-2 text-body">
+          <li><strong class="text-ink">€200/h</strong> net — from a minimum of roughly 20 hours per month</li>
+          <li>Why a minimum? FDE means building context — your codebase, your team, your goals. Under 20 hours per month, the model doesn't make sense for either party</li>
+          <li>Need just a few hours for an assessment? <a href="/en/ai-sparring" class="font-medium text-electric">AI Sparring</a> (from €300/h) is the right path</li>
+          <li>Cancel anytime, no notice required</li>
+          <li><em>Ideal for: concrete features, architecture, ongoing AI development in your codebase</em></li>
+        </ul>
+      </div>
+      <div class="card-line p-7">
+        <h3 class="text-xl font-bold text-ink">As a retainer</h3>
+        <ul class="mt-4 space-y-2 text-body">
+          <li>Fixed monthly hour bank for predictable capacity</li>
+          <li><strong class="text-ink">Volume discount</strong> on the hourly rate, depending on scope</li>
+          <li>Predictable, billed monthly</li>
+          <li><em>Ideal for: ongoing codebase partnership over several months</em></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- When FDE makes sense -->
+  <section class="bg-surface-2 py-20">
+    <div class="container-page">
+      <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">When FDE makes sense — and when it doesn't</h2>
+      <div class="mt-10 grid gap-5 lg:grid-cols-3">
+        {
+          scenarios.map((s, i) => (
+            <div class="card-line p-6">
+              <span class="text-sm font-bold text-electric">0{i + 1}</span>
+              <h3 class="mt-2 font-bold text-ink">{s.title}</h3>
+              <p class="mt-2 text-sm text-body">{s.body}</p>
+            </div>
+          ))
+        }
+      </div>
+      <div class="mt-8 rounded-[20px] border border-line bg-white p-7">
+        <p class="font-bold text-ink">When it doesn't fit:</p>
+        <ul class="mt-3 space-y-2 text-body">
+          <li>You primarily need strategy without implementation → <a href="/en/fractional-caio" class="font-medium text-electric">Fractional CAIO</a> is a better fit</li>
+          <li>You don't have a direction yet → <a href="/en/ai-workshop" class="font-medium text-electric">AI Workshop</a> is the first step</li>
+          <li>You're looking for pure development capacity without the strategic element → I'm happy to refer you</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <Steps heading="How we get started" steps={steps} />
+
+  <section class="my-8 bg-ink py-20 text-white">
+    <div class="container-page max-w-4xl text-center">
+      <p class="text-2xl font-medium leading-snug md:text-3xl">
+        "An FDE isn't the external consultant looking in from the outside. He's the senior engineer you don't currently have on your team — on loan."
+      </p>
+      <p class="mt-6 text-sm text-white/60">— Joshua Heller</p>
+    </div>
+  </section>
+
+  <Faq heading="Frequently Asked Questions" items={faqs} />
+
+  <Cta heading="Sound like what you need?" sub="Let's talk for 30 minutes. If FDE doesn't fit, I'll tell you that too." lang="en" />
+</Layout>

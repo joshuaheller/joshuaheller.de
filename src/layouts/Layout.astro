@@ -5,6 +5,7 @@ import Seo from '../components/Seo.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE } from '../site';
+import { useTranslations, type Lang } from '../i18n';
 
 interface Props {
   title: string;
@@ -14,9 +15,14 @@ interface Props {
   type?: 'website' | 'article';
   jsonLd?: Record<string, unknown>[];
   noindex?: boolean;
+  lang?: Lang;
+  /** The path of the equivalent page in the other language */
+  alternatePath?: string;
 }
 
 const props = Astro.props;
+const lang = props.lang ?? 'de';
+const t = useTranslations(lang);
 
 // Person JSON-LD ships on every page
 const personLd = {
@@ -33,23 +39,23 @@ const jsonLd = [personLd, ...(props.jsonLd ?? [])];
 ---
 
 <!doctype html>
-<html lang="de">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <Seo {...props} jsonLd={jsonLd} />
+    <Seo {...props} lang={lang} jsonLd={jsonLd} />
     <script is:inline defer data-domain="joshuaheller.de" src="https://analytics.taisc.de/js/script.js"></script>
   </head>
   <body>
     <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-electric focus:px-4 focus:py-2 focus:text-white">
-      Zum Inhalt springen
+      {t.layout.skipLink}
     </a>
-    <Header />
+    <Header lang={lang} alternatePath={props.alternatePath} />
     <main id="main">
       <slot />
     </main>
-    <Footer />
+    <Footer lang={lang} />
   </body>
 </html>

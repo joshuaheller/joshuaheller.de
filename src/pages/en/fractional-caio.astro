@@ -1,0 +1,153 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ServiceHero from '../../components/ServiceHero.astro';
+import Steps from '../../components/Steps.astro';
+import Faq from '../../components/Faq.astro';
+import Cta from '../../components/Cta.astro';
+import { SITE } from '../../site';
+
+const reality = [
+  ['No dedicated Chief AI Officer or Head of AI', 'Strategic AI leadership on a weekly basis'],
+  ['Full-time CAIO too expensive (€150–300k/year)', 'A clear tech and AI roadmap'],
+  ['AI decisions made on gut feeling', 'Independent evaluation of vendors, tools, architectures'],
+  ['Dev team without strategic AI leadership', 'Dev team coaching and mentoring'],
+  ['Dependency on a single agency', 'Professional vendor management'],
+];
+
+const tasks = [
+  { title: 'AI Strategy', body: 'Develop AI roadmap, use-case prioritization, build-or-buy analysis, translate tech vision into language the C-suite understands.' },
+  { title: 'Tech Stack Selection', body: 'LLM providers, vector DBs, orchestration frameworks, cloud platforms — evaluated for your use case, not for hype.' },
+  { title: 'Dev Team Leadership', body: 'Technical leadership, code review culture, hiring support for AI engineering profiles, onboarding structures.' },
+  { title: 'Vendor & Agency Management', body: 'Manage your external service providers: contracts, SLAs, quality, escalation paths.' },
+  { title: 'Compliance & Risk', body: 'GDPR, EU AI Act, data residency, audit logs, risk assessment for AI use cases.' },
+  { title: 'Executive Reporting', body: 'Monthly updates for leadership and board — what\'s running, what costs what, what\'s next.' },
+];
+
+const steps = [
+  { title: 'Intro call & fit check', body: 'Does the model fit your situation?', meta: '⏱ 30 min' },
+  { title: 'AI audit & status quo', body: 'Existing systems, team, processes, vendor landscape.', meta: '⏱ 2–4 weeks' },
+  { title: 'Strategy & roadmap', body: 'AI vision, quarterly roadmap, budget recommendation, quick wins.', meta: '📤 Roadmap' },
+  { title: 'Ongoing collaboration', body: 'Weekly calls, monthly reporting, direct line via your tools (Teams, Notion, GitHub).', meta: '⏱ open-ended' },
+];
+
+const faqs = [
+  { q: 'What does a Fractional CAIO cost?', a: 'I work as Fractional CAIO exclusively on retainer, from €3,000 net per month — the exact amount depends on the agreed hour commitment. Compared to a full-time position (€150–300k annual salary plus overhead), it\'s a predictable, significantly more affordable investment.' },
+  { q: 'How many hours per week?', a: 'Typically 8–16 hours. We define the commitment together and adjust it quarterly.' },
+  { q: 'How does communication work?', a: 'Via the tools you already use — e.g., Microsoft Teams, Notion, GitHub. Weekly call with CEO or tech lead, monthly written report, quarterly strategy review.' },
+  { q: 'What sets you apart from a consulting firm?', a: 'A consulting firm delivers recommendations. I take ownership. I decide alongside you (or alone, depending on authority granted), and I\'m still there in 12 months when the consequences of my decisions become visible.' },
+  { q: 'What\'s the difference between FDE and Fractional CAIO?', a: 'FDE = I write code in your codebase. Fractional CAIO = I make and communicate AI decisions with/for your leadership. Many engagements combine both.' },
+  { q: 'What industries and company sizes do you work with?', a: 'From mid-market companies and scaleups to large enterprises and private equity portfolios — across industrial, B2B SaaS, and software. Working with multiple clients in the same industry is an advantage: I bring patterns from comparable setups.' },
+];
+
+const serviceLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Fractional CAIO',
+  serviceType: 'AI Leadership',
+  provider: { '@type': 'Person', name: 'Joshua Heller', url: SITE.url },
+  areaServed: 'DACH',
+  offers: { '@type': 'Offer', price: '3000', priceCurrency: 'EUR' },
+};
+---
+
+<Layout
+  title="Fractional CAIO — Chief AI Officer Part-Time | Joshua Heller"
+  description="Fractional CAIO (Chief AI Officer) for AI strategy, tech stack decisions, and AI leadership. As a retainer. For mid-market, enterprises, scaleups, and private equity. From €3,000/month."
+  path="/en/fractional-caio"
+  lang="en"
+  alternatePath="/fractional-caio"
+  jsonLd={[serviceLd]}
+>
+  <ServiceHero
+    eyebrow="Fractional CAIO"
+    title="Your Chief AI Officer — flexible and strategic."
+    sub="Part-time AI leadership, as a monthly retainer. For mid-market companies, enterprises, scaleups, and private equity portfolios that don't want to leave AI decisions to chance — but can't or won't finance a full-time CAIO."
+    primary={{ label: 'Book a Call →', href: '/en/contact' }}
+    secondary={{ label: "How it works", href: '#what-is' }}
+    image="Joshua in strategy meeting"
+    photo="videocall.jpg"
+    price="from €3,000/month net"
+  />
+
+  <!-- Reality vs. With Fractional CAIO -->
+  <section class="container-page py-20">
+    <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">AI needs leadership</h2>
+    <div class="mt-10 overflow-hidden rounded-[20px] border border-line">
+      <div class="grid grid-cols-2 bg-surface-2 text-sm font-bold text-ink">
+        <div class="p-4">The reality</div>
+        <div class="border-l border-line p-4 text-electric">With Fractional CAIO</div>
+      </div>
+      {
+        reality.map(([a, b]) => (
+          <div class="grid grid-cols-2 border-t border-line text-sm">
+            <div class="p-4 text-muted">{a}</div>
+            <div class="border-l border-line p-4 text-ink">{b}</div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- What I take on -->
+  <section class="bg-surface-2 py-20">
+    <div class="container-page">
+      <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">What I take on as Fractional CAIO</h2>
+      <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {
+          tasks.map((t) => (
+            <div class="card-line p-6">
+              <h3 class="font-bold text-ink">{t.title}</h3>
+              <p class="mt-2 text-sm text-body">{t.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- What is a Fractional CAIO -->
+  <section id="what-is" class="container-page py-20">
+    <div class="grid gap-10 lg:grid-cols-2">
+      <div>
+        <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">What exactly is a Fractional CAIO?</h2>
+        <div class="mt-6 space-y-4 text-body">
+          <p>A Fractional CAIO (Chief AI Officer) is an experienced AI and tech leader who works for multiple companies simultaneously — each part-time, but with real strategic ownership.</p>
+          <p>Unlike an Interim CAIO who bridges a vacancy: I\'m not a transitional solution. I\'m your long-term solution. There\'s no end date and no search for a successor.</p>
+          <p>The advantage: you get senior expertise that would cost €150,000–300,000 per year as a full-time position — at a fraction of that cost.</p>
+        </div>
+      </div>
+      <div class="space-y-4">
+        <div class="card-line p-6"><p class="font-bold text-ink">Flexible commitment.</p><p class="mt-1 text-sm text-body">1–2 days per week, depending on need. Remote-first with regular on-site days.</p></div>
+        <div class="card-line p-6"><p class="font-bold text-ink">Open-ended engagement.</p><p class="mt-1 text-sm text-body">No project with an end date. As long as it makes sense.</p></div>
+        <div class="card-line p-6"><p class="font-bold text-ink">Monthly retainer.</p><p class="mt-1 text-sm text-body">Predictable costs instead of day-rate surprises. From €3,000/month net.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison -->
+  <section class="bg-surface-2 py-20">
+    <div class="container-page">
+      <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Fractional CAIO vs. Interim CAIO vs. Consultant</h2>
+      <div class="mt-10 grid gap-5 lg:grid-cols-3">
+        <div class="card-line p-6"><h3 class="font-bold text-ink">Fractional CAIO</h3><p class="mt-2 text-sm text-body">Permanent external AI leadership part-time (1–2 days/week). Strategic focus. Open-ended. Monthly retainer.</p></div>
+        <div class="card-line p-6"><h3 class="font-bold text-ink">Interim CAIO</h3><p class="mt-2 text-sm text-body">Bridges a crisis or vacancy. Often full-time, time-limited, operational focus, high day rate. <strong class="text-ink">Not what I do.</strong></p></div>
+        <div class="card-line p-6"><h3 class="font-bold text-ink">Tech Consultant</h3><p class="mt-2 text-sm text-body">Analyzes, evaluates, recommends — without ongoing ownership. For one-off questions: see <a href="/en/ai-sparring" class="font-medium text-electric">AI Sparring</a>.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <Steps heading="How we get started" steps={steps} />
+
+  <section class="my-8 bg-ink py-20 text-white">
+    <div class="container-page max-w-4xl text-center">
+      <p class="text-2xl font-medium leading-snug md:text-3xl">
+        "A 100-slide AI strategy is not a strategy output. A strategy output is a decision with a date and an owner."
+      </p>
+      <p class="mt-6 text-sm text-white/60">— Joshua Heller</p>
+    </div>
+  </section>
+
+  <Faq heading="Frequently Asked Questions" items={faqs} />
+
+  <Cta heading="AI leadership — flexible and strategic?" sub="30-minute intro call. We'll figure out if Fractional CAIO fits your needs." lang="en" />
+</Layout>

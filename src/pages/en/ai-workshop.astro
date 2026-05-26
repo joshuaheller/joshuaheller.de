@@ -1,0 +1,89 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ServiceHero from '../../components/ServiceHero.astro';
+import Cta from '../../components/Cta.astro';
+import { SITE } from '../../site';
+
+const outcomes = [
+  ['Use-case mapping', 'for your domain (your processes, your data)'],
+  ['Tool and platform recommendation', 'OpenAI vs. Azure vs. local — what fits your compliance requirements'],
+  ['Prioritized roadmap', 'with quick wins (4 weeks) and strategic initiatives (6+ months)'],
+  ['Architecture sketch', 'for 1–2 concrete initiatives'],
+  ['Written documentation', 'after the workshop — a usable working document, not a 100-page deck'],
+];
+
+const formats = [
+  { name: 'AI Discovery', target: 'Leadership, strategy, product', dur: '0.5 day (3–4 h)', out: 'Your top 3 use cases identified. First tool hypothesis.' },
+  { name: 'AI Strategy', target: 'C-level + tech lead', dur: '1 day', out: 'Use-case backlog, tech stack decision, roadmap sketch.' },
+  { name: 'AI Sprint', target: 'Cross-functional team (5–12 people)', dur: '2 days', out: 'Like AI Strategy + architecture sketch + hands-on demo.' },
+];
+
+const serviceLd = {
+  '@context': 'https://schema.org', '@type': 'Service', name: 'AI Workshop',
+  serviceType: 'Workshop', provider: { '@type': 'Person', name: 'Joshua Heller', url: SITE.url }, areaServed: 'DACH',
+};
+---
+
+<Layout
+  title="AI Workshop for Your Team | From Buzzword to Roadmap"
+  description="1- to 2-day AI workshop for leadership and teams. Use-case mapping, tool selection, concrete next steps as a deliverable."
+  path="/en/ai-workshop"
+  lang="en"
+  alternatePath="/ki-workshop"
+  jsonLd={[serviceLd]}
+>
+  <ServiceHero
+    eyebrow="AI Workshop"
+    title="AI Workshop: From buzzword to roadmap."
+    sub="1 or 2 days with your team. At the end, you have a prioritized list of use cases, a tech recommendation, and a concrete next step — not 80 slides to debate."
+    primary={{ label: 'Book a Workshop →', href: '/en/contact' }}
+    image="Joshua in workshop / at whiteboard"
+    photo="whiteboard.jpg"
+  />
+
+  <section class="container-page py-20">
+    <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">What you get</h2>
+    <div class="mt-10 grid gap-5 md:grid-cols-2">
+      {
+        outcomes.map(([k, v]) => (
+          <div class="card-line p-6">
+            <h3 class="font-bold text-ink">{k}</h3>
+            <p class="mt-1 text-sm text-body">{v}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="bg-surface-2 py-20">
+    <div class="container-page">
+      <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Three workshop formats</h2>
+      <div class="mt-10 grid gap-6 lg:grid-cols-3">
+        {
+          formats.map((f) => (
+            <div class="card-line flex flex-col p-7">
+              <h3 class="text-xl font-bold text-ink">{f.name}</h3>
+              <span class="pill mt-3 w-fit">{f.dur}</span>
+              <p class="mt-4 text-sm font-medium text-muted">{f.target}</p>
+              <p class="mt-2 flex-1 text-sm text-body">{f.out}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="container-page grid gap-10 py-20 lg:grid-cols-2">
+    <div>
+      <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">How I work</h2>
+      <p class="mt-4 text-body">My workshop is not a PowerPoint marathon. Maximum 30% my input, 70% structured work at the whiteboard and on laptops.</p>
+      <p class="mt-3 text-body">Tools: Miro or Mural, Microsoft Teams for async, Notion or Confluence for documentation, sometimes Cursor or Claude Code live for a mini demo.</p>
+    </div>
+    <div class="rounded-[20px] border border-line bg-surface-2 p-8">
+      <h3 class="text-xl font-bold text-ink">Pricing</h3>
+      <p class="mt-3 text-body">An AI Workshop starts at <strong class="text-ink">€3,000</strong> net — the exact price depends on format, duration, and number of participants. We'll work out the details in the intro call.</p>
+    </div>
+  </section>
+
+  <Cta heading="Ready for the first step?" sub="Book a workshop — 30-minute intro call, no commitment." lang="en" />
+</Layout>

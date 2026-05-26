@@ -1,0 +1,64 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Cta from '../../../components/Cta.astro';
+import { getCollection, render } from 'astro:content';
+import { SITE } from '../../../site';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('glossaryEn');
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const defLd = {
+  '@context': 'https://schema.org',
+  '@type': 'DefinedTerm',
+  name: entry.data.term,
+  description: entry.data.tldr,
+  inDefinedTermSet: `${SITE.url}/en/glossary`,
+};
+---
+
+<Layout
+  title={`${entry.data.term}${entry.data.abbr ? ` (${entry.data.abbr})` : ''} — AI Glossary | Joshua Heller`}
+  description={entry.data.tldr}
+  path={`/en/glossary/${entry.id}`}
+  lang="en"
+  alternatePath={`/ki-glossar/${entry.id}`}
+  jsonLd={[defLd]}
+>
+  <article class="container-page max-w-3xl py-16">
+    <p class="text-sm text-muted"><a href="/en/glossary" class="hover:text-electric">AI Glossary</a></p>
+    <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-ink md:text-5xl">
+      {entry.data.term}{entry.data.abbr && <span class="text-muted"> ({entry.data.abbr})</span>}
+    </h1>
+
+    <div class="mt-6 rounded-2xl border border-line bg-surface-2 p-5">
+      <p class="text-xs font-semibold uppercase tracking-wide text-electric">TL;DR</p>
+      <p class="mt-1 text-body">{entry.data.tldr}</p>
+    </div>
+
+    <div class="prose-jh mt-10">
+      <Content />
+    </div>
+
+    {
+      entry.data.related.length > 0 && (
+        <div class="mt-10">
+          <p class="text-sm font-semibold text-ink">Related terms</p>
+          <div class="mt-3 flex flex-wrap gap-2">
+            {entry.data.related.map((slug) => (
+              <a href={`/en/glossary/${slug}`} class="pill hover:bg-surface-2">
+                {slug.replace(/-/g, ' ')}
+              </a>
+            ))}
+          </div>
+        </div>
+      )
+    }
+  </article>
+
+  <Cta heading="Want to talk through this?" sub="30-minute intro call, no commitment." lang="en" />
+</Layout>

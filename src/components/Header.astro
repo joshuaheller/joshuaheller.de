@@ -1,26 +1,34 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { MEGA_MENU, RESOURCES } from '../site';
+import { useTranslations, type Lang } from '../i18n';
+
+interface Props {
+  lang?: Lang;
+  alternatePath?: string;
+}
+
+const { lang = 'de', alternatePath } = Astro.props;
+const t = useTranslations(lang);
 
 const path = new URL(Astro.request.url).pathname;
-const isActive = (href: string) => path === href || (href !== '/' && path.startsWith(href));
+const isActive = (href: string) => path === href || (href !== '/' && href !== '/en/' && path.startsWith(href));
 ---
 
 <header class="sticky top-0 z-40 border-b border-line/70 bg-white/80 backdrop-blur-md">
   <div class="container-page flex h-16 items-center justify-between gap-4">
-    <a href="/" class="flex items-baseline gap-2 text-ink" aria-label="Joshua Heller — Startseite">
+    <a href={lang === 'en' ? '/en/' : '/'} class="flex items-baseline gap-2 text-ink" aria-label={t.layout.homeLabel}>
       <span class="text-lg font-extrabold tracking-tight">Joshua Heller</span>
     </a>
 
     <!-- Desktop nav -->
-    <nav class="hidden items-center gap-1 lg:flex" aria-label="Hauptnavigation">
-      <!-- Leistungen mega-menu -->
+    <nav class="hidden items-center gap-1 lg:flex" aria-label={lang === 'en' ? 'Main navigation' : 'Hauptnavigation'}>
+      <!-- Services mega-menu -->
       <div class="group relative">
         <button
           class="flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium text-ink transition hover:bg-surface-3"
           aria-haspopup="true"
         >
-          Leistungen
+          {t.nav.services}
           <Icon name="lucide:chevron-down" class="size-4 transition group-hover:rotate-180" />
         </button>
         <div
@@ -28,7 +36,7 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
         >
           <div class="card-glass grid grid-cols-3 gap-5 p-6">
             {
-              MEGA_MENU.map((col) => (
+              t.megaMenu.map((col) => (
                 <div>
                   <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-muted">{col.title}</p>
                   <ul class="space-y-3">
@@ -48,20 +56,20 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
         </div>
       </div>
 
-      <!-- Ressourcen dropdown -->
+      <!-- Resources dropdown -->
       <div class="group relative">
         <button
           class="flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium text-ink transition hover:bg-surface-3"
           aria-haspopup="true"
         >
-          Ressourcen
+          {t.nav.resources}
           <Icon name="lucide:chevron-down" class="size-4 transition group-hover:rotate-180" />
         </button>
         <div class="invisible absolute left-0 top-full z-50 w-56 pt-3 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
           <div class="card-glass p-3">
             <ul class="space-y-1">
               {
-                RESOURCES.map((r) => (
+                t.resources.map((r) => (
                   <li>
                     <a href={r.href} class="block rounded-lg px-3 py-2 text-sm font-medium text-ink transition hover:bg-white/70">
                       {r.label}
@@ -75,33 +83,67 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
       </div>
 
       <a
-        href="/ueber-mich"
+        href={lang === 'en' ? '/en/about' : '/ueber-mich'}
         class:list={[
           'rounded-full px-3 py-2 text-sm font-medium transition hover:bg-surface-3',
-          isActive('/ueber-mich') ? 'text-electric' : 'text-ink',
-        ]}>Über mich</a
+          isActive(lang === 'en' ? '/en/about' : '/ueber-mich') ? 'text-electric' : 'text-ink',
+        ]}>{t.nav.about}</a
       >
 
-      <a href="/kontakt" class="btn btn-primary ml-2">Erstgespräch vereinbaren</a>
+      <a href={lang === 'en' ? '/en/contact' : '/kontakt'} class="btn btn-primary ml-2">{t.nav.cta}</a>
+
+      <!-- Language switcher -->
+      {alternatePath && (
+        <div class="ml-2 flex items-center gap-1 border-l border-line pl-3">
+          {lang === 'de' ? (
+            <>
+              <span class="rounded-full bg-electric px-2.5 py-1 text-xs font-bold text-white">DE</span>
+              <a href={alternatePath} class="rounded-full px-2.5 py-1 text-xs font-bold text-muted transition hover:text-ink">EN</a>
+            </>
+          ) : (
+            <>
+              <a href={alternatePath} class="rounded-full px-2.5 py-1 text-xs font-bold text-muted transition hover:text-ink">DE</a>
+              <span class="rounded-full bg-electric px-2.5 py-1 text-xs font-bold text-white">EN</span>
+            </>
+          )}
+        </div>
+      )}
     </nav>
 
     <!-- Mobile toggle -->
-    <button
-      id="menu-toggle"
-      class="rounded-full p-2 text-ink lg:hidden"
-      aria-label="Menü öffnen"
-      aria-expanded="false"
-      aria-controls="mobile-menu"
-    >
-      <Icon name="lucide:menu" class="size-6" />
-    </button>
+    <div class="flex items-center gap-2 lg:hidden">
+      {alternatePath && (
+        <div class="flex items-center gap-1">
+          {lang === 'de' ? (
+            <>
+              <span class="rounded-full bg-electric px-2 py-0.5 text-xs font-bold text-white">DE</span>
+              <a href={alternatePath} class="rounded-full px-2 py-0.5 text-xs font-bold text-muted">EN</a>
+            </>
+          ) : (
+            <>
+              <a href={alternatePath} class="rounded-full px-2 py-0.5 text-xs font-bold text-muted">DE</a>
+              <span class="rounded-full bg-electric px-2 py-0.5 text-xs font-bold text-white">EN</span>
+            </>
+          )}
+        </div>
+      )}
+      <button
+        id="menu-toggle"
+        class="rounded-full p-2 text-ink"
+        aria-label={t.nav.menuOpen}
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <Icon name="lucide:menu" class="size-6" />
+      </button>
+    </div>
   </div>
 
   <!-- Mobile menu -->
   <div id="mobile-menu" class="hidden border-t border-line bg-white lg:hidden">
-    <nav class="container-page space-y-5 py-6" aria-label="Mobile Navigation">
+    <nav class="container-page space-y-5 py-6" aria-label={lang === 'en' ? 'Mobile navigation' : 'Mobile Navigation'}>
       {
-        MEGA_MENU.map((col) => (
+        t.megaMenu.map((col) => (
           <div>
             <p class="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">{col.title}</p>
             <ul class="space-y-1">
@@ -117,13 +159,13 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
         ))
       }
       <div>
-        <p class="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">Ressourcen</p>
+        <p class="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">{t.nav.resources}</p>
         <ul class="space-y-1">
-          {RESOURCES.map((r) => <li><a href={r.href} class="block py-1.5 font-semibold text-ink">{r.label}</a></li>)}
-          <li><a href="/ueber-mich" class="block py-1.5 font-semibold text-ink">Über mich</a></li>
+          {t.resources.map((r) => <li><a href={r.href} class="block py-1.5 font-semibold text-ink">{r.label}</a></li>)}
+          <li><a href={lang === 'en' ? '/en/about' : '/ueber-mich'} class="block py-1.5 font-semibold text-ink">{t.nav.about}</a></li>
         </ul>
       </div>
-      <a href="/kontakt" class="btn btn-primary w-full justify-center">Erstgespräch vereinbaren</a>
+      <a href={lang === 'en' ? '/en/contact' : '/kontakt'} class="btn btn-primary w-full justify-center">{t.nav.cta}</a>
     </nav>
   </div>
 </header>
@@ -134,6 +176,8 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
   toggle?.addEventListener('click', () => {
     const open = menu?.classList.toggle('hidden') === false;
     toggle.setAttribute('aria-expanded', String(open));
-    toggle.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+    const openLabel = toggle.dataset.labelOpen ?? 'Close menu';
+    const closeLabel = toggle.dataset.labelClose ?? 'Open menu';
+    toggle.setAttribute('aria-label', open ? openLabel : closeLabel);
   });
 </script>

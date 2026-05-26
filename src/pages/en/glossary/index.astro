@@ -1,0 +1,63 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const entries = (await getCollection('glossaryEn')).sort((a, b) => a.data.term.localeCompare(b.data.term, 'en'));
+
+// group by first letter
+const groups: Record<string, typeof entries> = {};
+for (const e of entries) {
+  const letter = (e.data.letter || e.data.term[0]).toUpperCase();
+  (groups[letter] ??= []).push(e);
+}
+const letters = Object.keys(groups).sort();
+---
+
+<Layout
+  title="AI Glossary — Key AI Terms, Explained | Joshua Heller"
+  description="From RAG to Forward Deployed Engineer to EU AI Act: AI terms explained technically and for business — with example use cases."
+  path="/en/glossary"
+  lang="en"
+  alternatePath="/ki-glossar"
+>
+  <section class="bg-blobs">
+    <div class="container-page py-16 md:py-20">
+      <p class="eyebrow mb-4">AI Glossary</p>
+      <h1 class="max-w-3xl text-4xl font-extrabold tracking-tight text-ink md:text-5xl">
+        AI terms, clearly explained.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg text-body">
+        Technical and business-oriented — from RAG and embeddings to Forward Deployed Engineer and the EU AI Act.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-page py-12">
+    {
+      letters.length === 0 ? (
+        <p class="rounded-xl border border-dashed border-line bg-surface-2 p-8 text-center text-muted">
+          Glossary entries coming soon.
+        </p>
+      ) : (
+        <div class="space-y-12">
+          {letters.map((letter) => (
+            <div>
+              <h2 class="text-2xl font-extrabold text-electric">{letter}</h2>
+              <div class="mt-4 grid gap-4 md:grid-cols-2">
+                {groups[letter].map((e) => (
+                  <a href={`/en/glossary/${e.id}`} class="card-line block p-5 transition hover:border-electric">
+                    <h3 class="font-bold text-ink">
+                      {e.data.term}
+                      {e.data.abbr && <span class="text-muted"> ({e.data.abbr})</span>}
+                    </h3>
+                    <p class="mt-1 line-clamp-2 text-sm text-body">{e.data.tldr}</p>
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )
+    }
+  </section>
+</Layout>

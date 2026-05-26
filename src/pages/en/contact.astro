@@ -1,0 +1,135 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Icon } from 'astro-icon/components';
+import { SITE } from '../../site';
+---
+
+<Layout
+  title="Contact — Book a Call with Joshua Heller"
+  description="30-minute intro call. No commitment, confidential, no sales pitch. You tell me what's going on. I tell you if and how I can help."
+  path="/en/contact"
+  lang="en"
+  alternatePath="/kontakt"
+>
+  <section class="bg-blobs">
+    <div class="container-page py-16 md:py-20">
+      <h1 class="text-4xl font-extrabold tracking-tight text-ink md:text-5xl">Let's talk.</h1>
+      <p class="mt-6 max-w-2xl text-lg text-body">
+        30-minute intro call. No commitment, confidential, no sales pitch. You tell me what's going on. I tell you if and how I can help.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-page grid gap-12 py-12 lg:grid-cols-[1fr_22rem]">
+    <div>
+      <form id="contact-form" class="space-y-5" novalidate>
+        <div class="grid gap-5 sm:grid-cols-2">
+          <label class="block">
+            <span class="text-sm font-medium text-ink">Name *</span>
+            <input required name="name" type="text" class="mt-1 w-full rounded-xl border border-line bg-white px-4 py-2.5 text-body outline-none focus:border-electric" />
+          </label>
+          <label class="block">
+            <span class="text-sm font-medium text-ink">Email *</span>
+            <input required name="email" type="email" class="mt-1 w-full rounded-xl border border-line bg-white px-4 py-2.5 text-body outline-none focus:border-electric" />
+          </label>
+          <label class="block">
+            <span class="text-sm font-medium text-ink">Company</span>
+            <input name="company" type="text" class="mt-1 w-full rounded-xl border border-line bg-white px-4 py-2.5 text-body outline-none focus:border-electric" />
+          </label>
+          <label class="block">
+            <span class="text-sm font-medium text-ink">Role</span>
+            <input name="role" type="text" class="mt-1 w-full rounded-xl border border-line bg-white px-4 py-2.5 text-body outline-none focus:border-electric" />
+          </label>
+        </div>
+        <label class="block">
+          <span class="text-sm font-medium text-ink">What's it about?</span>
+          <textarea name="message" rows="4" maxlength="500" class="mt-1 w-full rounded-xl border border-line bg-white px-4 py-2.5 text-body outline-none focus:border-electric"></textarea>
+        </label>
+        <label class="block">
+          <span class="text-sm font-medium text-ink">How did you hear about me?</span>
+          <select name="source" class="mt-1 w-full rounded-xl border border-line bg-white px-4 py-2.5 text-body outline-none focus:border-electric">
+            <option>LinkedIn</option>
+            <option>Referral</option>
+            <option>Google</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <p class="text-xs text-muted">
+          Submitting this form opens your email client with a pre-filled draft — no external service is used.
+          Legal basis for processing: Art. 6(1)(b) GDPR. Details in the
+          <a href="/datenschutz" class="text-electric">Privacy Policy</a>.
+        </p>
+        <button type="submit" class="btn btn-primary">Open request as email →</button>
+      </form>
+
+      <div id="contact-fallback" class="mt-5 hidden rounded-xl border border-line bg-surface-2 p-5 text-sm text-body">
+        <p>If no email client opened: copy the draft and send it to <strong class="text-ink">{SITE.email}</strong>.</p>
+        <button id="contact-copy" type="button" class="btn btn-ghost mt-3">Copy draft</button>
+        <span id="contact-copied" class="ml-3 hidden text-electric">Copied ✓</span>
+      </div>
+    </div>
+
+    <aside class="space-y-6">
+      <div class="card-line p-6">
+        <p class="font-bold text-ink">Prefer to write directly?</p>
+        <a href={`mailto:${SITE.email}`} class="mt-2 inline-flex items-center gap-2 text-sm font-medium text-electric">
+          <Icon name="lucide:mail" class="size-4" /> {SITE.email}
+        </a>
+      </div>
+      <div class="card-line p-6">
+        <p class="font-bold text-ink">Or via LinkedIn</p>
+        <a href={SITE.linkedin} target="_blank" rel="noopener" class="mt-2 inline-flex items-center gap-2 text-sm font-medium text-electric">
+          <Icon name="lucide:linkedin" class="size-4" /> heller-joshua
+        </a>
+      </div>
+      <div class="card-line p-6">
+        <p class="font-bold text-ink">Location & reach</p>
+        <p class="mt-2 text-sm text-body">
+          Karlsruhe & Pforzheim · Greater Stuttgart · Baden-Württemberg<br />DACH region · primarily remote · international available
+        </p>
+      </div>
+    </aside>
+  </section>
+</Layout>
+
+<script define:vars={{ email: SITE.email }}>
+  const form = document.getElementById('contact-form');
+  const fallback = document.getElementById('contact-fallback');
+
+  function buildDraft() {
+    const f = new FormData(form);
+    const lines = [
+      `Name: ${f.get('name') || ''}`,
+      `Email: ${f.get('email') || ''}`,
+      `Company: ${f.get('company') || ''}`,
+      `Role: ${f.get('role') || ''}`,
+      `Source: ${f.get('source') || ''}`,
+      '',
+      "What it's about:",
+      `${f.get('message') || ''}`,
+    ];
+    return lines.join('\n');
+  }
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    const f = new FormData(form);
+    const subject = `Inquiry from ${f.get('name') || 'Website'}`;
+    const href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(buildDraft())}`;
+    window.location.href = href;
+    fallback?.classList.remove('hidden');
+  });
+
+  document.getElementById('contact-copy')?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(buildDraft());
+      const ok = document.getElementById('contact-copied');
+      ok?.classList.remove('hidden');
+      setTimeout(() => ok?.classList.add('hidden'), 2000);
+    } catch {}
+  });
+</script>

@@ -1,0 +1,159 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ServiceHero from '../../components/ServiceHero.astro';
+import Photo from '../../components/Photo.astro';
+import Stats from '../../components/Stats.astro';
+import Cta from '../../components/Cta.astro';
+
+const drivers = [
+  { title: 'Create clarity', body: 'AI is a new field full of buzzwords. I translate it into concrete decisions for your team.' },
+  { title: 'Drive impact', body: 'No theory without practice. Every engagement ends with an artifact: code, MVP, or roadmap.' },
+  { title: 'Enable, don\'t bind', body: 'My goal is your independence. I document and hand off so you can move forward alone afterward.' },
+  { title: 'Strengthen Europe', body: 'European software companies need to keep pace with US players. I\'m glad to be part of that effort.' },
+];
+
+const skills = [
+  { title: 'AI Engineering & Agentic Software', body: 'LLM integration, RAG, multi-agent systems, MCP, LangGraph, eval pipelines. From notebook to production architecture.' },
+  { title: 'Full-Stack Development', body: 'React + TypeScript + Node, Python, AWS and Azure. Stack choice based on use case, not preference.' },
+  { title: 'Strategic AI Advisory', body: 'Use-case discovery, AI roadmap, tool and platform selection. Translator between executive leadership and tech teams.' },
+  { title: 'Workshops & Enablement', body: 'AI workshops, AI literacy training, team training. From C-level to junior developer.' },
+];
+
+const timeline = [
+  { org: 'TAISC – The AI Software Company GmbH', role: 'Founder & CEO', time: '05/2023 – present', body: 'AI consulting, AI engineering, and AI training for mid-market and software companies in the DACH region.' },
+  { org: 'generic.de software technologies AG', role: 'AI & Innovation Engineer', time: '08/2024 – 03/2025', body: 'Enterprise RAG, GitHub Copilot enablement, AI lead scoring, generative AI training.' },
+  { org: 'S-IT Application Engineering & Consulting GmbH', role: 'Frontend Developer / DevOps', time: '12/2021 – 10/2023', body: 'Daimler Trucks context: wiring harness toolchain, component library, CI/CD (Jenkins, GitHub Actions).' },
+  { org: 'Mercedes-Benz Tech Motion GmbH', role: 'IT Consultant', time: '12/2019 – 01/2021', body: 'Test concepts, release notes, requirements engineering in the automotive sector.' },
+];
+---
+
+<Layout
+  title="About — Joshua Heller, AI Engineer & Founder TAISC"
+  description="Founder of TAISC, AI Engineer with 5+ years in software and 3 years in AI. Scaled a SaaS solo to 350k users. How I think, how I work."
+  path="/en/about"
+  lang="en"
+  alternatePath="/ueber-mich"
+>
+  <ServiceHero
+    eyebrow="About"
+    title="I speak code, AI, and business."
+    sub="Started as a frontend developer, now founder, AI engineer, and Fractional CAIO. This mix — code, product, business — is my leverage: I understand what tech teams need, and what leadership wants to see."
+    primary={{ label: 'Get in touch →', href: '/en/contact' }}
+    secondary={{ label: 'My services', href: '/en/services' }}
+    image="Joshua at talk / workshop (large format)"
+    photo="hero.jpg"
+  />
+
+  <!-- Career path -->
+  <section class="container-page py-20">
+    <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">From developer to founder</h2>
+    <div class="mt-8 grid gap-6 text-lg text-body lg:grid-cols-2">
+      <div class="space-y-5">
+        <p>My career started where tech and business intersect — writing code for one of the world's largest automotive companies.</p>
+        <p>
+          While studying at Hochschule Pforzheim (B.Sc. Digital Enterprise Management), I worked as an IT
+          Consultant at Mercedes-Benz Tech Motion and later as a Frontend Developer and DevOps Engineer at S-IT
+          (Daimler Trucks context). I learned there how enterprise software really works: with legacy,
+          compliance, 10-year roadmaps, and teams larger than entire startups.
+        </p>
+      </div>
+      <div class="space-y-5">
+        <p>
+          In 2023 I built <strong class="text-ink">imagetocaption.ai</strong> alongside my job — a SaaS tool
+          that automatically generates social media captions. Solo. No funding. Within 12 months,
+          350,000 people used it.
+        </p>
+        <p>
+          In 2024 I joined generic.de as AI Engineer, building enterprise RAG systems, GitHub Copilot rollouts, and
+          AI lead scoring. In 2025 I formed <strong class="text-ink">TAISC – The AI Software Company GmbH</strong> out of imagetocaption, headquartered in Pforzheim/Karlsruhe. Today I combine both: deep understanding of how enterprise IT ticks — and the speed of a solo founder shipping software.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Drivers -->
+  <section class="bg-surface-2 py-20">
+    <div class="container-page">
+      <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">What drives me</h2>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          drivers.map((d) => (
+            <div class="card-line p-6">
+              <h3 class="font-bold text-ink">{d.title}</h3>
+              <p class="mt-2 text-sm text-body">{d.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <Stats lang="en" />
+
+  <!-- From practice -->
+  <section class="container-page grid gap-12 py-20 lg:grid-cols-2 lg:items-center">
+    <Photo name="notizen.jpg" alt="Joshua Heller at work, taking notes" ratio="4/3" />
+    <div>
+      <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">From practice, for practice</h2>
+      <div class="mt-6 space-y-4 text-body">
+        <p>
+          I know AI not just from papers or LinkedIn posts. I've discarded prototypes myself, rebuilt architectures, shipped models to production, and noticed at midnight that token costs were twice what was planned.
+        </p>
+        <p>
+          That experience flows into every engagement — whether choosing the right LLM platform, designing a multi-agent system architecture, or deciding whether your use case needs AI at all.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education + Skills -->
+  <section class="bg-surface-2 py-20">
+    <div class="container-page grid gap-12 lg:grid-cols-[20rem_1fr]">
+      <div>
+        <p class="eyebrow mb-3">Education</p>
+        <h3 class="text-xl font-bold text-ink">B.Sc. Digital Enterprise Management</h3>
+        <p class="mt-2 text-sm text-muted">Hochschule Pforzheim · 2018 – 2022</p>
+        <p class="mt-3 text-sm text-body">Focus: Information Systems · Software Engineering · Business Integration</p>
+      </div>
+      <div>
+        <h2 class="text-2xl font-extrabold tracking-tight text-ink md:text-3xl">Core competencies</h2>
+        <div class="mt-8 grid gap-6 sm:grid-cols-2">
+          {
+            skills.map((s, i) => (
+              <div class="card-line p-6">
+                <span class="text-sm font-bold text-electric">0{i + 1}</span>
+                <h3 class="mt-1 font-bold text-ink">{s.title}</h3>
+                <p class="mt-2 text-sm text-body">{s.body}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="container-page py-20">
+    <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Career timeline</h2>
+    <div class="mt-10 space-y-0 border-l border-line pl-6">
+      {
+        timeline.map((t) => (
+          <div class="relative pb-10">
+            <span class="absolute -left-[1.7rem] top-1.5 size-3 rounded-full border-2 border-white bg-electric" />
+            <p class="text-sm font-medium text-muted">{t.time}</p>
+            <h3 class="mt-1 text-lg font-bold text-ink">{t.org}</h3>
+            <p class="text-sm font-semibold text-electric">{t.role}</p>
+            <p class="mt-2 max-w-2xl text-body">{t.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <Cta
+    heading="Let's talk"
+    sub="You have an AI project or idea that needs strategic and technical support?"
+    lang="en"
+  />
+</Layout>

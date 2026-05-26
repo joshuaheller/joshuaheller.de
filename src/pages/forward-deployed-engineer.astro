@@ -6,19 +6,33 @@ import Faq from '../components/Faq.astro';
 import Cta from '../components/Cta.astro';
 import { SITE } from '../site';
 
-const tasks = [
-  { title: 'LLM-Integration', body: 'OpenAI, Anthropic, Azure OpenAI, AWS Bedrock, lokale LLMs. Prompt Engineering, Token-Optimierung, Streaming.' },
-  { title: 'RAG-Systeme', body: 'Vector-Stores (pgvector, Pinecone, ChromaDB), Embedding-Strategien, Hybrid-Search, Re-Ranking, Eval-Pipelines.' },
-  { title: 'Agentic Workflows', body: 'LangGraph, MCP-Server, Tool-Calling, Multi-Agent-Architekturen, Human-in-the-Loop.' },
-  { title: 'AI-native Features', body: 'Chatbots, Co-Piloten, Klassifikatoren, Generatoren — eingebettet in eure bestehende Web-App.' },
-  { title: 'DevOps für KI', body: 'Deployment auf Azure / AWS, Observability, Logging für LLMs, Cost-Tracking, Latenz-Optimierung.' },
-  { title: 'Refactoring & Modernisierung', body: 'Legacy-Codebase, Migration auf moderne Stacks, AI-assisted Refactoring mit Cursor, Claude Code, Copilot.' },
+const businessTasks = [
+  { title: 'Produktorientiertes Denken', body: 'Was bringt ROI? Was ist Nice-to-have? Ich priorisiere nach Business Impact, nicht nach technischer Eleganz.' },
+  { title: 'Architektur- & Produktverantwortung', body: 'Ich übernehme Verantwortung für Entscheidungen — nicht nur für die Umsetzung von Tickets.' },
+  { title: 'End-to-End Begleitung', body: 'Von der ersten Idee über Architektur, Implementierung und Deployment bis zur tatsächlichen Adoption im Team.' },
+  { title: 'Wissenstransfer', body: 'Euer Team lernt mit — nicht nur euer System. Nach dem Engagement seid ihr selbstständiger als vorher.' },
+];
+
+const techTasks = [
+  { title: 'LLM-Integration', body: 'OpenAI, Anthropic, Azure OpenAI, AWS Bedrock, lokale LLMs — mit Fokus auf Production-Readiness.' },
+  { title: 'RAG-Systeme', body: 'Von der Embedding-Strategie bis zur Eval-Pipeline — mit messbaren Qualitäts-KPIs.' },
+  { title: 'Agentic Workflows', body: 'LangGraph, MCP-Server, Tool-Calling, Multi-Agent — ausgelegt auf echte Geschäftsprozesse.' },
+  { title: 'AI-native Features', body: 'Chatbots, Co-Piloten, Klassifikatoren — embedded in eure bestehende Web-App, nicht daneben.' },
+  { title: 'DevOps für KI', body: 'Deployment, Observability, LLM-Logging, Cost-Tracking und Latenz-Optimierung.' },
+  { title: 'Refactoring & Modernisierung', body: 'Legacy-Codebase, Migration auf moderne Stacks, AI-assisted Refactoring mit Cursor, Claude Code und Copilot.' },
 ];
 
 const scenarios = [
-  { title: 'Ihr habt ein KI-Feature, das in 4–12 Wochen live muss.', body: 'Euer Team kann es nicht alleine in der Zeit — ich werde Teil des Teams, baue es mit, ziehe mich raus, sobald es läuft.' },
-  { title: 'Ihr habt einen funktionierenden Prototypen, aber keinen Weg in Production.', body: 'Vom Streamlit-Demo zum skalierbaren System ist ein anderer Berg. Ich kenne diesen Berg — mehrfach erklommen mit imagetocaption.ai und Kundenprojekten.' },
-  { title: 'Ihr wollt KI-Expertise aufbauen, ohne 6 Monate zu rekrutieren.', body: 'Statt einen Senior AI Engineer zu hiren (12+ Monate Time-to-Productivity), nehmt ihr mich für 3–6 Monate und schult euer Team parallel.' },
+  { title: 'Ihr habt ein KI-Feature, das in 4–12 Wochen live muss.', body: 'Euer Team kann es nicht alleine in der Zeit — ich baue es nicht nur mit, sondern stelle sicher, dass es tatsächlich genutzt wird.' },
+  { title: 'Ihr habt einen funktionierenden Prototypen, aber keinen Weg in Production.', body: 'Vom Streamlit-Demo zum skalierbaren System ist ein anderer Berg. Ich prüfe dabei auch: Ist der Prototyp das Richtige, oder braucht es einen anderen Scope?' },
+  { title: 'Ihr wollt KI-Expertise aufbauen, ohne 6 Monate zu rekrutieren.', body: 'Statt einen Senior AI Engineer zu hiren, nehmt ihr mich für 3–6 Monate. Euer Team lernt in jedem Sprint mit — das ist Teil der Vereinbarung, kein Bonus.' },
+  { title: 'Ihr wisst, dass KI etwas verändern kann — aber noch nicht genau, wo und wie.', body: 'Ich helfe dabei, die richtigen Initiativen zu identifizieren und priorisiere nach echtem Business Impact.' },
+];
+
+const questions = [
+  { title: 'Lohnt sich das?', body: 'Bevor wir anfangen zu bauen, kläre ich: Was ist der konkrete Business Value? Was ändert sich — in Prozessen, Kosten, Kundenerlebnis? Ich baue keine Features, die keinen Impact haben.' },
+  { title: 'Was muss wirklich live?', body: 'Nicht alles, was sich gut anhört, muss in Version 1 rein. Ich helfe beim Scope-Setting: Was ist MVP, was ist Nice-to-have, was ist technische Schuld?' },
+  { title: 'Wer nutzt das danach?', body: 'Ein Feature, das nicht genutzt wird, hat keinen ROI. Ich denke Adoption von Anfang an mit: Wer sind die User? Was brauchen sie? Wie kommt das Wissen in euer Team?' },
 ];
 
 const steps = [
@@ -31,6 +45,9 @@ const steps = [
 const faqs = [
   { q: 'Was unterscheidet einen FDE von einem normalen Freelancer?', a: 'Ein FDE übernimmt Verantwortung — für Architektur, Code-Qualität, Entscheidungen. Ein klassischer Freelancer arbeitet Tickets ab. Ich tue beides, je nach Kontext, aber der Default ist: ich denke mit, nicht nur runter.' },
   { q: 'Wie viele Stunden pro Woche bist du da?', a: 'Standard sind 10–20 Stunden, das funktioniert für die meisten Setups. Bei intensiven Phasen auch 30–40. Ich gehe nie Vollzeit auf ein einzelnes Engagement — sonst verliert ihr den FDE-Vorteil.' },
+  { q: 'Arbeitest du nur an KI-Projekten, die schon klar definiert sind?', a: 'Nein — ein großer Teil meiner Arbeit ist genau das Gegenteil: herauszufinden, welche KI-Initiativen überhaupt Sinn ergeben. Ich helfe beim Scope-Setting, bei der ROI-Einschätzung und bei der Frage, ob der geplante Ansatz der richtige ist. Das spart oft mehr, als jede Stunde Implementierung einspart.' },
+  { q: 'Was passiert, wenn eine KI-Initiative in deiner Einschätzung keinen ROI hat?', a: 'Dann sage ich das. Lieber ein ehrliches Gespräch vor dem Engagement als ein halbes Jahr Entwicklung für ein Feature, das niemand nutzt. Mein Geschäftsmodell baut auf Empfehlungen — kurze, erfolgreiche Projekte schlagen lange, unklare Engagements.' },
+  { q: 'Wie stellst du sicher, dass unser Team nach dem Engagement eigenständig weiterarbeiten kann?', a: 'Wissenstransfer ist kein Bonus, sondern Teil der Arbeit. In jedem Sprint gibt es Dokumentation, Pair-Programming und erklärende Sessions. Am Ende des Engagements sollte euer Team die Architektur verstehen, die Entscheidungen nachvollziehen können und in der Lage sein, weiterzuentwickeln — ohne mich.' },
   { q: 'Wo und womit arbeitest du?', a: 'Primär remote aus Karlsruhe/Pforzheim, regelmäßig vor Ort im DACH-Raum. Ich arbeite mit den Tools, die ihr habt — Microsoft Teams, GitHub, Cursor, Claude Code, Notion — und bin offen für eure Cloud (Azure, AWS, Supabase, Google Cloud). Alles digital, alles dokumentiert.' },
   { q: 'Bist du allein, oder bringst du ein Team mit?', a: 'In FDE-Engagements bin ich selbst die Person. Bei größeren Engagements ziehe ich nach Absprache TAISC-Engineers hinzu. Aber niemals ohne dich zu fragen.' },
   { q: 'Was, wenn das Engagement nach 4 Wochen nicht passt?', a: 'Du kannst jederzeit aufhören, ohne Vorlauf — abgerechnet werden nur geleistete Stunden. Es gibt nur einen sinnvollen Mindestumfang, damit das Modell funktioniert. Mein Geschäftsmodell baut auf Empfehlungen — ein unzufriedener Kunde ist für mich teurer als ein gekündigter Vertrag.' },
@@ -54,19 +71,19 @@ const serviceLd = {
 ---
 
 <Layout
-  title="Forward Deployed Engineer für KI-Projekte | Joshua Heller"
-  description="Forward Deployed Engineer: Ich werde Teil deines Teams und baue KI-Features bis zur Production. Stundenbasis oder Monthly Retainer. Ab 200 €/h netto."
+  title="Forward Deployed Engineer — KI mit Business Impact | Joshua Heller"
+  description="Forward Deployed Engineer: Ich denke vom Ergebnis her, nicht vom Stack. KI-Initiativen von Idee bis Production — mit Architektur- und ROI-Verantwortung. Ab 200 €/h."
   path="/forward-deployed-engineer"
   jsonLd={[serviceLd]}
 >
   <ServiceHero
     eyebrow="Forward Deployed Engineer"
-    title="Dein KI-Engineer in deiner Codebase — auf Zeit."
-    sub="Forward Deployed Engineering ist das, was OpenAI, Anthropic und Palantir mit ihren wichtigsten Kunden machen: ein Senior-Engineer wird Teil eures Teams, baut konkrete Features bis Production und verschwindet, sobald ihr eigenständig weitermacht."
+    title="Nicht nur ein KI-Engineer — einer, der vom Ergebnis her denkt."
+    sub="Forward Deployed Engineering ist das, was OpenAI, Anthropic und Palantir mit ihren wichtigsten Kunden machen: Ein Senior-Engineer wird Teil eures Teams — mit echter Verantwortung für das Ergebnis, nicht nur für den Code. Der Unterschied: Ein FDE denkt in Business Impact und ROI, begleitet KI-Initiativen von der ersten Idee bis Production und sorgt dafür, dass Lösungen tatsächlich genutzt werden."
     secondary={{ label: "So funktioniert's", href: '#was-ist-fde' }}
     image="Joshua mit Laptop im Team-Setting"
     photo="laptop.jpg"
-    photoPosition="center 72%"
+    photoPosition="center 54%"
     price="ab 200 €/h netto"
   />
 
@@ -81,6 +98,7 @@ const serviceLd = {
           Palantir hat ihn geprägt, OpenAI, Anthropic, Scale AI und Lovable haben ihn übernommen.
         </p>
         <p>In den USA ist das Modell bei jedem KI-First-Unternehmen Standard. In DACH ist es noch jung — und genau deswegen für euch eine Chance.</p>
+        <p>Was das für euch bedeutet: Ihr bekommt ein Modell, das bei den erfolgreichsten KI-Unternehmen der Welt Standard ist — zu einem Zeitpunkt, wo deutsche Wettbewerber noch mit klassischem Consulting arbeiten.</p>
       </div>
       <div class="grid gap-5 sm:grid-cols-2">
         <div class="card-line p-6">
@@ -90,6 +108,8 @@ const serviceLd = {
             <li>sitzt im selben Chat (z. B. Teams) wie das Team</li>
             <li>kennt Codebase, Backlog, Stakeholder</li>
             <li>liefert Features, nicht Empfehlungen</li>
+            <li>denkt in ROI und Business Impact</li>
+            <li>sorgt für Adoption, nicht nur Deployment</li>
           </ul>
         </div>
         <div class="card-line p-6">
@@ -99,19 +119,57 @@ const serviceLd = {
             <li>Senior-Expertise statt nur Hände</li>
             <li>dokumentiert und schult</li>
             <li>Ansprechpartner für Strategie</li>
+            <li>fragt: Lohnt sich das?</li>
+            <li>Wissenstransfer als explizites Ziel</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- F3 Was ich tue -->
+  <!-- F3 Denkweise -->
   <section class="bg-surface-2 py-20">
     <div class="container-page">
-      <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Was ich als FDE konkret tue</h2>
-      <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Was ich zuerst frage — bevor ich eine Zeile Code schreibe</h2>
+      <div class="mt-10 grid gap-5 lg:grid-cols-3">
         {
-          tasks.map((t) => (
+          questions.map((q, i) => (
+            <div class="card-line p-6">
+              <span class="text-sm font-bold text-electric">0{i + 1}</span>
+              <h3 class="mt-2 font-bold text-ink">{q.title}</h3>
+              <p class="mt-2 text-sm text-body">{q.body}</p>
+            </div>
+          ))
+        }
+      </div>
+      <blockquote class="mt-10 rounded-[20px] border border-line bg-white p-7 text-xl font-medium text-ink">
+        „KI-Features scheitern nicht am Code. Sie scheitern daran, dass niemand sie braucht — oder niemand weiß, wie man sie nutzt."
+        <footer class="mt-3 text-sm font-normal text-muted">— Joshua Heller</footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- F3 Was ich tue -->
+  <section class="container-page py-20">
+    <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Was ein FDE einbringt</h2>
+    <div class="mt-10">
+      <p class="eyebrow mb-4">Business & Product</p>
+      <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        {
+          businessTasks.map((t) => (
+            <div class="card-line p-6">
+              <h3 class="font-bold text-ink">{t.title}</h3>
+              <p class="mt-2 text-sm text-body">{t.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+    <div class="mt-12">
+      <p class="eyebrow mb-4">Tech Stack</p>
+      <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {
+          techTasks.map((t) => (
             <div class="card-line p-6">
               <h3 class="font-bold text-ink">{t.title}</h3>
               <p class="mt-2 text-sm text-body">{t.body}</p>
@@ -122,14 +180,25 @@ const serviceLd = {
     </div>
   </section>
 
+  <section class="bg-ink py-20 text-white">
+    <div class="container-page">
+      <p class="mx-auto max-w-4xl text-center text-2xl font-medium leading-snug md:text-3xl">
+        „Der häufigste Fehler in KI-Projekten: Man baut das Richtige falsch, oder das Falsche richtig. Mein Job ist,
+        beides zu verhindern."
+      </p>
+      <p class="mt-6 text-center text-sm text-white/60">— Joshua Heller</p>
+    </div>
+  </section>
+
   <!-- F4 Auf einen Blick -->
   <section class="container-page py-16">
-    <div class="grid grid-cols-2 gap-8 rounded-[24px] border border-line bg-surface-2 p-10 md:grid-cols-4">
+    <div class="grid grid-cols-2 gap-8 rounded-[24px] border border-line bg-surface-2 p-10 md:grid-cols-5">
       {
         [
           { v: 'ab 200 €/h', l: 'Stundensatz netto' },
           { v: 'ab 20 h', l: 'Mindestumfang pro Monat' },
           { v: 'Retainer', l: 'planbar, mit Mengenrabatt' },
+          { v: 'End-to-End', l: 'von Definition bis Adoption' },
           { v: 'Senior', l: '5+ Jahre Software, 3 Jahre KI exklusiv' },
         ].map((s) => (
           <div>
@@ -150,6 +219,7 @@ const serviceLd = {
         <h3 class="text-xl font-bold text-ink">Stundensatz</h3>
         <ul class="mt-4 space-y-2 text-body">
           <li><strong class="text-ink">200 €/h</strong> netto — ab einem Mindestumfang von rund 20 Stunden pro Monat</li>
+          <li>Warum Mindestvolumen? FDE bedeutet Kontext aufbauen — eure Codebase, euer Team, eure Ziele. Unter 20 Stunden pro Monat macht das Modell für beide Seiten keinen Sinn</li>
           <li>Brauchst du nur ein paar Stunden für eine Einschätzung? Dann ist das <a href="/ki-sparring" class="font-medium text-electric">KI-Sparring</a> (ab 300 €/h) der richtige Weg</li>
           <li>Jederzeit kündbar, ohne Vorlauf</li>
           <li><em>Ideal für: konkrete Features, Architektur, laufende KI-Entwicklung in eurer Codebase</em></li>
@@ -185,9 +255,9 @@ const serviceLd = {
       <div class="mt-8 rounded-[20px] border border-line bg-white p-7">
         <p class="font-bold text-ink">Wann nicht:</p>
         <ul class="mt-3 space-y-2 text-body">
-          <li>Ihr braucht primär Strategie, kein Code → <a href="/fractional-caio" class="font-medium text-electric">Fractional CAIO</a> ist passender</li>
-          <li>Ihr habt eine Idee, aber noch keine Klarheit → <a href="/ki-workshop" class="font-medium text-electric">KI-Workshop</a> ist der erste Schritt</li>
-          <li>Ihr braucht reine Body-Leasing-Hände ohne strategischen Anteil → da bin ich schlicht zu teuer; ich vermittle gerne</li>
+          <li>Ihr braucht primär Strategie ohne Umsetzung → <a href="/fractional-caio" class="font-medium text-electric">Fractional CAIO</a> ist passender</li>
+          <li>Ihr habt noch keine Richtung → <a href="/ki-workshop" class="font-medium text-electric">KI-Workshop</a> ist der erste Schritt</li>
+          <li>Ihr sucht reine Entwickler-Kapazität ohne strategischen Anteil → ich vermittle gerne weiter</li>
         </ul>
       </div>
     </div>

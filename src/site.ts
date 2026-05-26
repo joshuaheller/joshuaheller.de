@@ -69,7 +69,7 @@ export const SERVICES = [
     slug: 'fractional-caio',
     name: 'Fractional CAIO',
     tagline: 'KI-Führung auf Teilzeit',
-    price: 'ab 2.000 €/Monat',
+    price: 'ab 3.000 €/Monat',
     intent: 'fuehrung',
   },
   {

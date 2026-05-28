@@ -98,12 +98,12 @@ export const CLIENTS: { name: string; file: string; color?: boolean; boost?: boo
   { name: 'WM aquatec', file: '/images/logos/wm-aquatec.png' },
   { name: 'STIHL', file: '/images/logos/stihl.jpg' },
   { name: 'i40', file: '/images/logos/i40.png' },
-  { name: 'S-IT', file: '/images/logos/s-it.png' },
+  { name: 'S-IT', file: '/images/logos/s-it.png', boost: true },
   { name: 'mimacom', file: '/images/logos/mimacom.jpg' },
   { name: 'ALL:AIRT', file: '/images/logos/allairt.jpg', boost: true },
   { name: 'squareNeo', file: '/images/logos/squareneo.svg' },
   { name: 'koenic', file: '/images/logos/koenic.png' },
-  { name: 'digitalsprung', file: '/images/logos/digitalsprung.png', boost: true },
+  { name: 'digitalsprung', file: '/images/logos/digitalsprung.png' },
 ];
 
 export const PARTNERS = [

@@ -1,0 +1,414 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  lang?: 'de' | 'en';
+}
+
+const { lang = 'de' } = Astro.props;
+const isEn = lang === 'en';
+
+const copy = isEn
+  ? {
+      eyebrow: 'Fractional CAIO ROI calculator',
+      heading: 'Run the numbers before you hire.',
+      sub: 'Compare a full-time CAIO hire with a Fractional CAIO retainer. The model is intentionally transparent: adjust the assumptions and see where the economics turn.',
+      presetLabel: 'Starting point',
+      presets: [
+        ['lean', 'Lean setup'],
+        ['typical', 'Typical scaleup'],
+        ['senior', 'Senior hire'],
+      ],
+      controls: [
+        ['need', 'AI leadership needed per week', 'h / week', '4h', '32h'],
+        ['salary', 'Full-time CAIO gross salary', '€', '€120k', '€300k'],
+        ['overhead', 'Employer overhead and benefits', '%', '15%', '45%'],
+        ['recruiting', 'Recruiting, search and onboarding', '% salary', '0%', '40%'],
+        ['ramp', 'Ramp-up until full productivity', 'months', '0', '9'],
+        ['retainer', 'Fractional CAIO monthly retainer', '€', '€3k', '€15k'],
+      ],
+      resultHeading: 'Your estimated first-year advantage',
+      cards: {
+        savings: 'First-year savings',
+        roi: 'ROI on retainer',
+        reduction: 'Cost reduction',
+        hourly: 'Effective cost / needed hour',
+      },
+      breakdown: 'Cost breakdown',
+      fullTime: 'Full-time CAIO, year 1',
+      fractional: 'Fractional CAIO, year 1',
+      loadedSalary: 'Loaded salary',
+      hiringCost: 'Hiring and onboarding',
+      rampCost: 'Ramp-up drag',
+      fractionalCost: 'Retainer',
+      interpretation: 'Interpretation',
+      cta: 'Discuss my scenario',
+      ctaHref: '/en/contact',
+      note: 'A directional estimate, net of VAT. It excludes opportunity cost from delayed AI decisions, vendor lock-in, failed pilots, or wrong hires.',
+    }
+  : {
+      eyebrow: 'Fractional-CAIO ROI-Rechner',
+      heading: 'Rechne durch, bevor du einstellst.',
+      sub: 'Vergleiche eine Vollzeit-CAIO-Einstellung mit einem Fractional-CAIO-Retainer. Die Annahmen sind bewusst sichtbar: Du kannst alles verschieben und sofort sehen, wo sich das Modell lohnt.',
+      presetLabel: 'Ausgangslage',
+      presets: [
+        ['lean', 'Schlankes Setup'],
+        ['typical', 'Typischer Mittelstand'],
+        ['senior', 'Senior Hire'],
+      ],
+      controls: [
+        ['need', 'KI-Führung pro Woche benötigt', 'h / Woche', '4h', '32h'],
+        ['salary', 'Brutto-Jahresgehalt Vollzeit-CAIO', '€', '€120k', '€300k'],
+        ['overhead', 'Arbeitgebernebenkosten und Benefits', '%', '15%', '45%'],
+        ['recruiting', 'Recruiting, Suche und Onboarding', '% Gehalt', '0%', '40%'],
+        ['ramp', 'Ramp-up bis volle Produktivität', 'Monate', '0', '9'],
+        ['retainer', 'Fractional-CAIO Retainer pro Monat', '€', '€3k', '€15k'],
+      ],
+      resultHeading: 'Dein geschätzter Vorteil im ersten Jahr',
+      cards: {
+        savings: 'Ersparnis im 1. Jahr',
+        roi: 'ROI auf den Retainer',
+        reduction: 'Kostenreduktion',
+        hourly: 'Effektive Kosten / benötigte Stunde',
+      },
+      breakdown: 'Kostenaufschlüsselung',
+      fullTime: 'Vollzeit-CAIO, Jahr 1',
+      fractional: 'Fractional CAIO, Jahr 1',
+      loadedSalary: 'Vollkosten Gehalt',
+      hiringCost: 'Hiring und Onboarding',
+      rampCost: 'Ramp-up-Reibung',
+      fractionalCost: 'Retainer',
+      interpretation: 'Einordnung',
+      cta: 'Mein Szenario besprechen',
+      ctaHref: '/kontakt',
+      note: 'Richtwert netto zzgl. USt. Nicht eingerechnet sind Opportunitätskosten durch verzögerte KI-Entscheidungen, Vendor-Lock-in, gescheiterte Piloten oder Fehlbesetzungen.',
+    };
+---
+
+<section id="roi-rechner" class="bg-ink py-20 text-white">
+  <div class="container-page">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="eyebrow text-cyan">{copy.eyebrow}</p>
+      <h2 class="mt-4 text-3xl font-extrabold leading-tight md:text-5xl">{copy.heading}</h2>
+      <p class="mt-5 text-base leading-7 text-white/68 md:text-lg">{copy.sub}</p>
+    </div>
+
+    <div
+      class="roi-calculator mt-12 overflow-hidden rounded-[28px] border border-white/12 bg-white/[0.06] p-5 shadow-2xl shadow-black/20 md:p-8"
+      data-roi-calculator
+      data-locale={isEn ? 'en-DE' : 'de-DE'}
+    >
+      <div class="grid gap-8 lg:grid-cols-[1.02fr_0.98fr]">
+        <div class="rounded-[22px] border border-white/10 bg-white/[0.05] p-5 md:p-7">
+          <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <p class="text-sm font-bold text-white">{copy.presetLabel}</p>
+            <div class="grid grid-cols-3 gap-1 rounded-full bg-black/24 p-1 text-xs font-semibold" role="group" aria-label={copy.presetLabel}>
+              {
+                copy.presets.map(([value, label], index) => (
+                  <button
+                    type="button"
+                    class:list={[
+                      'roi-preset rounded-full px-3 py-2 text-white/62 transition hover:text-white',
+                      index === 1 && 'is-active bg-white text-ink hover:text-ink',
+                    ]}
+                    data-preset={value}
+                  >
+                    {label}
+                  </button>
+                ))
+              }
+            </div>
+          </div>
+
+          <div class="mt-8 space-y-7">
+            {
+              copy.controls.map(([key, label, unit, minLabel, maxLabel]) => (
+                <label class="block" data-control={key}>
+                  <span class="flex items-start justify-between gap-4">
+                    <span class="text-sm font-bold text-white/90">{label}</span>
+                    <span class="rounded-full bg-white/10 px-3 py-1 text-sm font-extrabold text-cyan" data-value-for={key}>
+                      0
+                    </span>
+                  </span>
+                  <input
+                    class="roi-range mt-4 w-full"
+                    type="range"
+                    data-input={key}
+                    aria-label={label}
+                    min={key === 'salary' ? 120000 : key === 'overhead' ? 15 : key === 'recruiting' ? 0 : key === 'ramp' ? 0 : key === 'retainer' ? 3000 : 4}
+                    max={key === 'salary' ? 300000 : key === 'overhead' ? 45 : key === 'recruiting' ? 40 : key === 'ramp' ? 9 : key === 'retainer' ? 15000 : 32}
+                    step={key === 'salary' ? 5000 : key === 'retainer' ? 500 : 1}
+                  />
+                  <span class="mt-2 flex justify-between text-xs font-medium text-white/38">
+                    <span>{minLabel}</span>
+                    <span>{unit}</span>
+                    <span>{maxLabel}</span>
+                  </span>
+                </label>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="flex flex-col rounded-[22px] border border-white/10 bg-white/[0.08] p-5 md:p-7">
+          <div class="flex items-center gap-3">
+            <span class="flex size-10 items-center justify-center rounded-full bg-cyan text-ink">
+              <Icon name="lucide:calculator" class="size-5" />
+            </span>
+            <h3 class="text-xl font-extrabold text-white">{copy.resultHeading}</h3>
+          </div>
+
+          <div class="mt-6 grid gap-3 sm:grid-cols-2">
+            <div class="roi-result-card">
+              <p class="roi-result-value" data-output="savings">0 €</p>
+              <p>{copy.cards.savings}</p>
+            </div>
+            <div class="roi-result-card">
+              <p class="roi-result-value" data-output="roi">0%</p>
+              <p>{copy.cards.roi}</p>
+            </div>
+            <div class="roi-result-card">
+              <p class="roi-result-value" data-output="reduction">0%</p>
+              <p>{copy.cards.reduction}</p>
+            </div>
+            <div class="roi-result-card is-highlight">
+              <p class="roi-result-value" data-output="hourly">0 €</p>
+              <p>{copy.cards.hourly}</p>
+            </div>
+          </div>
+
+          <div class="mt-7">
+            <div class="flex items-center justify-between text-xs font-bold uppercase text-white/52">
+              <span>{copy.fullTime}</span>
+              <span>{copy.fractional}</span>
+            </div>
+            <div class="mt-3 h-3 overflow-hidden rounded-full bg-black/34">
+              <span class="block h-full rounded-full bg-cyan" data-output="bar"></span>
+            </div>
+          </div>
+
+          <div class="mt-7 grid gap-5 md:grid-cols-2">
+            <div>
+              <p class="text-sm font-bold text-white">{copy.breakdown}</p>
+              <dl class="mt-3 space-y-2 text-sm text-white/62">
+                <div class="flex justify-between gap-4"><dt>{copy.loadedSalary}</dt><dd class="font-bold text-white" data-output="loadedSalary">0 €</dd></div>
+                <div class="flex justify-between gap-4"><dt>{copy.hiringCost}</dt><dd class="font-bold text-white" data-output="hiringCost">0 €</dd></div>
+                <div class="flex justify-between gap-4"><dt>{copy.rampCost}</dt><dd class="font-bold text-white" data-output="rampCost">0 €</dd></div>
+                <div class="flex justify-between gap-4 border-t border-white/10 pt-2"><dt>{copy.fractionalCost}</dt><dd class="font-bold text-cyan" data-output="fractionalCost">0 €</dd></div>
+              </dl>
+            </div>
+            <div class="rounded-[18px] border border-cyan/25 bg-cyan/10 p-4">
+              <p class="text-sm font-bold text-cyan">{copy.interpretation}</p>
+              <p class="mt-2 text-sm leading-6 text-white/75" data-output="narrative"></p>
+            </div>
+          </div>
+
+          <div class="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <a href={copy.ctaHref} class="btn btn-primary justify-center bg-white text-ink shadow-none hover:bg-cyan hover:text-ink">
+              <Icon name="lucide:calendar-check" class="size-4" />
+              {copy.cta}
+            </a>
+            <p class="text-xs leading-5 text-white/42">{copy.note}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const presets = {
+    lean: { need: 8, salary: 150000, overhead: 24, recruiting: 15, ramp: 3, retainer: 4500 },
+    typical: { need: 12, salary: 190000, overhead: 28, recruiting: 22, ramp: 4, retainer: 6500 },
+    senior: { need: 16, salary: 240000, overhead: 32, recruiting: 28, ramp: 5, retainer: 9000 },
+  };
+
+  const formatters = new Map();
+
+  const getFormatter = (locale) => {
+    if (!formatters.has(locale)) {
+      formatters.set(
+        locale,
+        new Intl.NumberFormat(locale, {
+          style: 'currency',
+          currency: 'EUR',
+          maximumFractionDigits: 0,
+        }),
+      );
+    }
+    return formatters.get(locale);
+  };
+
+  const setText = (root, name, value) => {
+    const target = root.querySelector(`[data-output="${name}"]`);
+    if (target) target.textContent = value;
+  };
+
+  const setValueText = (root, name, value, money, locale) => {
+    const target = root.querySelector(`[data-value-for="${name}"]`);
+    if (!target) return;
+    if (money) {
+      target.textContent = getFormatter(locale).format(value);
+      return;
+    }
+    target.textContent = name === 'need' ? `${value}h` : name === 'ramp' ? `${value}` : `${value}%`;
+  };
+
+  const updateRangeFill = (input) => {
+    const min = Number(input.min);
+    const max = Number(input.max);
+    const value = Number(input.value);
+    const progress = ((value - min) / (max - min)) * 100;
+    input.style.setProperty('--range-progress', `${progress}%`);
+  };
+
+  const readState = (root) => {
+    const state = {};
+    root.querySelectorAll('[data-input]').forEach((input) => {
+      state[input.dataset.input] = Number(input.value);
+      updateRangeFill(input);
+    });
+    return state;
+  };
+
+  const calculate = (root) => {
+    const locale = root.dataset.locale || 'de-DE';
+    const money = getFormatter(locale);
+    const state = readState(root);
+
+    Object.entries(state).forEach(([name, value]) => {
+      setValueText(root, name, value, name === 'salary' || name === 'retainer', locale);
+    });
+
+    const loadedSalary = state.salary * (1 + state.overhead / 100);
+    const hiringCost = state.salary * (state.recruiting / 100);
+    const rampCost = (loadedSalary / 12) * state.ramp * 0.5;
+    const fullTimeFirstYear = loadedSalary + hiringCost + rampCost;
+    const fractionalYear = state.retainer * 12;
+    const savings = fullTimeFirstYear - fractionalYear;
+    const roi = fractionalYear > 0 ? savings / fractionalYear : 0;
+    const reduction = fullTimeFirstYear > 0 ? savings / fullTimeFirstYear : 0;
+    const fractionalHourly = state.retainer / (state.need * 4.33);
+    const fullTimeEffectiveHourly = fullTimeFirstYear / (state.need * 52);
+    const hourlyDelta = fullTimeEffectiveHourly - fractionalHourly;
+    const barWidth = Math.max(8, Math.min(100, (fractionalYear / fullTimeFirstYear) * 100));
+
+    setText(root, 'savings', money.format(savings));
+    setText(root, 'roi', `${Math.round(roi * 100)}%`);
+    setText(root, 'reduction', `${Math.round(reduction * 100)}%`);
+    setText(root, 'hourly', money.format(Math.max(0, hourlyDelta)));
+    setText(root, 'loadedSalary', money.format(loadedSalary));
+    setText(root, 'hiringCost', money.format(hiringCost));
+    setText(root, 'rampCost', money.format(rampCost));
+    setText(root, 'fractionalCost', money.format(fractionalYear));
+
+    const bar = root.querySelector('[data-output="bar"]');
+    if (bar) bar.style.width = `${barWidth}%`;
+
+    const narrative = root.querySelector('[data-output="narrative"]');
+    if (narrative) {
+      const isEnglish = locale.startsWith('en');
+      const neededShare = Math.round((state.need / 40) * 100);
+      narrative.textContent = isEnglish
+        ? `At ${state.need} hours per week, you need about ${neededShare}% of a full-time AI leader. In year one, the retainer is ${money.format(fractionalYear)} versus ${money.format(fullTimeFirstYear)} for a hire, before counting delayed decisions or failed vendor bets.`
+        : `Bei ${state.need} Stunden pro Woche brauchst du etwa ${neededShare}% einer Vollzeit-KI-Führungskraft. Im ersten Jahr stehen ${money.format(fractionalYear)} Retainer gegen ${money.format(fullTimeFirstYear)} Vollzeitkosten, bevor verzögerte Entscheidungen oder falsche Vendor-Wetten überhaupt eingerechnet sind.`;
+    }
+  };
+
+  document.querySelectorAll('[data-roi-calculator]').forEach((root) => {
+    const inputs = root.querySelectorAll('[data-input]');
+    const buttons = root.querySelectorAll('[data-preset]');
+
+    const applyPreset = (name) => {
+      const preset = presets[name] || presets.typical;
+      inputs.forEach((input) => {
+        input.value = preset[input.dataset.input];
+      });
+      buttons.forEach((button) => {
+        button.classList.toggle('is-active', button.dataset.preset === name);
+        button.classList.toggle('bg-white', button.dataset.preset === name);
+        button.classList.toggle('text-ink', button.dataset.preset === name);
+        button.classList.toggle('hover:text-ink', button.dataset.preset === name);
+      });
+      calculate(root);
+    };
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => applyPreset(button.dataset.preset));
+    });
+    inputs.forEach((input) => {
+      input.addEventListener('input', () => calculate(root));
+    });
+
+    applyPreset('typical');
+  });
+</script>
+
+<style>
+  .roi-calculator {
+    background:
+      radial-gradient(46rem 30rem at 14% 6%, rgba(0, 255, 255, 0.16), transparent 62%),
+      radial-gradient(38rem 28rem at 88% 100%, rgba(0, 0, 255, 0.22), transparent 64%),
+      rgba(255, 255, 255, 0.06);
+  }
+
+  .roi-range {
+    --range-progress: 50%;
+    appearance: none;
+    height: 0.45rem;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--color-cyan) 0 var(--range-progress), rgba(255, 255, 255, 0.12) var(--range-progress) 100%);
+    outline: none;
+  }
+
+  .roi-range::-webkit-slider-thumb {
+    appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 999px;
+    background: #fff;
+    border: 0.25rem solid var(--color-cyan);
+    box-shadow: 0 0 0 0.35rem rgba(0, 255, 255, 0.1);
+    cursor: pointer;
+  }
+
+  .roi-range::-moz-range-thumb {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 999px;
+    background: #fff;
+    border: 0.25rem solid var(--color-cyan);
+    box-shadow: 0 0 0 0.35rem rgba(0, 255, 255, 0.1);
+    cursor: pointer;
+  }
+
+  .roi-result-card {
+    min-height: 7.1rem;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.26);
+    padding: 1rem;
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+
+  .roi-result-card.is-highlight {
+    border-color: rgba(0, 255, 255, 0.35);
+    background: rgba(0, 255, 255, 0.1);
+  }
+
+  .roi-result-value {
+    margin-bottom: 0.4rem;
+    color: #fff;
+    font-size: clamp(1.6rem, 5vw, 2.35rem);
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  @media (max-width: 520px) {
+    .roi-result-card {
+      min-height: 6.4rem;
+    }
+  }
+</style>

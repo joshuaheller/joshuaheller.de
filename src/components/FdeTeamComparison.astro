@@ -1,0 +1,84 @@
+---
+interface ComparisonRow {
+  dimension: string;
+  fde: { headline: string; detail: string };
+  team: { headline: string; detail: string };
+}
+
+interface Props {
+  heading: string;
+  sub: string;
+  fdeLabel: string;
+  teamLabel: string;
+  rows: ComparisonRow[];
+  footnote?: string;
+}
+
+const { heading, sub, fdeLabel, teamLabel, rows, footnote } = Astro.props;
+---
+
+<section class="bg-surface-2 py-20">
+  <div class="container-page">
+    <h2 class="max-w-3xl text-3xl font-extrabold tracking-tight text-ink md:text-4xl">{heading}</h2>
+    <p class="mt-4 max-w-3xl text-lg text-body">{sub}</p>
+
+    <div class="mt-10 hidden overflow-hidden rounded-[24px] border border-line bg-white lg:block">
+      <div class="grid grid-cols-[1.1fr_1fr_1fr] border-b border-line bg-surface-3 text-sm font-bold text-ink">
+        <div class="p-5"></div>
+        <div class="border-l border-line p-5 text-electric">{fdeLabel}</div>
+        <div class="border-l border-line p-5">{teamLabel}</div>
+      </div>
+      {
+        rows.map((row) => (
+          <details class="group border-b border-line last:border-b-0">
+            <summary class="grid cursor-pointer list-none grid-cols-[1.1fr_1fr_1fr] items-start transition hover:bg-surface-2 [&::-webkit-details-marker]:hidden">
+              <div class="flex items-center gap-3 p-5 font-semibold text-ink">
+                <span class="inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-surface-3 text-xs text-electric transition group-open:rotate-90">
+                  →
+                </span>
+                {row.dimension}
+              </div>
+              <div class="border-l border-line p-5">
+                <p class="font-medium text-ink">{row.fde.headline}</p>
+              </div>
+              <div class="border-l border-line p-5">
+                <p class="font-medium text-body">{row.team.headline}</p>
+              </div>
+            </summary>
+            <div class="grid grid-cols-[1.1fr_1fr_1fr] border-t border-line bg-surface-2/70">
+              <div class="p-5"></div>
+              <div class="border-l border-line p-5 text-sm text-body">{row.fde.detail}</div>
+              <div class="border-l border-line p-5 text-sm text-body">{row.team.detail}</div>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+
+    <div class="mt-10 space-y-4 lg:hidden">
+      {
+        rows.map((row) => (
+          <details class="overflow-hidden rounded-[20px] border border-line bg-white">
+            <summary class="cursor-pointer list-none p-5 font-semibold text-ink [&::-webkit-details-marker]:hidden">
+              {row.dimension}
+            </summary>
+            <div class="space-y-4 border-t border-line p-5">
+              <div class="rounded-[16px] border border-electric/20 bg-surface-2 p-4">
+                <p class="text-xs font-bold uppercase tracking-wide text-electric">{fdeLabel}</p>
+                <p class="mt-2 font-medium text-ink">{row.fde.headline}</p>
+                <p class="mt-2 text-sm text-body">{row.fde.detail}</p>
+              </div>
+              <div class="rounded-[16px] border border-line bg-white p-4">
+                <p class="text-xs font-bold uppercase tracking-wide text-muted">{teamLabel}</p>
+                <p class="mt-2 font-medium text-ink">{row.team.headline}</p>
+                <p class="mt-2 text-sm text-body">{row.team.detail}</p>
+              </div>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+
+    {footnote && <p class="mt-6 text-sm text-muted">{footnote}</p>}
+  </div>
+</section>

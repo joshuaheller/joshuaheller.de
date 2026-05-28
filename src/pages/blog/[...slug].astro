@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Placeholder from '../../components/Placeholder.astro';
+import BlogCover from '../../components/BlogCover.astro';
 import Cta from '../../components/Cta.astro';
 import { getCollection, render } from 'astro:content';
 import { SITE } from '../../site';
@@ -41,7 +41,7 @@ const articleLd = {
     <h1 class="mt-4 text-4xl font-extrabold leading-tight tracking-tight text-ink md:text-5xl">{post.data.title}</h1>
     <p class="mt-5 text-xl text-body">{post.data.description}</p>
     <div class="mt-8">
-      <Placeholder label="Hero-Image (1200×630)" ratio="16/9" />
+      <BlogCover name={post.data.heroImage} alt={post.data.title} ratio="16/9" rounded="rounded-[20px]" priority />
     </div>
     <div class="prose-jh mt-10">
       <Content />

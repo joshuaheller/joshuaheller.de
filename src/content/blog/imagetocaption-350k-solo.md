@@ -4,6 +4,7 @@ description: 'Eine Build-in-Public-Story: Stack, Distribution, Lessons Learned â
 pubDate: 2026-04-22
 category: 'Build in Public'
 readingTime: '15 Min.'
+heroImage: 'blog-laptop-build.png'
 draft: false
 ---
 

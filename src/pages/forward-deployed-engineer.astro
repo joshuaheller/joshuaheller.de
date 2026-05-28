@@ -4,6 +4,7 @@ import ServiceHero from '../components/ServiceHero.astro';
 import Steps from '../components/Steps.astro';
 import Faq from '../components/Faq.astro';
 import Cta from '../components/Cta.astro';
+import FdeTeamComparison from '../components/FdeTeamComparison.astro';
 import { SITE } from '../site';
 
 const businessTasks = [
@@ -33,6 +34,86 @@ const questions = [
   { title: 'Lohnt sich das?', body: 'Bevor wir anfangen zu bauen, kläre ich: Was ist der konkrete Business Value? Was ändert sich — in Prozessen, Kosten, Kundenerlebnis? Ich baue keine Features, die keinen Impact haben.' },
   { title: 'Was muss wirklich live?', body: 'Nicht alles, was sich gut anhört, muss in Version 1 rein. Ich helfe beim Scope-Setting: Was ist MVP, was ist Nice-to-have, was ist technische Schuld?' },
   { title: 'Wer nutzt das danach?', body: 'Ein Feature, das nicht genutzt wird, hat keinen ROI. Ich denke Adoption von Anfang an mit: Wer sind die User? Was brauchen sie? Wie kommt das Wissen in euer Team?' },
+];
+
+const comparisonRows = [
+  {
+    dimension: 'Time-to-Impact',
+    fde: {
+      headline: 'Produktiv in Tagen, nicht Monaten',
+      detail: 'Ein Senior-Engineer mit Kontext ist schnell im Repo, im Backlog und im Team-Chat. Kein 3–6-monatiges Hiring, kein Onboarding-Marathon.',
+    },
+    team: {
+      headline: 'Monate bis das Team steht',
+      detail: 'Recruiting, Einarbeitung, Team-Dynamik und erste gemeinsame Releases brauchen Zeit — besonders bei Senior AI Roles.',
+    },
+  },
+  {
+    dimension: 'Kosten & Flexibilität',
+    fde: {
+      headline: 'Variable Kosten, klarer Scope',
+      detail: 'Ihr zahlt für geleistete Senior-Kapazität — ab einem sinnvollen Mindestumfang, jederzeit skalierbar hoch oder runter.',
+    },
+    team: {
+      headline: 'Hohe Fixkosten ab Tag 1',
+      detail: '3–5 Vollzeit-Rollen (Backend, Frontend, DevOps, PM, ggf. ML) bedeuten schnell 300–600k €/Jahr — auch wenn gerade weniger Output nötig ist.',
+    },
+  },
+  {
+    dimension: 'Koordination',
+    fde: {
+      headline: 'Eine Ansprechperson, wenig Overhead',
+      detail: 'Keine Daily-Meeting-Schichten zwischen Rollen. Entscheidungen fallen schneller, weil Architektur und Umsetzung zusammenfallen.',
+    },
+    team: {
+      headline: 'Mehr Abstimmung, mehr Latenz',
+      detail: 'Meetings, Handoffs und unterschiedliche Prioritäten zwischen Rollen verlangsamen Entscheidungen — besonders in den ersten Monaten.',
+    },
+  },
+  {
+    dimension: 'Architektur & Verantwortung',
+    fde: {
+      headline: 'End-to-End Ownership',
+      detail: 'Ich übernehme Architektur, Code-Qualität und Produktentscheidungen — nicht nur Ticket-Umsetzung.',
+    },
+    team: {
+      headline: 'Verantwortung verteilt',
+      detail: 'Gut bei großen Produkten — aber ohne klare AI-Leadership kann jeder seine Spur bauen und niemand das Gesamtbild tragen.',
+    },
+  },
+  {
+    dimension: 'Business Impact',
+    fde: {
+      headline: 'Fragt zuerst: Lohnt sich das?',
+      detail: 'Scope, ROI und Adoption werden vor dem Bauen geklärt. Kein Feature ohne Business Case.',
+    },
+    team: {
+      headline: 'Baut oft, was geplant wurde',
+      detail: 'Teams liefern zuverlässig — aber ohne strategischen Filter kann viel gebaut werden, das niemand nutzt.',
+    },
+  },
+  {
+    dimension: 'Wissenstransfer',
+    fde: {
+      headline: 'Explizites Lernziel',
+      detail: 'Pair Programming, Doku und erklärende Sessions sind Teil der Arbeit — euer Team wird eigenständiger.',
+    },
+    team: {
+      headline: 'Wissen bleibt in Silos',
+      detail: 'Jede Rolle kennt ihren Bereich — das Gesamtverständnis der AI-Architektur muss aktiv aufgebaut werden.',
+    },
+  },
+  {
+    dimension: 'Skalierung',
+    fde: {
+      headline: 'Ideal für fokussierte KI-Initiativen',
+      detail: 'Ein klares Feature, ein Production-Push, ein Architektur-Sprint — schnell und schlank.',
+    },
+    team: {
+      headline: 'Stärker bei parallelen Streams',
+      detail: 'Wenn ihr gleichzeitig mehrere große Produktlinien parallel entwickelt, lohnt sich ein dediziertes Team eher.',
+    },
+  },
 ];
 
 const steps = [
@@ -128,6 +209,15 @@ const serviceLd = {
       </div>
     </div>
   </section>
+
+  <FdeTeamComparison
+    heading="Forward Deployed Engineer vs. Softwareteam"
+    sub="Ein FDE ersetzt nicht jedes Team — aber für die meisten KI-Initiativen im Mittelstand liefert er schneller Impact, weniger Overhead und klarere Verantwortung. Klick die Zeilen an für Details."
+    fdeLabel="Forward Deployed Engineer"
+    teamLabel="Klassisches Softwareteam (3–5 Personen)"
+    rows={comparisonRows}
+    footnote="Faustregel: Wenn ihr ein konkretes KI-Feature in Wochen live braucht, ist FDE meist die bessere Wahl. Wenn ihr parallel mehrere große Produktlinien skaliert, kann ein Team sinnvoller sein — idealerweise mit klarer AI-Leadership."
+  />
 
   <!-- F3 Denkweise -->
   <section class="bg-surface-2 py-20">

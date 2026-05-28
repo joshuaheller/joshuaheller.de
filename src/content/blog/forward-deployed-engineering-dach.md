@@ -4,6 +4,7 @@ description: 'Das FDE-Modell erklärt: Vergleich mit klassischer Beratung, der U
 pubDate: 2026-05-20
 category: 'KI-Strategie'
 readingTime: '18 Min.'
+heroImage: 'blog-fde-session.png'
 draft: false
 ---
 

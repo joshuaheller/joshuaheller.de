@@ -4,6 +4,7 @@ description: 'The FDE model explained: comparison with traditional consulting, i
 pubDate: 2026-05-20
 category: 'AI Strategy'
 readingTime: '18 min.'
+heroImage: 'blog-fde-session.png'
 draft: false
 ---
 

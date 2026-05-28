@@ -4,6 +4,7 @@ import ServiceHero from '../../components/ServiceHero.astro';
 import Steps from '../../components/Steps.astro';
 import Faq from '../../components/Faq.astro';
 import Cta from '../../components/Cta.astro';
+import FdeTeamComparison from '../../components/FdeTeamComparison.astro';
 import { SITE } from '../../site';
 
 const businessTasks = [
@@ -33,6 +34,86 @@ const questions = [
   { title: 'Is it worth it?', body: 'Before we start building, I clarify: what\'s the concrete business value? What changes — in processes, costs, customer experience? I don\'t build features that have no impact.' },
   { title: 'What actually needs to ship?', body: 'Not everything that sounds good needs to be in version 1. I help with scope-setting: what\'s MVP, what\'s nice-to-have, what\'s technical debt?' },
   { title: 'Who uses it afterward?', body: 'A feature nobody uses has no ROI. I think about adoption from day one: who are the users? What do they need? How does the knowledge get into your team?' },
+];
+
+const comparisonRows = [
+  {
+    dimension: 'Time to impact',
+    fde: {
+      headline: 'Productive in days, not months',
+      detail: 'A senior engineer with context is quickly in your repo, backlog, and team chat. No 3–6 month hiring cycle, no onboarding marathon.',
+    },
+    team: {
+      headline: 'Months until the team is in place',
+      detail: 'Recruiting, onboarding, team dynamics, and first joint releases take time — especially for senior AI roles.',
+    },
+  },
+  {
+    dimension: 'Cost & flexibility',
+    fde: {
+      headline: 'Variable cost, clear scope',
+      detail: 'You pay for delivered senior capacity — from a sensible minimum commitment, scalable up or down anytime.',
+    },
+    team: {
+      headline: 'High fixed costs from day one',
+      detail: '3–5 full-time roles (backend, frontend, DevOps, PM, possibly ML) quickly mean €300–600k/year — even when less output is needed.',
+    },
+  },
+  {
+    dimension: 'Coordination',
+    fde: {
+      headline: 'One point of contact, low overhead',
+      detail: 'No daily meeting layers between roles. Decisions happen faster because architecture and implementation sit together.',
+    },
+    team: {
+      headline: 'More alignment, more latency',
+      detail: 'Meetings, handoffs, and different priorities between roles slow decisions — especially in the first months.',
+    },
+  },
+  {
+    dimension: 'Architecture & ownership',
+    fde: {
+      headline: 'End-to-end ownership',
+      detail: 'I take responsibility for architecture, code quality, and product decisions — not just ticket execution.',
+    },
+    team: {
+      headline: 'Distributed responsibility',
+      detail: 'Good for large products — but without clear AI leadership, everyone can build their lane and nobody owns the whole picture.',
+    },
+  },
+  {
+    dimension: 'Business impact',
+    fde: {
+      headline: 'Asks first: is this worth building?',
+      detail: 'Scope, ROI, and adoption get clarified before building. No feature without a business case.',
+    },
+    team: {
+      headline: 'Often builds what was planned',
+      detail: 'Teams deliver reliably — but without a strategic filter, a lot can get built that nobody uses.',
+    },
+  },
+  {
+    dimension: 'Knowledge transfer',
+    fde: {
+      headline: 'Explicit learning goal',
+      detail: 'Pair programming, documentation, and explanatory sessions are part of the work — your team becomes more self-sufficient.',
+    },
+    team: {
+      headline: 'Knowledge stays in silos',
+      detail: 'Each role knows their area — understanding the overall AI architecture has to be built actively.',
+    },
+  },
+  {
+    dimension: 'Scale',
+    fde: {
+      headline: 'Ideal for focused AI initiatives',
+      detail: 'One clear feature, one production push, one architecture sprint — fast and lean.',
+    },
+    team: {
+      headline: 'Stronger with parallel streams',
+      detail: 'If you\'re developing several large product lines in parallel, a dedicated team can make more sense.',
+    },
+  },
 ];
 
 const steps = [
@@ -129,6 +210,15 @@ const serviceLd = {
       </div>
     </div>
   </section>
+
+  <FdeTeamComparison
+    heading="Forward Deployed Engineer vs. software team"
+    sub="An FDE doesn't replace every team — but for most mid-market AI initiatives, it delivers faster impact, less overhead, and clearer ownership. Click a row for details."
+    fdeLabel="Forward Deployed Engineer"
+    teamLabel="Classic software team (3–5 people)"
+    rows={comparisonRows}
+    footnote="Rule of thumb: if you need a concrete AI feature live in weeks, FDE is usually the better choice. If you're scaling several large product lines in parallel, a team can make more sense — ideally with clear AI leadership."
+  />
 
   <!-- What I ask first -->
   <section class="bg-surface-2 py-20">

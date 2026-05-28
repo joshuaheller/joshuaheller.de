@@ -1,6 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import Placeholder from '../../../components/Placeholder.astro';
+import BlogCover from '../../../components/BlogCover.astro';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('blogEn', ({ data }) => !data.draft)).sort(
@@ -37,7 +37,7 @@ const fmt = (d: Date) => d.toLocaleDateString('en-US', { day: 'numeric', month: 
           {posts.map((post) => (
             <article class="card-line overflow-hidden transition hover:border-electric">
               <a href={`/en/blog/${post.id}`}>
-                <Placeholder label="Blog Cover" ratio="16/9" rounded="rounded-none" />
+                <BlogCover name={post.data.heroImage} alt={post.data.title} ratio="16/9" rounded="rounded-none" />
                 <div class="p-6">
                   <p class="text-xs text-muted">
                     {fmt(post.data.pubDate)} · {post.data.readingTime} · {post.data.category}

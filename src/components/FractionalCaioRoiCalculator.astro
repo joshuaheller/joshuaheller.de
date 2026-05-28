@@ -12,7 +12,7 @@ const copy = isEn
   ? {
       eyebrow: 'Fractional CAIO ROI calculator',
       heading: 'Run the numbers before you hire.',
-      sub: 'Compare a full-time CAIO hire with a Fractional CAIO retainer. The model is intentionally transparent: adjust the assumptions and see where the economics turn.',
+      sub: 'Compare a full-time CAIO employment with a Fractional CAIO retainer. Three inputs are enough: salary level, fractional scope, and monthly retainer.',
       presetLabel: 'Starting point',
       presets: [
         ['lean', 'Lean setup'],
@@ -20,19 +20,16 @@ const copy = isEn
         ['senior', 'Senior hire'],
       ],
       controls: [
-        ['need', 'AI leadership needed per week', 'h / week', '4h', '32h'],
         ['salary', 'Full-time CAIO gross salary', '€', '€120k', '€300k'],
-        ['overhead', 'Employer overhead and benefits', '%', '15%', '45%'],
-        ['recruiting', 'Recruiting, search and onboarding', '% salary', '0%', '40%'],
-        ['ramp', 'Ramp-up until full productivity', 'months', '0', '9'],
+        ['hours', 'Fractional CAIO scope', 'h / week', '4h', '20h'],
         ['retainer', 'Fractional CAIO monthly retainer', '€', '€3k', '€15k'],
       ],
       resultHeading: 'Your estimated first-year advantage',
       cards: {
         savings: 'First-year savings',
+        fullTime: 'Full-time employment, year 1',
+        fractional: 'Fractional CAIO, year 1',
         roi: 'ROI on retainer',
-        reduction: 'Cost reduction',
-        hourly: 'Savings / needed hour',
       },
       breakdown: 'Cost breakdown',
       fullTime: 'Full-time CAIO, year 1',
@@ -44,12 +41,13 @@ const copy = isEn
       interpretation: 'Interpretation',
       cta: 'Discuss my scenario',
       ctaHref: '/en/contact',
+      assumptions: 'Fixed assumptions: 28% employer overhead, 22% recruiting/search/onboarding, €25k ramp-up drag.',
       note: 'A directional estimate, net of VAT. It excludes opportunity cost from delayed AI decisions, vendor lock-in, failed pilots, or wrong hires.',
     }
   : {
       eyebrow: 'Fractional-CAIO ROI-Rechner',
       heading: 'Rechne durch, bevor du einstellst.',
-      sub: 'Vergleiche eine Vollzeit-CAIO-Einstellung mit einem Fractional-CAIO-Retainer. Die Annahmen sind bewusst sichtbar: Du kannst alles verschieben und sofort sehen, wo sich das Modell lohnt.',
+      sub: 'Vergleiche eine Vollzeit-CAIO-Anstellung mit einem Fractional-CAIO-Retainer. Drei Eingaben reichen: Gehaltsniveau, Fractional-Umfang und monatlicher Retainer.',
       presetLabel: 'Ausgangslage',
       presets: [
         ['lean', 'Schlankes Setup'],
@@ -57,19 +55,16 @@ const copy = isEn
         ['senior', 'Senior Hire'],
       ],
       controls: [
-        ['need', 'KI-Führung pro Woche benötigt', 'h / Woche', '4h', '32h'],
         ['salary', 'Brutto-Jahresgehalt Vollzeit-CAIO', '€', '€120k', '€300k'],
-        ['overhead', 'Arbeitgebernebenkosten und Benefits', '%', '15%', '45%'],
-        ['recruiting', 'Recruiting, Suche und Onboarding', '% Gehalt', '0%', '40%'],
-        ['ramp', 'Ramp-up bis volle Produktivität', 'Monate', '0', '9'],
+        ['hours', 'Fractional-CAIO Umfang', 'h / Woche', '4h', '20h'],
         ['retainer', 'Fractional-CAIO Retainer pro Monat', '€', '€3k', '€15k'],
       ],
       resultHeading: 'Dein geschätzter Vorteil im ersten Jahr',
       cards: {
         savings: 'Ersparnis im 1. Jahr',
+        fullTime: 'Vollzeit-Anstellung, Jahr 1',
+        fractional: 'Fractional CAIO, Jahr 1',
         roi: 'ROI auf den Retainer',
-        reduction: 'Kostenreduktion',
-        hourly: 'Ersparnis / benötigte Stunde',
       },
       breakdown: 'Kostenaufschlüsselung',
       fullTime: 'Vollzeit-CAIO, Jahr 1',
@@ -81,6 +76,7 @@ const copy = isEn
       interpretation: 'Einordnung',
       cta: 'Mein Szenario besprechen',
       ctaHref: '/kontakt',
+      assumptions: 'Fixe Annahmen: 28% Arbeitgebernebenkosten, 22% Recruiting/Suche/Onboarding, 25.000 € Ramp-up-Reibung.',
       note: 'Richtwert netto zzgl. USt. Nicht eingerechnet sind Opportunitätskosten durch verzögerte KI-Entscheidungen, Vendor-Lock-in, gescheiterte Piloten oder Fehlbesetzungen.',
     };
 ---
@@ -99,7 +95,7 @@ const copy = isEn
       data-locale={isEn ? 'en-DE' : 'de-DE'}
     >
       <div class="grid gap-8 lg:grid-cols-[1.02fr_0.98fr]">
-        <div class="rounded-[22px] border border-white/10 bg-white/[0.05] p-5 md:p-7">
+        <div class="self-start rounded-[22px] border border-white/10 bg-white/[0.05] p-5 md:p-7">
           <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <p class="text-sm font-bold text-white">{copy.presetLabel}</p>
             <div class="grid grid-cols-3 gap-1 rounded-full bg-black/24 p-1 text-xs font-semibold" role="group" aria-label={copy.presetLabel}>
@@ -135,8 +131,8 @@ const copy = isEn
                     type="range"
                     data-input={key}
                     aria-label={label}
-                    min={key === 'salary' ? 120000 : key === 'overhead' ? 15 : key === 'recruiting' ? 0 : key === 'ramp' ? 0 : key === 'retainer' ? 3000 : 4}
-                    max={key === 'salary' ? 300000 : key === 'overhead' ? 45 : key === 'recruiting' ? 40 : key === 'ramp' ? 9 : key === 'retainer' ? 15000 : 32}
+                    min={key === 'salary' ? 120000 : key === 'retainer' ? 3000 : 4}
+                    max={key === 'salary' ? 300000 : key === 'retainer' ? 15000 : 20}
                     step={key === 'salary' ? 5000 : key === 'retainer' ? 500 : 1}
                   />
                   <span class="mt-2 flex justify-between text-xs font-medium text-white/38">
@@ -159,21 +155,21 @@ const copy = isEn
           </div>
 
           <div class="mt-6 grid gap-3 sm:grid-cols-2">
-            <div class="roi-result-card">
+            <div class="roi-result-card sm:col-span-2">
               <p class="roi-result-value" data-output="savings">0 €</p>
               <p>{copy.cards.savings}</p>
             </div>
             <div class="roi-result-card">
-              <p class="roi-result-value" data-output="roi">0%</p>
-              <p>{copy.cards.roi}</p>
+              <p class="roi-result-value" data-output="fullTimeCost">0 €</p>
+              <p>{copy.cards.fullTime}</p>
             </div>
             <div class="roi-result-card">
-              <p class="roi-result-value" data-output="reduction">0%</p>
-              <p>{copy.cards.reduction}</p>
+              <p class="roi-result-value" data-output="fractionalCostCard">0 €</p>
+              <p>{copy.cards.fractional}</p>
             </div>
-            <div class="roi-result-card is-highlight">
-              <p class="roi-result-value" data-output="hourly">0 €</p>
-              <p>{copy.cards.hourly}</p>
+            <div class="roi-result-card is-highlight sm:col-span-2">
+              <p class="roi-result-value" data-output="roi">0%</p>
+              <p>{copy.cards.roi}</p>
             </div>
           </div>
 
@@ -196,6 +192,7 @@ const copy = isEn
                 <div class="flex justify-between gap-4"><dt>{copy.rampCost}</dt><dd class="font-bold text-white" data-output="rampCost">0 €</dd></div>
                 <div class="flex justify-between gap-4 border-t border-white/10 pt-2"><dt>{copy.fractionalCost}</dt><dd class="font-bold text-cyan" data-output="fractionalCost">0 €</dd></div>
               </dl>
+              <p class="mt-3 text-xs leading-5 text-white/42">{copy.assumptions}</p>
             </div>
             <div class="rounded-[18px] border border-cyan/25 bg-cyan/10 p-4">
               <p class="text-sm font-bold text-cyan">{copy.interpretation}</p>
@@ -218,9 +215,15 @@ const copy = isEn
 
 <script>
   const presets = {
-    lean: { need: 8, salary: 150000, overhead: 24, recruiting: 15, ramp: 3, retainer: 4500 },
-    typical: { need: 12, salary: 190000, overhead: 28, recruiting: 22, ramp: 4, retainer: 6500 },
-    senior: { need: 16, salary: 240000, overhead: 32, recruiting: 28, ramp: 5, retainer: 9000 },
+    lean: { salary: 150000, hours: 8, retainer: 4500 },
+    typical: { salary: 190000, hours: 12, retainer: 6500 },
+    senior: { salary: 240000, hours: 16, retainer: 8500 },
+  };
+
+  const fixedAssumptions = {
+    overheadRate: 0.28,
+    hiringRate: 0.22,
+    rampCost: 25000,
   };
 
   const formatters = new Map();
@@ -251,7 +254,7 @@ const copy = isEn
       target.textContent = getFormatter(locale).format(value);
       return;
     }
-    target.textContent = name === 'need' ? `${value}h` : name === 'ramp' ? `${value}` : `${value}%`;
+    target.textContent = `${value}h`;
   };
 
   const updateRangeFill = (input) => {
@@ -280,23 +283,19 @@ const copy = isEn
       setValueText(root, name, value, name === 'salary' || name === 'retainer', locale);
     });
 
-    const loadedSalary = state.salary * (1 + state.overhead / 100);
-    const hiringCost = state.salary * (state.recruiting / 100);
-    const rampCost = (loadedSalary / 12) * state.ramp * 0.5;
+    const loadedSalary = state.salary * (1 + fixedAssumptions.overheadRate);
+    const hiringCost = state.salary * fixedAssumptions.hiringRate;
+    const rampCost = fixedAssumptions.rampCost;
     const fullTimeFirstYear = loadedSalary + hiringCost + rampCost;
     const fractionalYear = state.retainer * 12;
     const savings = fullTimeFirstYear - fractionalYear;
     const roi = fractionalYear > 0 ? savings / fractionalYear : 0;
-    const reduction = fullTimeFirstYear > 0 ? savings / fullTimeFirstYear : 0;
-    const fractionalHourly = state.retainer / (state.need * 4.33);
-    const fullTimeEffectiveHourly = fullTimeFirstYear / (state.need * 52);
-    const hourlyDelta = fullTimeEffectiveHourly - fractionalHourly;
     const barWidth = Math.max(8, Math.min(100, (fractionalYear / fullTimeFirstYear) * 100));
 
     setText(root, 'savings', money.format(savings));
+    setText(root, 'fullTimeCost', money.format(fullTimeFirstYear));
+    setText(root, 'fractionalCostCard', money.format(fractionalYear));
     setText(root, 'roi', `${Math.round(roi * 100)}%`);
-    setText(root, 'reduction', `${Math.round(reduction * 100)}%`);
-    setText(root, 'hourly', money.format(Math.max(0, hourlyDelta)));
     setText(root, 'loadedSalary', money.format(loadedSalary));
     setText(root, 'hiringCost', money.format(hiringCost));
     setText(root, 'rampCost', money.format(rampCost));
@@ -308,10 +307,10 @@ const copy = isEn
     const narrative = root.querySelector('[data-output="narrative"]');
     if (narrative) {
       const isEnglish = locale.startsWith('en');
-      const neededShare = Math.round((state.need / 40) * 100);
+      const fractionalShare = Math.round((state.hours / 40) * 100);
       narrative.textContent = isEnglish
-        ? `At ${state.need} hours per week, you need about ${neededShare}% of a full-time AI leader. In year one, the retainer is ${money.format(fractionalYear)} versus ${money.format(fullTimeFirstYear)} for a hire, before counting delayed decisions or failed vendor bets.`
-        : `Bei ${state.need} Stunden pro Woche brauchst du etwa ${neededShare}% einer Vollzeit-KI-Führungskraft. Im ersten Jahr stehen ${money.format(fractionalYear)} Retainer gegen ${money.format(fullTimeFirstYear)} Vollzeitkosten, bevor verzögerte Entscheidungen oder falsche Vendor-Wetten überhaupt eingerechnet sind.`;
+        ? `At ${state.hours} hours per week, you buy roughly ${fractionalShare}% of a senior AI leader instead of carrying a full-time employment. In year one, that frees up ${money.format(savings)} for implementation, tooling, or internal enablement.`
+        : `Bei ${state.hours} Stunden pro Woche kaufst du etwa ${fractionalShare}% einer Senior-KI-Führungskraft ein, statt eine Vollzeit-Anstellung zu tragen. Im ersten Jahr bleiben so ${money.format(savings)} frei für Umsetzung, Tools oder internes Enablement.`;
     }
   };
 
@@ -324,6 +323,7 @@ const copy = isEn
       inputs.forEach((input) => {
         input.value = preset[input.dataset.input];
       });
+      root.dataset.previousHours = preset.hours;
       buttons.forEach((button) => {
         button.classList.toggle('is-active', button.dataset.preset === name);
         button.classList.toggle('bg-white', button.dataset.preset === name);
@@ -337,7 +337,17 @@ const copy = isEn
       button.addEventListener('click', () => applyPreset(button.dataset.preset));
     });
     inputs.forEach((input) => {
-      input.addEventListener('input', () => calculate(root));
+      input.addEventListener('input', () => {
+        if (input.dataset.input === 'hours') {
+          const retainerInput = root.querySelector('[data-input="retainer"]');
+          const previousHours = Number(root.dataset.previousHours || input.value);
+          const currentRate = Number(retainerInput.value) / (previousHours * 4.33);
+          const nextRetainer = Math.round((Number(input.value) * currentRate * 4.33) / 500) * 500;
+          retainerInput.value = Math.min(Number(retainerInput.max), Math.max(Number(retainerInput.min), nextRetainer));
+          root.dataset.previousHours = input.value;
+        }
+        calculate(root);
+      });
     });
 
     applyPreset('typical');

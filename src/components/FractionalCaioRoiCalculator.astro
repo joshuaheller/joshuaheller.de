@@ -32,7 +32,7 @@ const copy = isEn
         savings: 'First-year savings',
         roi: 'ROI on retainer',
         reduction: 'Cost reduction',
-        hourly: 'Effective cost / needed hour',
+        hourly: 'Savings / needed hour',
       },
       breakdown: 'Cost breakdown',
       fullTime: 'Full-time CAIO, year 1',
@@ -69,7 +69,7 @@ const copy = isEn
         savings: 'Ersparnis im 1. Jahr',
         roi: 'ROI auf den Retainer',
         reduction: 'Kostenreduktion',
-        hourly: 'Effektive Kosten / benötigte Stunde',
+        hourly: 'Ersparnis / benötigte Stunde',
       },
       breakdown: 'Kostenaufschlüsselung',
       fullTime: 'Vollzeit-CAIO, Jahr 1',
@@ -380,6 +380,15 @@ const copy = isEn
     border: 0.25rem solid var(--color-cyan);
     box-shadow: 0 0 0 0.35rem rgba(0, 255, 255, 0.1);
     cursor: pointer;
+  }
+
+  .roi-preset.is-active {
+    background: #fff;
+    color: var(--color-ink);
+  }
+
+  .roi-preset.is-active:hover {
+    color: var(--color-ink);
   }
 
   .roi-result-card {

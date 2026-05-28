@@ -91,14 +91,14 @@ export const SERVICES = [
 // Kunden / Stationen für die Logo-Wand — echte Logos in public/images/logos
 // color: nicht graustufen (z. B. farbiges S-IT-Shutter-Logo)
 // boost: größer darstellen (Logos mit viel Whitespace)
-export const CLIENTS: { name: string; file: string; color?: boolean; boost?: boolean }[] = [
+export const CLIENTS: { name: string; file: string; color?: boolean; boost?: boolean; medium?: boolean }[] = [
   { name: 'BCT Technology', file: '/images/logos/bct.png' },
   { name: 'Bitwerft', file: '/images/logos/bitwerft.jpg' },
   { name: 'Onventis', file: '/images/logos/onventis.svg' },
   { name: 'WM aquatec', file: '/images/logos/wm-aquatec.png' },
   { name: 'STIHL', file: '/images/logos/stihl.jpg' },
   { name: 'i40', file: '/images/logos/i40.png' },
-  { name: 'S-IT', file: '/images/logos/s-it.png', boost: true },
+  { name: 'S-IT', file: '/images/logos/s-it.png', medium: true },
   { name: 'mimacom', file: '/images/logos/mimacom.jpg' },
   { name: 'ALL:AIRT', file: '/images/logos/allairt.jpg', boost: true },
   { name: 'squareNeo', file: '/images/logos/squareneo.svg' },

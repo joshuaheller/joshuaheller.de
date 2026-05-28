@@ -23,7 +23,7 @@ const t = useTranslations(lang);
               decoding="async"
               class:list={[
                 'w-auto object-contain transition',
-                c.boost ? 'max-h-14 max-w-[11rem]' : 'max-h-10 max-w-[8rem]',
+                c.boost ? 'max-h-14 max-w-[11rem]' : c.medium ? 'max-h-12 max-w-[10rem]' : 'max-h-10 max-w-[8rem]',
                 c.color ? 'opacity-90 hover:opacity-100' : 'opacity-70 grayscale hover:opacity-100 hover:grayscale-0',
               ]}
             />

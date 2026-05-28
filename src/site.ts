@@ -44,7 +44,7 @@ export const RESOURCES: NavLink[] = [
 ];
 
 export const STATS = [
-  { value: '350k+', label: 'Nutzer auf imagetocaption.ai' },
+  { value: '350k+', label: 'Nutzer auf eigenen SaaS-Produkten' },
   { value: '5+', label: 'Jahre als Software-Engineer' },
   { value: '3', label: 'Jahre als AI-Engineer' },
   { value: '1M+', label: 'LinkedIn-Impressionen / Jahr' },

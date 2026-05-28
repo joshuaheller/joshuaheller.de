@@ -69,7 +69,7 @@ export const translations = {
       partners: 'Partner & Förderung',
     },
     stats: [
-      { value: '350k+', label: 'Nutzer auf imagetocaption.ai' },
+      { value: '350k+', label: 'Nutzer auf eigenen SaaS-Produkten' },
       { value: '5+', label: 'Jahre als Software-Engineer' },
       { value: '3', label: 'Jahre als AI-Engineer' },
       { value: '1M+', label: 'LinkedIn-Impressionen / Jahr' },
@@ -152,7 +152,7 @@ export const translations = {
       partners: 'Partners & Sponsors',
     },
     stats: [
-      { value: '350k+', label: 'Users on imagetocaption.ai' },
+      { value: '350k+', label: 'Users on own SaaS products' },
       { value: '5+', label: 'Years as Software Engineer' },
       { value: '3', label: 'Years exclusively in AI' },
       { value: '1M+', label: 'LinkedIn Impressions / Year' },

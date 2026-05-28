@@ -24,6 +24,8 @@ import { SITE } from '../site';
   <section class="container-page grid gap-12 py-12 lg:grid-cols-[1fr_22rem]">
     <div>
       <form id="contact-form" class="space-y-5" novalidate>
+        <input type="hidden" name="access_key" value="8ed62a29-3d62-436e-bb01-027b023603d8" />
+        <input type="hidden" name="subject" value="Neue Anfrage – joshuaheller.de" />
         <div class="grid gap-5 sm:grid-cols-2">
           <label class="block">
             <span class="text-sm font-medium text-ink">Name *</span>
@@ -56,17 +58,14 @@ import { SITE } from '../site';
           </select>
         </label>
         <p class="text-xs text-muted">
-          Mit dem Absenden öffnet sich dein E-Mail-Programm mit einem fertigen Entwurf an mich — es wird kein externer
-          Dienst eingebunden. Grundlage der Verarbeitung: Art. 6 Abs. 1 lit. b DSGVO. Details in der
+          Mit dem Absenden wird deine Anfrage über Web3Forms übermittelt. Grundlage der Verarbeitung: Art. 6 Abs. 1 lit. b DSGVO. Details in der
           <a href="/datenschutz" class="text-electric">Datenschutzerklärung</a>.
         </p>
-        <button type="submit" class="btn btn-primary">Anfrage als E-Mail öffnen →</button>
+        <button type="submit" class="btn btn-primary">Anfrage senden →</button>
       </form>
 
-      <div id="contact-fallback" class="mt-5 hidden rounded-xl border border-line bg-surface-2 p-5 text-sm text-body">
-        <p>Falls sich kein E-Mail-Programm öffnet: Entwurf kopieren und an <strong class="text-ink">{SITE.email}</strong> senden.</p>
-        <button id="contact-copy" type="button" class="btn btn-ghost mt-3">Entwurf kopieren</button>
-        <span id="contact-copied" class="ml-3 hidden text-electric">Kopiert ✓</span>
+      <div id="contact-success" class="mt-5 hidden rounded-xl border border-line bg-surface-2 p-5 text-sm text-body">
+        <p class="font-semibold text-ink">Danke! Ich melde mich innerhalb von 24 Stunden.</p>
       </div>
     </div>
 
@@ -93,44 +92,37 @@ import { SITE } from '../site';
   </section>
 </Layout>
 
-<script define:vars={{ email: SITE.email }}>
+<script>
   const form = document.getElementById('contact-form');
-  const fallback = document.getElementById('contact-fallback');
+  const success = document.getElementById('contact-success');
+  const submitBtn = form?.querySelector('button[type="submit"]');
 
-  function buildDraft() {
-    const f = new FormData(form);
-    const lines = [
-      `Name: ${f.get('name') || ''}`,
-      `E-Mail: ${f.get('email') || ''}`,
-      `Firma: ${f.get('company') || ''}`,
-      `Rolle: ${f.get('role') || ''}`,
-      `Quelle: ${f.get('source') || ''}`,
-      '',
-      'Worum geht’s:',
-      `${f.get('message') || ''}`,
-    ];
-    return lines.join('\n');
-  }
-
-  form?.addEventListener('submit', (e) => {
+  form?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-    const f = new FormData(form);
-    const subject = `Anfrage von ${f.get('name') || 'Website'}`;
-    const href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(buildDraft())}`;
-    window.location.href = href;
-    fallback?.classList.remove('hidden');
-  });
+    if (!form.checkValidity()) { form.reportValidity(); return; }
 
-  document.getElementById('contact-copy')?.addEventListener('click', async () => {
+    const originalHTML = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Wird gesendet…';
+
     try {
-      await navigator.clipboard.writeText(buildDraft());
-      const ok = document.getElementById('contact-copied');
-      ok?.classList.remove('hidden');
-      setTimeout(() => ok?.classList.add('hidden'), 2000);
-    } catch {}
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: new FormData(form),
+      });
+      const json = await res.json();
+      if (json.success) {
+        form.style.display = 'none';
+        success?.classList.remove('hidden');
+      } else {
+        submitBtn.innerHTML = originalHTML;
+        submitBtn.disabled = false;
+        alert('Etwas ist schiefgelaufen. Bitte erneut versuchen.');
+      }
+    } catch {
+      submitBtn.innerHTML = originalHTML;
+      submitBtn.disabled = false;
+      alert('Etwas ist schiefgelaufen. Bitte erneut versuchen.');
+    }
   });
 </script>

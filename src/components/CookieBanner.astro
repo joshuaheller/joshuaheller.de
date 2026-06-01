@@ -1,0 +1,204 @@
+---
+import type { Lang } from '../i18n';
+
+interface Props {
+  lang?: Lang;
+}
+
+const lang = Astro.props.lang ?? 'de';
+const isEn = lang === 'en';
+
+const t = isEn
+  ? {
+      ariaLabel: 'Cookie settings',
+      message:
+        'We use a privacy-friendly, cookieless analytics tool (Plausible). Optionally, with your consent, we load the LinkedIn Insight Tag for marketing.',
+      decline: 'Necessary only',
+      accept: 'Allow all',
+      learnMore: 'Learn more',
+      privacyHref: '/datenschutz',
+    }
+  : {
+      ariaLabel: 'Cookie-Einstellungen',
+      message:
+        'Wir nutzen ein datenschutzfreundliches, cookieloses Analyse-Tool (Plausible). Optional laden wir mit Ihrer Einwilligung das LinkedIn Insight Tag für Marketing.',
+      decline: 'Nur notwendige',
+      accept: 'Alle erlauben',
+      learnMore: 'Mehr erfahren',
+      privacyHref: '/datenschutz',
+    };
+---
+
+<div id="cookie-banner" class="cookie-banner" role="dialog" aria-label={t.ariaLabel} aria-live="polite" hidden>
+  <p class="cookie-banner__text">{t.message}</p>
+  <div class="cookie-banner__actions">
+    <button type="button" class="cookie-banner__btn cookie-banner__btn--decline" data-action="decline">{t.decline}</button>
+    <button type="button" class="cookie-banner__btn cookie-banner__btn--accept" data-action="accept">{t.accept}</button>
+  </div>
+  <a href={t.privacyHref} class="cookie-banner__link">{t.learnMore}</a>
+</div>
+
+<style>
+  .cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 60;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem 1rem;
+    padding: 0.85rem 1.25rem;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-line);
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.06);
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: var(--color-body);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .cookie-banner[hidden] {
+    display: none;
+  }
+  .cookie-banner--hidden {
+    transform: translateY(100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .cookie-banner__text {
+    margin: 0;
+    flex: 1 1 240px;
+    max-width: 640px;
+  }
+  .cookie-banner__actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+  .cookie-banner__btn {
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+  }
+  .cookie-banner__btn--decline {
+    background: transparent;
+    color: var(--color-muted);
+    border: 1px solid var(--color-line);
+  }
+  .cookie-banner__btn--decline:hover {
+    color: var(--color-ink);
+    border-color: var(--color-muted);
+  }
+  .cookie-banner__btn--accept {
+    background: var(--color-electric);
+    color: #fff;
+  }
+  .cookie-banner__btn--accept:hover {
+    background: var(--color-electric-600);
+    transform: translateY(-1px);
+  }
+  .cookie-banner__link {
+    font-size: 0.78rem;
+    color: var(--color-muted);
+    text-decoration: underline;
+    flex-basis: 100%;
+    text-align: center;
+  }
+  .cookie-banner__link:hover {
+    color: var(--color-ink);
+  }
+  @media (min-width: 480px) {
+    .cookie-banner__link {
+      flex-basis: auto;
+      order: 3;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var STORAGE_KEY = 'jh-consent';
+    var LINKEDIN_PARTNER_ID = '7050346';
+
+    function getConsent() {
+      try {
+        return localStorage.getItem(STORAGE_KEY);
+      } catch (e) {
+        return null;
+      }
+    }
+    function setConsent(value) {
+      try {
+        localStorage.setItem(STORAGE_KEY, value);
+      } catch (e) {}
+    }
+
+    function loadLinkedInInsight() {
+      if (window.lintrk) return;
+      window._linkedin_partner_id = LINKEDIN_PARTNER_ID;
+      window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+      window._linkedin_data_partner_ids.push(window._linkedin_partner_id);
+      window.lintrk = function (a, b) {
+        window.lintrk.q.push([a, b]);
+      };
+      window.lintrk.q = [];
+      var s = document.getElementsByTagName('script')[0];
+      var b = document.createElement('script');
+      b.type = 'text/javascript';
+      b.async = true;
+      b.src = 'https://snap.licdn.com/li.lms-analytics/insight.min.js';
+      s.parentNode.insertBefore(b, s);
+    }
+
+    function hideBanner() {
+      var b = document.getElementById('cookie-banner');
+      if (!b) return;
+      b.classList.add('cookie-banner--hidden');
+      setTimeout(function () {
+        b.hidden = true;
+      }, 300);
+    }
+
+    function showBanner() {
+      var b = document.getElementById('cookie-banner');
+      if (!b) return;
+      b.hidden = false;
+      b.classList.remove('cookie-banner--hidden');
+    }
+
+    function init() {
+      var banner = document.getElementById('cookie-banner');
+      if (!banner) return;
+
+      banner.querySelector('[data-action="accept"]').addEventListener('click', function () {
+        setConsent('granted');
+        loadLinkedInInsight();
+        hideBanner();
+      });
+      banner.querySelector('[data-action="decline"]').addEventListener('click', function () {
+        setConsent('denied');
+        hideBanner();
+      });
+
+      var consent = getConsent();
+      if (consent === 'granted') {
+        loadLinkedInInsight();
+      } else if (consent !== 'denied') {
+        showBanner();
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>

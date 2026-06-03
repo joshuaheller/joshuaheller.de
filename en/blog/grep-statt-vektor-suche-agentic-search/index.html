@@ -1,0 +1,155 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.18.1"><title>Why AI Agents Are Better Off Using grep Than Your Vector Database | Joshua Heller</title><meta name="description" content="A new paper shows: when agents search the raw corpus directly with grep instead of embeddings, accuracy goes up and cost goes down. What that means for your RAG architecture."><link rel="canonical" href="https://joshuaheller.de/en/blog/grep-statt-vektor-suche-agentic-search"><meta property="og:type" content="article"><meta property="og:title" content="Why AI Agents Are Better Off Using grep Than Your Vector Database | Joshua Heller"><meta property="og:description" content="A new paper shows: when agents search the raw corpus directly with grep instead of embeddings, accuracy goes up and cost goes down. What that means for your RAG architecture."><meta property="og:url" content="https://joshuaheller.de/en/blog/grep-statt-vektor-suche-agentic-search"><meta property="og:image" content="https://joshuaheller.de/og/de/og-default.png"><meta property="og:site_name" content="Joshua Heller"><meta property="og:locale" content="en_US"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Why AI Agents Are Better Off Using grep Than Your Vector Database | Joshua Heller"><meta name="twitter:description" content="A new paper shows: when agents search the raw corpus directly with grep instead of embeddings, accuracy goes up and cost goes down. What that means for your RAG architecture."><meta name="twitter:image" content="https://joshuaheller.de/og/de/og-default.png"><link rel="alternate" hreflang="de" href="https://joshuaheller.de/blog/grep-statt-vektor-suche-agentic-search"><link rel="alternate" hreflang="en" href="https://joshuaheller.de/en/blog/grep-statt-vektor-suche-agentic-search"><link rel="alternate" hreflang="x-default" href="https://joshuaheller.de/blog/grep-statt-vektor-suche-agentic-search"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Joshua Heller","url":"https://joshuaheller.de","jobTitle":"AI Engineer & Fractional CAIO","worksFor":{"@type":"Organization","name":"TAISC – The AI Software Company GmbH","url":"https://theaisoftwarecompany.com"},"sameAs":["https://www.linkedin.com/in/heller-joshua","https://theaisoftwarecompany.com"]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Why AI Agents Are Better Off Using grep Than Your Vector Database","description":"A new paper shows: when agents search the raw corpus directly with grep instead of embeddings, accuracy goes up and cost goes down. What that means for your RAG architecture.","datePublished":"2026-06-03T00:00:00.000Z","author":{"@type":"Person","name":"Joshua Heller","url":"https://joshuaheller.de"},"publisher":{"@type":"Organization","name":"TAISC – The AI Software Company GmbH"}}</script><script defer data-domain="joshuaheller.de" src="https://analytics.taisc.de/js/script.js"></script><link rel="stylesheet" href="/_astro/_slug_.CY2uFGGQ.css"></head> <body> <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-electric focus:px-4 focus:py-2 focus:text-white"> Skip to content </a> <header class="sticky top-0 z-40 border-b border-line/70 bg-white/80 backdrop-blur-md"> <div class="container-page flex h-16 items-center justify-between gap-4"> <a href="/en/" class="flex items-baseline gap-2 text-ink" aria-label="Joshua Heller — Home"> <span class="text-lg font-extrabold tracking-tight">Joshua Heller</span> </a> <!-- Desktop nav --> <nav class="hidden items-center gap-1 lg:flex" aria-label="Main navigation"> <!-- Services mega-menu --> <div class="group relative"> <button class="flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium text-ink transition hover:bg-surface-3" aria-haspopup="true"> Services <svg width="1em" height="1em" class="size-4 transition group-hover:rotate-180" data-icon="lucide:chevron-down">   <symbol id="ai:lucide:chevron-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9l6 6l6-6"/></symbol><use href="#ai:lucide:chevron-down"></use>  </svg> </button> <div class="invisible absolute left-1/2 top-full z-50 w-[44rem] -translate-x-1/2 pt-3 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"> <div class="card-glass grid grid-cols-3 gap-5 p-6"> <div> <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-muted">I need AI understanding</p> <ul class="space-y-3"> <li> <a href="/en/ai-workshop" class="block rounded-xl px-2 py-1.5 transition hover:bg-white/70"> <span class="block text-sm font-semibold text-ink">AI Workshop</span> <span class="block text-xs text-muted">From buzzword to roadmap</span> </a> </li><li> <a href="/en/ai-sparring" class="block rounded-xl px-2 py-1.5 transition hover:bg-white/70"> <span class="block text-sm font-semibold text-ink">AI Sparring</span> <span class="block text-xs text-muted">External sparring partner for tech &amp; strategy</span> </a> </li> </ul> </div><div> <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-muted">I need an AI engineer</p> <ul class="space-y-3"> <li> <a href="/en/forward-deployed-engineer" class="block rounded-xl px-2 py-1.5 transition hover:bg-white/70"> <span class="block text-sm font-semibold text-ink">Forward Deployed Engineer</span> <span class="block text-xs text-muted">I build inside your codebase</span> </a> </li><li> <a href="/en/mvp" class="block rounded-xl px-2 py-1.5 transition hover:bg-white/70"> <span class="block text-sm font-semibold text-ink">MVP Service</span> <span class="block text-xs text-muted">From prototype to product in 2–6 weeks</span> </a> </li> </ul> </div><div> <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-muted">I need AI leadership</p> <ul class="space-y-3"> <li> <a href="/en/fractional-caio" class="block rounded-xl px-2 py-1.5 transition hover:bg-white/70"> <span class="block text-sm font-semibold text-ink">Fractional CAIO</span> <span class="block text-xs text-muted">Part-time AI leadership</span> </a> </li> </ul> </div> </div> </div> </div> <!-- Resources dropdown --> <div class="group relative"> <button class="flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium text-ink transition hover:bg-surface-3" aria-haspopup="true"> Resources <svg width="1em" height="1em" viewBox="0 0 24 24" class="size-4 transition group-hover:rotate-180" data-icon="lucide:chevron-down">   <use href="#ai:lucide:chevron-down"></use>  </svg> </button> <div class="invisible absolute left-0 top-full z-50 w-56 pt-3 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"> <div class="card-glass p-3"> <ul class="space-y-1"> <li> <a href="/en/blog" class="block rounded-lg px-3 py-2 text-sm font-medium text-ink transition hover:bg-white/70"> Blog </a> </li><li> <a href="/en/glossary" class="block rounded-lg px-3 py-2 text-sm font-medium text-ink transition hover:bg-white/70"> AI Glossary </a> </li> </ul> </div> </div> </div> <a href="/en/about" class="rounded-full px-3 py-2 text-sm font-medium transition hover:bg-surface-3 text-ink">About</a> <a href="/en/contact" class="btn btn-primary ml-2">Book a Call</a> <!-- Language switcher --> <div class="ml-2 flex items-center gap-1 border-l border-line pl-3">  <a href="/blog/grep-statt-vektor-suche-agentic-search" class="rounded-full px-2.5 py-1 text-xs font-bold text-muted transition hover:text-ink">DE</a> <span class="rounded-full bg-electric px-2.5 py-1 text-xs font-bold text-white">EN</span>  </div> </nav> <!-- Mobile toggle --> <div class="flex items-center gap-2 lg:hidden"> <div class="flex items-center gap-1">  <a href="/blog/grep-statt-vektor-suche-agentic-search" class="rounded-full px-2 py-0.5 text-xs font-bold text-muted">DE</a> <span class="rounded-full bg-electric px-2 py-0.5 text-xs font-bold text-white">EN</span>  </div> <button id="menu-toggle" class="rounded-full p-2 text-ink" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"> <svg width="1em" height="1em" class="size-6" data-icon="lucide:menu">   <symbol id="ai:lucide:menu" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5h16M4 12h16M4 19h16"/></symbol><use href="#ai:lucide:menu"></use>  </svg> </button> </div> </div> <!-- Mobile menu --> <div id="mobile-menu" class="hidden border-t border-line bg-white lg:hidden"> <nav class="container-page space-y-5 py-6" aria-label="Mobile navigation"> <div> <p class="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">I need AI understanding</p> <ul class="space-y-1"> <li> <a href="/en/ai-workshop" class="block py-1.5 font-semibold text-ink"> AI Workshop </a> </li><li> <a href="/en/ai-sparring" class="block py-1.5 font-semibold text-ink"> AI Sparring </a> </li> </ul> </div><div> <p class="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">I need an AI engineer</p> <ul class="space-y-1"> <li> <a href="/en/forward-deployed-engineer" class="block py-1.5 font-semibold text-ink"> Forward Deployed Engineer </a> </li><li> <a href="/en/mvp" class="block py-1.5 font-semibold text-ink"> MVP Service </a> </li> </ul> </div><div> <p class="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">I need AI leadership</p> <ul class="space-y-1"> <li> <a href="/en/fractional-caio" class="block py-1.5 font-semibold text-ink"> Fractional CAIO </a> </li> </ul> </div> <div> <p class="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">Resources</p> <ul class="space-y-1"> <li><a href="/en/blog" class="block py-1.5 font-semibold text-ink">Blog</a></li><li><a href="/en/glossary" class="block py-1.5 font-semibold text-ink">AI Glossary</a></li> <li><a href="/en/about" class="block py-1.5 font-semibold text-ink">About</a></li> </ul> </div> <a href="/en/contact" class="btn btn-primary w-full justify-center">Book a Call</a> </nav> </div> </header> <script type="module">const e=document.getElementById("menu-toggle"),a=document.getElementById("mobile-menu");e?.addEventListener("click",()=>{const t=a?.classList.toggle("hidden")===!1;e.setAttribute("aria-expanded",String(t));const n=e.dataset.labelOpen??"Close menu",l=e.dataset.labelClose??"Open menu";e.setAttribute("aria-label",t?n:l)});</script> <main id="main">  <article class="container-page max-w-3xl py-16"> <p class="text-sm text-muted"> <a href="/en/blog" class="hover:text-electric">Blog</a> · June 3, 2026 · 12 min. · AI Engineering </p> <h1 class="mt-4 text-4xl font-extrabold leading-tight tracking-tight text-ink md:text-5xl">Why AI Agents Are Better Off Using grep Than Your Vector Database</h1> <p class="mt-5 text-xl text-body">A new paper shows: when agents search the raw corpus directly with grep instead of embeddings, accuracy goes up and cost goes down. What that means for your RAG architecture.</p> <div class="mt-8"> <div class="overflow-hidden border border-line rounded-[20px]" style="aspect-ratio:16/9"><img src="/_astro/blog-dci-grep-search.D45n42TE_Z1BaoOy.webp" srcset="/_astro/blog-dci-grep-search.D45n42TE_1Jqeo1.webp 480w, /_astro/blog-dci-grep-search.D45n42TE_Z1BaoOy.webp 671w" alt="Why AI Agents Are Better Off Using grep Than Your Vector Database" sizes="(max-width: 1024px) 100vw, 800px" style="object-position:center" loading="eager" decoding="async" fetchpriority="auto" width="671" height="700" class="h-full w-full object-cover"></div> </div> <div class="prose-jh mt-10"> <blockquote>
+<p><strong>TL;DR</strong></p>
+<ul>
+<li>A new paper (“Beyond Semantic Similarity”) shows: let an agent search the raw corpus directly with <code>grep</code> and <code>find</code> — no embeddings, no vector index — and it beats strong RAG baselines.</li>
+<li>Same Claude Sonnet 4.6, only the retrieval swapped: accuracy on BrowseComp-Plus from 69% to 80%, cost down 29%.</li>
+<li>The real insight: the bottleneck isn’t the retriever, it’s the interface through which the agent sees the corpus.</li>
+</ul>
+</blockquote>
+<h2 id="the-problem-with-classic-rag">The Problem with Classic RAG</h2>
+<p>Almost every enterprise AI application today follows the same pattern: documents get chunked, turned into embeddings, dropped into a vector database — and at runtime the model pulls the top-k most similar hits. That’s efficient and perfectly fine for large, static corpora.</p>
+<p>The catch: this interface compresses all corpus access into <strong>a single similarity step</strong> before any real reasoning begins. Whatever the vector search filters out early can’t be recovered by even the strongest downstream model. Exact matches (“this specific contract clause”), combining weak clues, or checking the local context around a hit — all of that is hard to express with a pure top-k retriever.</p>
+<h2 id="what-the-paper-proposes-direct-corpus-interaction">What the Paper Proposes: Direct Corpus Interaction</h2>
+<p>The idea behind <strong>Direct Corpus Interaction (DCI)</strong> is almost defiantly simple: let the agent search the raw corpus directly — with the tools every shell already has. <code>grep</code> and <code>rg</code> for exact and regex matches, <code>find</code> and <code>glob</code> for navigation, targeted file reads and small scripts for local context.</p>
+<p>No embedding model. No vector index. No retrieval API. Semantic interpretation is no longer done by an upstream index but by the agent itself. And because these operations compose, real expressive power emerges:</p>
+<ul>
+<li>Enforce exact constraints: <code>grep 'foo' file | grep 'bar'</code></li>
+<li>Combine weak clues: <code>find . | grep 'report' | grep '2024'</code></li>
+<li>Verify hypotheses against local context: <code>grep -n 'keyword' file | head</code></li>
+</ul>
+<p>The entire corpus stays available at all times — instead of just the thin slice the retriever lets through.</p>
+<h2 id="the-numbers">The Numbers</h2>
+<p>It was tested against strong sparse, dense, and reranking baselines. The most practically relevant results:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Setup</th><th>Result</th><th>Delta</th></tr></thead><tbody><tr><td>BrowseComp-Plus (same Sonnet 4.6, retriever → DCI)</td><td>69.0% → 80.0% accuracy</td><td>+11 points</td></tr><tr><td>Same task, cost</td><td>$1,440 → $1,016</td><td>−29.4%</td></tr><tr><td>Multi-hop QA (DCI + Claude Code)</td><td>83.0 avg accuracy</td><td>+30.7 vs. best retrieval baseline</td></tr><tr><td>IR ranking</td><td>68.5 avg NDCG@10</td><td>+21.5 vs. best baseline</td></tr></tbody></table>
+<p>What stands out is the combination: <strong>higher accuracy at lower cost</strong>. That’s rare — usually you buy quality with more expensive models or more tokens.</p>
+<h2 id="why-it-works-interface-resolution">Why It Works: “Interface Resolution”</h2>
+<p>The obvious explanation would be that DCI simply finds more of the right documents. But that’s not it. The authors show that DCI often wins even when the retriever had already surfaced the relevant documents.</p>
+<p>The actual lever is what they call <strong>“retrieval interface resolution”</strong>: the ability to operate on units <em>smaller</em> than whole documents. A retriever returns a document or a chunk. An agent with <code>grep</code> can zoom in on the exact line, the surrounding context, the precise number — and refine its search from there. The biggest gains come from turning surfaced evidence into finer-grained local search and verification steps.</p>
+<p>Put differently: the stronger the models get, the more the bottleneck shifts from the <em>retriever</em> to the <em>interface</em>. A compressed similarity index becomes a brake the moment the model can search like a human researcher — forming hypotheses, testing exact patterns, reading local context, refining.</p>
+<h2 id="what-this-means-for-your-architecture">What This Means for Your Architecture</h2>
+<p>No reason to throw out every vector database now. For large, static corpora, dense and sparse retrieval remain scalable and strong. But they’re just <em>one</em> point in the design space — not the only answer.</p>
+<p>Three situations where DCI is particularly interesting:</p>
+<ul>
+<li><strong>Local, heterogeneous corpora</strong> that change constantly. No re-indexing, no embedding pipeline — the agent works directly on the files.</li>
+<li><strong>Tasks with exact constraints</strong>: specific IDs, clauses, dates, code locations. Exactly where semantic similarity often fails.</li>
+<li><strong>Agentic, multi-step research</strong> where you refine mid-flight instead of pulling top-k once.</li>
+</ul>
+<p>Also worth noting: this works with standard tools a coding agent like Claude Code already has. The retrieval system here is no longer a separate piece of infrastructure — it’s the shell.</p>
+<h2 id="what-you-can-do-now">What You Can Do Now</h2>
+<ol>
+<li>Look at your current RAG pipeline: how often does it fail on <em>exact</em> requirements rather than topical similarity?</li>
+<li>Check whether your corpus is large-and-static (vector DB still makes sense) or local-and-living (DCI is worth a test).</li>
+<li>Before you build the next embedding pipeline: test how far an agent with <code>grep</code> and file reads gets on your real data.</li>
+</ol>
+<p>Exactly these architecture decisions — and shipping them straight into your codebase — are the core of the <a href="/en/forward-deployed-engineer">Forward Deployed Engineer model</a>: build close to the real use case instead of advising from the outside.</p> </div> </article> <section class="container-page py-20"> <div class="bg-blobs overflow-hidden rounded-[28px] border border-line bg-surface-2 px-6 py-16 text-center md:px-16"> <h2 class="mx-auto max-w-2xl text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Want to talk through this in your context?</h2> <p class="mx-auto mt-4 max-w-xl text-lg text-body">30-minute intro call, no commitment.</p> <div class="mt-8 flex flex-wrap items-center justify-center gap-4"> <a href="/en/contact" class="btn btn-primary">Book a Call →</a> </div> <p class="mt-6 text-sm text-muted"> Prefer to write first?  <a href="mailto:joshuaheller@theaisoftwarecompany.com" class="font-medium text-electric"> joshuaheller@theaisoftwarecompany.com </a> </p> </div> </section>  </main> <footer class="border-t border-line bg-surface-2"> <div class="container-page grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-4"> <div> <p class="text-lg font-extrabold tracking-tight text-ink">Joshua Heller</p> <p class="mt-3 max-w-xs text-sm text-muted"> AI Engineer &amp; Fractional CAIO. From prototype to product — directly in your codebase. </p> <a href="https://www.linkedin.com/in/heller-joshua" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-electric"> <svg width="1em" height="1em" class="size-4" data-icon="lucide:linkedin">   <symbol id="ai:lucide:linkedin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2a2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6M2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></g></symbol><use href="#ai:lucide:linkedin"></use>  </svg> LinkedIn
+</a> </div> <div> <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-muted">AI Understanding</p> <ul class="space-y-2 text-sm"> <li><a href="/en/ai-workshop" class="text-body hover:text-electric">AI Workshop</a></li> <li><a href="/en/ai-sparring" class="text-body hover:text-electric">AI Sparring</a></li> </ul> </div> <div> <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-muted">Engineering &amp; Leadership</p> <ul class="space-y-2 text-sm"> <li><a href="/en/forward-deployed-engineer" class="text-body hover:text-electric">Forward Deployed Engineer</a></li> <li><a href="/en/mvp" class="text-body hover:text-electric">MVP Service</a></li> <li><a href="/en/fractional-caio" class="text-body hover:text-electric">Fractional CAIO</a></li> </ul> </div> <div> <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-muted">More</p> <ul class="space-y-2 text-sm"> <li><a href="/en/about" class="text-body hover:text-electric">About</a></li> <li><a href="/en/blog" class="text-body hover:text-electric">Blog</a></li> <li><a href="/en/glossary" class="text-body hover:text-electric">AI Glossary</a></li> <li><a href="/en/contact" class="text-body hover:text-electric">Contact</a></li> <li><a href="/impressum" class="text-body hover:text-electric">Legal Notice</a></li> <li><a href="/datenschutz" class="text-body hover:text-electric">Privacy Policy</a></li> </ul> </div> </div> <div class="border-t border-line"> <div class="container-page flex flex-col gap-2 py-6 text-xs text-muted md:flex-row md:items-center md:justify-between"> <p> Joshua Heller is CEO of  <a href="https://theaisoftwarecompany.com" target="_blank" rel="noopener" class="font-medium text-body hover:text-electric">TAISC – The AI Software Company GmbH</a>.
+</p> <p>© 2026 Joshua Heller · Logos are property of their respective owners.</p> </div> </div> </footer> <div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Cookie settings" aria-live="polite" hidden data-astro-cid-fzbxxtek> <p class="cookie-banner__text" data-astro-cid-fzbxxtek>We use a privacy-friendly, cookieless analytics tool (Plausible). Optionally, with your consent, we load the LinkedIn Insight Tag for marketing.</p> <div class="cookie-banner__actions" data-astro-cid-fzbxxtek> <button type="button" class="cookie-banner__btn cookie-banner__btn--decline" data-action="decline" data-astro-cid-fzbxxtek>Necessary only</button> <button type="button" class="cookie-banner__btn cookie-banner__btn--accept" data-action="accept" data-astro-cid-fzbxxtek>Allow all</button> </div> <a href="/datenschutz" class="cookie-banner__link" data-astro-cid-fzbxxtek>Learn more</a> </div>  <script>
+  (function () {
+    var STORAGE_KEY = 'jh-consent';
+    var LINKEDIN_PARTNER_ID = '7050346';
+
+    function getConsent() {
+      try {
+        return localStorage.getItem(STORAGE_KEY);
+      } catch (e) {
+        return null;
+      }
+    }
+    function setConsent(value) {
+      try {
+        localStorage.setItem(STORAGE_KEY, value);
+      } catch (e) {}
+    }
+
+    function loadLinkedInInsight() {
+      if (window.lintrk) return;
+      window._linkedin_partner_id = LINKEDIN_PARTNER_ID;
+      window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+      window._linkedin_data_partner_ids.push(window._linkedin_partner_id);
+      window.lintrk = function (a, b) {
+        window.lintrk.q.push([a, b]);
+      };
+      window.lintrk.q = [];
+      var s = document.getElementsByTagName('script')[0];
+      var b = document.createElement('script');
+      b.type = 'text/javascript';
+      b.async = true;
+      b.src = 'https://snap.licdn.com/li.lms-analytics/insight.min.js';
+      s.parentNode.insertBefore(b, s);
+    }
+
+    function hideBanner() {
+      var b = document.getElementById('cookie-banner');
+      if (!b) return;
+      b.classList.add('cookie-banner--hidden');
+      setTimeout(function () {
+        b.hidden = true;
+      }, 300);
+    }
+
+    function showBanner() {
+      var b = document.getElementById('cookie-banner');
+      if (!b) return;
+      b.hidden = false;
+      b.classList.remove('cookie-banner--hidden');
+    }
+
+    function init() {
+      var banner = document.getElementById('cookie-banner');
+      if (!banner) return;
+
+      banner.querySelector('[data-action="accept"]').addEventListener('click', function () {
+        setConsent('granted');
+        loadLinkedInInsight();
+        hideBanner();
+      });
+      banner.querySelector('[data-action="decline"]').addEventListener('click', function () {
+        setConsent('denied');
+        hideBanner();
+      });
+
+      var consent = getConsent();
+      if (consent === 'granted') {
+        loadLinkedInInsight();
+      } else if (consent !== 'denied') {
+        showBanner();
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script> </body></html>

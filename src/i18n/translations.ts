@@ -19,6 +19,12 @@ export const translations = {
     },
     megaMenu: [
       {
+        title: 'Ich suche KI-Beratung',
+        items: [
+          { label: 'KI-Beratung', href: '/ki-beratung/', desc: 'Strategie & Umsetzung — ohne Agentur-Overhead' },
+        ],
+      },
+      {
         title: 'Ich brauche KI-Verständnis',
         items: [
           { label: 'KI-Workshop', href: '/ki-workshop/', desc: 'Vom Buzzword zur Roadmap' },

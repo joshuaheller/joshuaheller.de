@@ -55,6 +55,7 @@ export const translations = {
         contact: { label: 'Kontakt', href: '/kontakt/' },
         impressum: { label: 'Impressum', href: '/impressum/' },
         datenschutz: { label: 'Datenschutz', href: '/datenschutz/' },
+        beratung: { label: 'KI-Beratung', href: '/ki-beratung/' },
         fde: { label: 'Forward Deployed Engineer', href: '/forward-deployed-engineer/' },
         mvp: { label: 'MVP-Service', href: '/mvp/' },
         caio: { label: 'Fractional CAIO', href: '/fractional-caio/' },

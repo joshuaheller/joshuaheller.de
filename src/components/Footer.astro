@@ -41,6 +41,9 @@ const { footer: f } = t;
     <div>
       <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-muted">{f.col2}</p>
       <ul class="space-y-2 text-sm">
+        {'beratung' in f.links && (
+          <li><a href={f.links.beratung.href} class="text-body hover:text-electric">{f.links.beratung.label}</a></li>
+        )}
         <li><a href={f.links.fde.href} class="text-body hover:text-electric">{f.links.fde.label}</a></li>
         <li><a href={f.links.mvp.href} class="text-body hover:text-electric">{f.links.mvp.label}</a></li>
         <li><a href={f.links.caio.href} class="text-body hover:text-electric">{f.links.caio.label}</a></li>

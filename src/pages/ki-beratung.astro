@@ -1,0 +1,165 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ServiceHero from '../components/ServiceHero.astro';
+import Steps from '../components/Steps.astro';
+import Faq from '../components/Faq.astro';
+import Cta from '../components/Cta.astro';
+import { SITE } from '../site';
+
+const meaning = [
+  { title: 'Strategie, die zur Umsetzung führt', body: 'KI-Beratung heißt bei mir nicht 100 Folien, sondern priorisierte Use Cases, eine Make-or-Buy-Einschätzung und ein nächster Schritt mit Datum.' },
+  { title: 'Berater, der auch baut', body: 'Ich bewerte nicht nur Tools und Vendors, ich baue selbst in eurer Codebase. Beratung und Engineering aus einer Hand — ohne Übergabeverluste.' },
+  { title: 'Ohne Agentur-Overhead', body: 'Ihr sprecht direkt mit dem, der die Arbeit macht. Kein Sales-Layer, keine Junioren auf eurem Projekt, keine aufgeblähten Tagessätze.' },
+];
+
+const forWhom = [
+  'Geschäftsführung und Tech-Leads im Mittelstand, die KI nicht dem Zufall überlassen wollen',
+  'Scaleups, die einen ersten KI-Use-Case sauber aufsetzen wollen, bevor sie ein Team aufbauen',
+  'Konzern- und Private-Equity-Umfelder, die eine unabhängige zweite Meinung zu KI-Vorhaben brauchen',
+  'Teams, die eine externe, herstellerunabhängige Bewertung von Tools, Architekturen und Vendors suchen',
+];
+
+const steps = [
+  { title: 'Erstgespräch & Fit-Check', body: 'Wo steht ihr, was ist das Ziel, ist KI-Beratung der richtige Ansatz?', meta: '⏱ 30 Min' },
+  { title: 'Status-Quo & Use-Case-Analyse', body: 'Bestehende Systeme, Daten, Prozesse. Welche KI-Use-Cases lohnen sich wirklich?', meta: '⏱ 1–3 Tage' },
+  { title: 'Empfehlung & Roadmap', body: 'Priorisierte Use Cases, Make-or-Buy, Tech-Stack-Empfehlung, Quick Wins.', meta: '📤 Roadmap' },
+  { title: 'Umsetzung oder Begleitung', body: 'Ich baue als Forward Deployed Engineer oder begleite euch laufend als Fractional CAIO — je nach Bedarf.', meta: '⏱ flexibel' },
+];
+
+const faqs = [
+  { q: 'Was ist der Unterschied zu einer KI-Unternehmensberatung?', a: 'Eine klassische KI-Unternehmensberatung liefert Empfehlungen und übergibt dann an euch oder Dritte. Ich bin ein einzelner, erfahrener KI-Berater, der die Strategie entwickelt — und sie auf Wunsch auch selbst umsetzt. Ohne Agentur-Overhead, ohne Übergabeverluste.' },
+  { q: 'Bist du eine Agentur?', a: 'Nein. Ich bin ein Solo-KI-Berater. Ihr sprecht direkt mit dem, der die Arbeit macht — kein Sales-Team, keine Juniorbesetzung auf eurem Projekt.' },
+  { q: 'Für welche Unternehmensgrößen ist KI-Beratung sinnvoll?', a: 'Von Mittelständlern und Scaleups bis zu Konzernen und Private-Equity-Portfolios. Entscheidend ist nicht die Größe, sondern dass es eine konkrete Frage oder ein konkretes Vorhaben gibt.' },
+  { q: 'Berätst du auch vor Ort in Baden-Württemberg?', a: 'Ja. Ich arbeite remote-first, bin aber im Großraum Karlsruhe, Pforzheim und Stuttgart regelmäßig vor Ort. Für Unternehmen in Baden-Württemberg sind Vor-Ort-Termine unkompliziert möglich.' },
+  { q: 'Wie geht es nach der Beratung weiter?', a: 'Drei Wege: Euer Team setzt selbst um, ich baue als Forward Deployed Engineer in eurer Codebase, oder ich begleite euch laufend als Fractional CAIO. Ihr entscheidet — es gibt keinen Zwang zur Umsetzung über mich.' },
+];
+
+const professionalServiceLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Joshua Heller — KI-Beratung',
+  description:
+    'Senior KI-Berater für KI-Beratung, KI-Strategie und Umsetzung — für Unternehmen im Mittelstand, Scaleups, Konzernen und Private Equity. Ohne Agentur-Overhead.',
+  url: new URL('/ki-beratung/', SITE.url).href,
+  founder: { '@type': 'Person', name: 'Joshua Heller', url: SITE.url },
+  provider: { '@type': 'Person', name: 'Joshua Heller', url: SITE.url },
+  email: SITE.email,
+  areaServed: [
+    { '@type': 'AdministrativeArea', name: 'Baden-Württemberg' },
+    { '@type': 'City', name: 'Karlsruhe' },
+    { '@type': 'City', name: 'Stuttgart' },
+    { '@type': 'City', name: 'Pforzheim' },
+  ],
+  knowsAbout: ['KI-Beratung', 'KI-Strategie', 'Fractional CAIO', 'MVP-Entwicklung', 'Forward Deployed Engineering'],
+};
+---
+
+<Layout
+  title="KI-Beratung & KI-Berater ohne Agentur | Joshua Heller"
+  description="KI-Beratung für Unternehmen von einem erfahrenen Solo-KI-Berater, der auch baut — ohne Agentur-Overhead. KI-Strategie, Use-Case-Priorisierung und Umsetzung. Für Mittelstand, Konzerne, Scaleups & Private Equity in Baden-Württemberg und DACH."
+  path="/ki-beratung"
+  jsonLd={[professionalServiceLd]}
+>
+  <ServiceHero
+    eyebrow="KI-Beratung"
+    title="KI-Beratung ohne Agentur-Overhead."
+    sub="Ein erfahrener KI-Berater, der nicht nur berät, sondern auch baut. Ihr sprecht direkt mit dem, der die Arbeit macht — keine Agentur, kein Sales-Layer, keine Junioren auf eurem Projekt. KI-Strategie und Umsetzung aus einer Hand."
+    secondary={{ label: 'Was das heißt', href: '#was-ist' }}
+    image="Joshua im Beratungsgespräch"
+    photo="videocall.jpg"
+  />
+
+  <!-- Was KI-Beratung bei mir bedeutet -->
+  <section id="was-ist" class="container-page py-20">
+    <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Was KI-Beratung bei mir bedeutet</h2>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {
+        meaning.map((m) => (
+          <div class="card-line p-6">
+            <h3 class="font-bold text-ink">{m.title}</h3>
+            <p class="mt-2 text-sm text-body">{m.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Für wen -->
+  <section class="bg-surface-2 py-20">
+    <div class="container-page grid gap-10 lg:grid-cols-2 lg:items-center">
+      <div>
+        <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Für wen KI-Beratung sinnvoll ist</h2>
+        <p class="mt-4 text-body">
+          KI-Beratung für Unternehmen lohnt sich, wenn es eine konkrete Frage oder ein konkretes Vorhaben gibt — und ihr
+          eine unabhängige, herstellerneutrale Einschätzung wollt, bevor ihr Budget bindet.
+        </p>
+      </div>
+      <ul class="space-y-3">
+        {forWhom.map((w) => <li class="rounded-xl border border-line bg-white p-4 text-sm text-body">{w}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Vorgehen -->
+  <Steps heading="Mein Vorgehen" steps={steps} />
+
+  <!-- Abgrenzung / Cross-Links -->
+  <section class="bg-surface-2 py-20">
+    <div class="container-page">
+      <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Beratung — und auf Wunsch Umsetzung</h2>
+      <p class="mt-4 max-w-2xl text-body">
+        KI-Beratung ist selten ein Selbstzweck. Je nachdem, was ihr braucht, geht es nahtlos weiter:
+      </p>
+      <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <a href="/forward-deployed-engineer/" class="card-line block p-6 transition hover:border-electric">
+          <h3 class="font-bold text-ink">Forward Deployed Engineer</h3>
+          <p class="mt-2 text-sm text-body">Wenn die Beratung in Code münden soll: Ich baue direkt in eurer Codebase. →</p>
+        </a>
+        <a href="/mvp/" class="card-line block p-6 transition hover:border-electric">
+          <h3 class="font-bold text-ink">MVP-Service</h3>
+          <p class="mt-2 text-sm text-body">Use Case schnell und günstig validieren — Festpreis, in 2–6 Wochen. →</p>
+        </a>
+        <a href="/fractional-caio/" class="card-line block p-6 transition hover:border-electric">
+          <h3 class="font-bold text-ink">Fractional CAIO</h3>
+          <p class="mt-2 text-sm text-body">Laufende, dauerhafte KI-Führung auf Teilzeit, als monatlicher Retainer. →</p>
+        </a>
+        <a href="/ki-workshop/" class="card-line block p-6 transition hover:border-electric">
+          <h3 class="font-bold text-ink">KI-Workshop</h3>
+          <p class="mt-2 text-sm text-body">Wenn ihr noch nicht wisst, wo ihr mit KI anfangen sollt. →</p>
+        </a>
+        <a href="/ki-sparring/" class="card-line block p-6 transition hover:border-electric">
+          <h3 class="font-bold text-ink">KI-Sparring</h3>
+          <p class="mt-2 text-sm text-body">Punktuelle, unabhängige zweite Meinung — abgerechnet nach Stunden. →</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lokal: Baden-Württemberg -->
+  <section class="container-page py-20">
+    <div class="grid gap-10 lg:grid-cols-2">
+      <div>
+        <h2 class="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">KI-Beratung in Baden-Württemberg</h2>
+        <div class="mt-6 space-y-4 text-body">
+          <p>
+            Ich arbeite remote-first, bin aber in Baden-Württemberg verwurzelt: im Großraum Karlsruhe und Pforzheim sowie
+            im Großraum Stuttgart sind Vor-Ort-Termine unkompliziert möglich.
+          </p>
+          <p>
+            Gerade der Mittelstand in der Region schätzt einen Ansprechpartner in der Nähe, der die lokale
+            Industrie-Landschaft kennt — von der Fertigung über B2B-SaaS bis zum Maschinenbau.
+          </p>
+        </div>
+      </div>
+      <div class="space-y-4">
+        <div class="card-line p-6"><p class="font-bold text-ink">Karlsruhe</p><p class="mt-1 text-sm text-body">Technologieregion mit dichtem KIT- und Startup-Umfeld — mein direktes Einzugsgebiet.</p></div>
+        <div class="card-line p-6"><p class="font-bold text-ink">Pforzheim</p><p class="mt-1 text-sm text-body">Mittelstand und Industrie zwischen Karlsruhe und Stuttgart.</p></div>
+        <div class="card-line p-6"><p class="font-bold text-ink">Großraum Stuttgart</p><p class="mt-1 text-sm text-body">Vom Maschinenbau bis zur Automotive-Zulieferung — Vor-Ort-Tage gut machbar.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faqs} />
+
+  <Cta heading="Konkrete KI-Frage oder ein Vorhaben?" sub="30 Minuten Erstgespräch. Wir klären, ob und wie KI-Beratung euch weiterbringt." lang="de" />
+</Layout>

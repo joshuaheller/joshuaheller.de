@@ -1,5 +1,5 @@
 ---
-title: 'Warum KI-Agenten besser grep nutzen als deine Vektordatenbank'
+title: 'KI-Agenten: grep statt Vektordatenbank'
 description: 'Ein neues Paper zeigt: Wenn Agenten direkt mit grep im rohen Korpus suchen statt über Embeddings, steigt die Genauigkeit und die Kosten sinken. Was das für deine RAG-Architektur bedeutet.'
 pubDate: 2026-06-03
 category: 'AI Engineering'

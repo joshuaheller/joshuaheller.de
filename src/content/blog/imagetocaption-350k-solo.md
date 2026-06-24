@@ -1,5 +1,5 @@
 ---
-title: 'Wie ich imagetocaption.ai solo auf 350.000 Nutzer skaliert habe'
+title: 'imagetocaption.ai: solo auf 350.000 Nutzer'
 description: 'Eine Build-in-Public-Story: Stack, Distribution, Lessons Learned — und was ich heute anders machen würde.'
 pubDate: 2026-04-22
 category: 'Build in Public'

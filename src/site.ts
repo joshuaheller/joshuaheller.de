@@ -17,8 +17,8 @@ export const MEGA_MENU: { title: string; items: NavLink[] }[] = [
   {
     title: 'Ich brauche KI-Verständnis',
     items: [
-      { label: 'KI-Workshop', href: '/ki-workshop', desc: 'Vom Buzzword zur Roadmap' },
-      { label: 'KI-Sparring', href: '/ki-sparring', desc: 'Externer Sparringspartner für Tech & Strategie' },
+      { label: 'KI-Workshop', href: '/ki-workshop/', desc: 'Vom Buzzword zur Roadmap' },
+      { label: 'KI-Sparring', href: '/ki-sparring/', desc: 'Externer Sparringspartner für Tech & Strategie' },
     ],
   },
   {
@@ -26,21 +26,21 @@ export const MEGA_MENU: { title: string; items: NavLink[] }[] = [
     items: [
       {
         label: 'Forward Deployed Engineer',
-        href: '/forward-deployed-engineer',
+        href: '/forward-deployed-engineer/',
         desc: 'Ich baue in deiner Codebase',
       },
-      { label: 'MVP-Service', href: '/mvp', desc: 'Vom Prototyp zum Produkt in 2–6 Wochen' },
+      { label: 'MVP-Service', href: '/mvp/', desc: 'Vom Prototyp zum Produkt in 2–6 Wochen' },
     ],
   },
   {
     title: 'Ich brauche KI-Führung',
-    items: [{ label: 'Fractional CAIO', href: '/fractional-caio', desc: 'KI-Führung auf Teilzeit' }],
+    items: [{ label: 'Fractional CAIO', href: '/fractional-caio/', desc: 'KI-Führung auf Teilzeit' }],
   },
 ];
 
 export const RESOURCES: NavLink[] = [
-  { label: 'Blog', href: '/blog' },
-  { label: 'KI-Glossar', href: '/ki-glossar' },
+  { label: 'Blog', href: '/blog/' },
+  { label: 'KI-Glossar', href: '/ki-glossar/' },
 ];
 
 export const STATS = [

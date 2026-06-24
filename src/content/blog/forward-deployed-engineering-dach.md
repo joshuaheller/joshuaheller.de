@@ -1,5 +1,5 @@
 ---
-title: 'Warum Forward Deployed Engineering die Zukunft der Beratung ist'
+title: 'Forward Deployed Engineering im DACH-Raum'
 description: 'Das FDE-Modell erklärt: Vergleich mit klassischer Beratung, der US-Ursprung bei Palantir und OpenAI — und warum DACH dem Trend zwei Jahre hinterherläuft.'
 pubDate: 2026-05-20
 category: 'KI-Strategie'

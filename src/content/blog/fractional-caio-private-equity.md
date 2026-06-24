@@ -1,5 +1,5 @@
 ---
-title: 'Warum Fractional CAIOs für Private-Equity-Firmen ein guter Invest sind'
+title: 'Fractional CAIO für Private Equity'
 description: 'Portfolio-weite KI-Hebel, schnellere Due Diligence und messbare Value Creation — ohne 200k-Vollzeit-CAIO pro Beteiligung.'
 pubDate: 2026-05-06
 category: 'KI-Strategie'

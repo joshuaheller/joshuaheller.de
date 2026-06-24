@@ -1,5 +1,5 @@
 ---
-title: 'Why Forward Deployed Engineering Is the Future of Consulting'
+title: 'Forward Deployed Engineering in DACH'
 description: 'The FDE model explained: comparison with traditional consulting, its US origins at Palantir and OpenAI — and why the DACH region is two years behind the trend.'
 pubDate: 2026-05-20
 category: 'AI Strategy'

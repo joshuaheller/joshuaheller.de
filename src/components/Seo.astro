@@ -29,7 +29,8 @@ const {
   alternatePath,
 } = Astro.props;
 
-const canonical = new URL(path, SITE.url).href;
+const withSlash = (p: string) => (p.endsWith('/') ? p : p + '/');
+const canonical = new URL(withSlash(path), SITE.url).href;
 const ogImageUrl = new URL(ogImage, SITE.url).href;
 const ogLocale = lang === 'en' ? 'en_US' : 'de_DE';
 
@@ -59,9 +60,9 @@ const enPath = lang === 'en' ? path : alternatePath;
 {
   dePath && enPath && (
     <>
-      <link rel="alternate" hreflang="de" href={new URL(dePath, SITE.url).href} />
-      <link rel="alternate" hreflang="en" href={new URL(enPath, SITE.url).href} />
-      <link rel="alternate" hreflang="x-default" href={new URL(dePath, SITE.url).href} />
+      <link rel="alternate" hreflang="de" href={new URL(withSlash(dePath), SITE.url).href} />
+      <link rel="alternate" hreflang="en" href={new URL(withSlash(enPath), SITE.url).href} />
+      <link rel="alternate" hreflang="x-default" href={new URL(withSlash(dePath), SITE.url).href} />
     </>
   )
 }

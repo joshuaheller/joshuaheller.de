@@ -83,14 +83,14 @@ const isActive = (href: string) => path === href || (href !== '/' && href !== '/
       </div>
 
       <a
-        href={lang === 'en' ? '/en/about' : '/ueber-mich'}
+        href={lang === 'en' ? '/en/about/' : '/ueber-mich/'}
         class:list={[
           'rounded-full px-3 py-2 text-sm font-medium transition hover:bg-surface-3',
-          isActive(lang === 'en' ? '/en/about' : '/ueber-mich') ? 'text-electric' : 'text-ink',
+          isActive(lang === 'en' ? '/en/about/' : '/ueber-mich/') ? 'text-electric' : 'text-ink',
         ]}>{t.nav.about}</a
       >
 
-      <a href={lang === 'en' ? '/en/contact' : '/kontakt'} class="btn btn-primary ml-2">{t.nav.cta}</a>
+      <a href={lang === 'en' ? '/en/contact/' : '/kontakt/'} class="btn btn-primary ml-2">{t.nav.cta}</a>
 
       <!-- Language switcher -->
       {alternatePath && (
@@ -162,10 +162,10 @@ const isActive = (href: string) => path === href || (href !== '/' && href !== '/
         <p class="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">{t.nav.resources}</p>
         <ul class="space-y-1">
           {t.resources.map((r) => <li><a href={r.href} class="block py-1.5 font-semibold text-ink">{r.label}</a></li>)}
-          <li><a href={lang === 'en' ? '/en/about' : '/ueber-mich'} class="block py-1.5 font-semibold text-ink">{t.nav.about}</a></li>
+          <li><a href={lang === 'en' ? '/en/about/' : '/ueber-mich/'} class="block py-1.5 font-semibold text-ink">{t.nav.about}</a></li>
         </ul>
       </div>
-      <a href={lang === 'en' ? '/en/contact' : '/kontakt'} class="btn btn-primary w-full justify-center">{t.nav.cta}</a>
+      <a href={lang === 'en' ? '/en/contact/' : '/kontakt/'} class="btn btn-primary w-full justify-center">{t.nav.cta}</a>
     </nav>
   </div>
 </header>

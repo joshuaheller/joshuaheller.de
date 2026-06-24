@@ -1,5 +1,5 @@
 ---
-title: 'Why AI Agents Are Better Off Using grep Than Your Vector Database'
+title: 'AI Agents: grep Instead of a Vector Database'
 description: 'A new paper shows: when agents search the raw corpus directly with grep instead of embeddings, accuracy goes up and cost goes down. What that means for your RAG architecture.'
 pubDate: 2026-06-03
 category: 'AI Engineering'

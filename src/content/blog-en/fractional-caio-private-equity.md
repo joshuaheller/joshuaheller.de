@@ -1,5 +1,5 @@
 ---
-title: 'Why Fractional CAIOs Are a Strong Investment for Private Equity Firms'
+title: 'Fractional CAIO for Private Equity'
 description: 'Portfolio-wide AI leverage, faster due diligence, and measurable value creation — without a €200k full-time CAIO per portfolio company.'
 pubDate: 2026-05-06
 category: 'AI Strategy'

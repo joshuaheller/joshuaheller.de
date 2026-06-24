@@ -39,17 +39,17 @@ Ein Fractional CAIO (Chief AI Officer) arbeitet part-time, aber mit echter strat
 | Recruiting-Risiko | Kein 9-Monats-Hire | Hohes Risiko bei Senior AI Roles |
 | Strategie vs. Umsetzung | Fokus auf Entscheidungen & Steuerung | Oft Implementierung ohne klare Priorisierung |
 
-Ein Fractional CAIO ersetzt kein Engineering — aber er verhindert, dass teure Teams das Falsche bauen. Für Umsetzung ergänzt sich das Modell ideal mit einem [Forward Deployed Engineer](/forward-deployed-engineer), der direkt in der Codebase liefert.
+Ein Fractional CAIO ersetzt kein Engineering — aber er verhindert, dass teure Teams das Falsche bauen. Für Umsetzung ergänzt sich das Modell ideal mit einem [Forward Deployed Engineer](/forward-deployed-engineer/), der direkt in der Codebase liefert.
 
 ## Typische Use Cases in PE-Portfolios
 
 1. **Post-Acquisition AI Assessment:** In 2–4 Wochen klären, wo KI in den nächsten 12 Monaten EBITDA bewegt — oder bewusst nicht.
 2. **Shared AI Operating Model:** Gemeinsame Eval-Standards, Vendor-Verträge und Architektur-Prinzipien über 3–5 Beteiligungen.
 3. **Management-Begleitung:** Quartalsweise AI-Reviews im Board oder beim Operating Partner — mit klaren KPIs statt Buzzword-Slides.
-4. **Build-vs-Buy-Entscheidungen:** Wann ein [MVP-Service](/mvp) reicht, wann ein FDE-Retainer, wann gar nichts.
+4. **Build-vs-Buy-Entscheidungen:** Wann ein [MVP-Service](/mvp/) reicht, wann ein FDE-Retainer, wann gar nichts.
 
 ## Was du jetzt tun kannst
 
 1. Liste deine Top-3-Beteiligungen mit dem höchsten KI-Potenzial — nicht „alle“, sondern die mit klarem Business Case.
 2. Prüfe, ob ihr heute überhaupt eine gemeinsame AI-Governance habt — oder ob jede Firma allein experimentiert.
-3. Wenn du das strukturiert angehen willst: 30 Minuten Erstgespräch zum [Fractional CAIO](/fractional-caio)-Modell.
+3. Wenn du das strukturiert angehen willst: 30 Minuten Erstgespräch zum [Fractional CAIO](/fractional-caio/)-Modell.

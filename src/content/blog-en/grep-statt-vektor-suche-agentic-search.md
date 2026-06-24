@@ -70,4 +70,4 @@ Also worth noting: this works with standard tools a coding agent like Claude Cod
 2. Check whether your corpus is large-and-static (vector DB still makes sense) or local-and-living (DCI is worth a test).
 3. Before you build the next embedding pipeline: test how far an agent with `grep` and file reads gets on your real data.
 
-Exactly these architecture decisions — and shipping them straight into your codebase — are the core of the [Forward Deployed Engineer model](/en/forward-deployed-engineer): build close to the real use case instead of advising from the outside.
+Exactly these architecture decisions — and shipping them straight into your codebase — are the core of the [Forward Deployed Engineer model](/en/forward-deployed-engineer/): build close to the real use case instead of advising from the outside.

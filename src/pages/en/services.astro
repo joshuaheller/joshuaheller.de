@@ -87,7 +87,7 @@ const situations = [
             <p class="mb-5 text-sm font-semibold uppercase tracking-wide text-muted">{col.title}</p>
             <div class="space-y-5">
               {col.services.map((s) => (
-                <a href={s.slug} class="card-line block p-6 transition hover:border-electric">
+                <a href={`${s.slug}/`} class="card-line block p-6 transition hover:border-electric">
                   <h2 class="text-lg font-bold text-ink">{s.name}</h2>
                   <p class="mt-1 text-sm text-body">{s.tagline}</p>
                   <div class="mt-4 flex items-center justify-between">
@@ -111,7 +111,7 @@ const situations = [
           situations.map((row) => (
             <div class="flex flex-col gap-3 p-5 sm:flex-row sm:items-center sm:justify-between">
               <p class="text-body">{row.s}</p>
-              <a href={row.href} class="shrink-0 font-semibold text-electric">{row.r} →</a>
+              <a href={`${row.href}/`} class="shrink-0 font-semibold text-electric">{row.r} →</a>
             </div>
           ))
         }

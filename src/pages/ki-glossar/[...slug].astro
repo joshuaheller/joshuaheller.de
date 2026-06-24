@@ -30,7 +30,7 @@ const defLd = {
   jsonLd={[defLd]}
 >
   <article class="container-page max-w-3xl py-16">
-    <p class="text-sm text-muted"><a href="/ki-glossar" class="hover:text-electric">KI-Glossar</a></p>
+    <p class="text-sm text-muted"><a href="/ki-glossar/" class="hover:text-electric">KI-Glossar</a></p>
     <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-ink md:text-5xl">
       {entry.data.term}{entry.data.abbr && <span class="text-muted"> ({entry.data.abbr})</span>}
     </h1>
@@ -50,7 +50,7 @@ const defLd = {
           <p class="text-sm font-semibold text-ink">Verwandte Begriffe</p>
           <div class="mt-3 flex flex-wrap gap-2">
             {entry.data.related.map((slug) => (
-              <a href={`/ki-glossar/${slug}`} class="pill hover:bg-surface-2">
+              <a href={`/ki-glossar/${slug}/`} class="pill hover:bg-surface-2">
                 {slug.replace(/-/g, ' ')}
               </a>
             ))}

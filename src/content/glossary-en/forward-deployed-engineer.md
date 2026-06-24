@@ -19,4 +19,4 @@ A B2B SaaS company wants to add an AI co-pilot to their product. The internal te
 
 ## When This Is Relevant for You
 
-I work exactly in this model — as a Forward Deployed Engineer for software companies, scaleups, and mid-market firms. More on the [FDE service page](/en/forward-deployed-engineer).
+I work exactly in this model — as a Forward Deployed Engineer for software companies, scaleups, and mid-market firms. More on the [FDE service page](/en/forward-deployed-engineer/).

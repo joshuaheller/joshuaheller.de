@@ -19,4 +19,4 @@ A mid-market company or enterprise knows AI is strategically important but has n
 
 ## When This Is Relevant for You
 
-I work as Fractional CAIO for mid-market companies, enterprises, scaleups, and private equity portfolios — exclusively on retainer. More on the [Fractional CAIO service page](/en/fractional-caio).
+I work as Fractional CAIO for mid-market companies, enterprises, scaleups, and private equity portfolios — exclusively on retainer. More on the [Fractional CAIO service page](/en/fractional-caio/).

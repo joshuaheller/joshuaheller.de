@@ -19,4 +19,4 @@ Ein Mittelständler oder Konzern weiß, dass KI strategisch wichtig wird, hat ab
 
 ## Wann das bei mir relevant ist
 
-Ich arbeite als Fractional CAIO für Mittelständler, Konzerne, Scaleups und Private-Equity-Portfolios im DACH-Raum — ausschließlich im Retainer. Mehr dazu auf der [Fractional-CAIO-Seite](/fractional-caio).
+Ich arbeite als Fractional CAIO für Mittelständler, Konzerne, Scaleups und Private-Equity-Portfolios im DACH-Raum — ausschließlich im Retainer. Mehr dazu auf der [Fractional-CAIO-Seite](/fractional-caio/).

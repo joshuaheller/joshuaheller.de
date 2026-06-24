@@ -37,4 +37,4 @@ Monetization came too late. The tool was strong, the distribution was strong —
 2. Test distribution earlier than features.
 3. Validate willingness to pay before spending months building out.
 
-This thinking is exactly what drives the [MVP Service](/en/mvp): real user data in 2–4 weeks instead of 6 months of planning.
+This thinking is exactly what drives the [MVP Service](/en/mvp/): real user data in 2–4 weeks instead of 6 months of planning.

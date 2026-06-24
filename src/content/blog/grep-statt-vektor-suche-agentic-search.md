@@ -70,4 +70,4 @@ Spannend ist auch: Das funktioniert mit Standard-Werkzeugen, die ein Coding-Agen
 2. Prüfe, ob dein Korpus eher groß-und-statisch (Vektor-DB bleibt sinnvoll) oder lokal-und-lebendig (DCI lohnt einen Test) ist.
 3. Bevor du die nächste Embedding-Pipeline baust: teste, wie weit ein Agent mit `grep` und File-Reads auf deinen echten Daten kommt.
 
-Genau solche Architektur-Entscheidungen — und ihre Umsetzung direkt in deiner Codebase — sind der Kern des [Forward-Deployed-Engineer-Modells](/forward-deployed-engineer): nah am echten Use Case bauen, statt von außen zu beraten.
+Genau solche Architektur-Entscheidungen — und ihre Umsetzung direkt in deiner Codebase — sind der Kern des [Forward-Deployed-Engineer-Modells](/forward-deployed-engineer/): nah am echten Use Case bauen, statt von außen zu beraten.

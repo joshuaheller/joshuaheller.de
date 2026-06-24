@@ -37,4 +37,4 @@ Die Monetarisierung kam zu spät. Das Tool war stark, die Distribution stark —
 2. Teste Distribution früher als Features.
 3. Validiere die Zahlungsbereitschaft, bevor du monatelang ausbaust.
 
-Genau diese Denke steckt im [MVP-Service](/mvp): in 2–4 Wochen zu echten Nutzer-Daten statt 6 Monate Konzept.
+Genau diese Denke steckt im [MVP-Service](/mvp/): in 2–4 Wochen zu echten Nutzer-Daten statt 6 Monate Konzept.

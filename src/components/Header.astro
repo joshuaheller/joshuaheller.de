@@ -12,6 +12,7 @@ const t = useTranslations(lang);
 
 const path = new URL(Astro.request.url).pathname;
 const isActive = (href: string) => path === href || (href !== '/' && href !== '/en/' && path.startsWith(href));
+const altPath = alternatePath && !alternatePath.endsWith('/') ? alternatePath + '/' : alternatePath;
 ---
 
 <header class="sticky top-0 z-40 border-b border-line/70 bg-white/80 backdrop-blur-md">
@@ -98,11 +99,11 @@ const isActive = (href: string) => path === href || (href !== '/' && href !== '/
           {lang === 'de' ? (
             <>
               <span class="rounded-full bg-electric px-2.5 py-1 text-xs font-bold text-white">DE</span>
-              <a href={alternatePath} class="rounded-full px-2.5 py-1 text-xs font-bold text-muted transition hover:text-ink">EN</a>
+              <a href={altPath} class="rounded-full px-2.5 py-1 text-xs font-bold text-muted transition hover:text-ink">EN</a>
             </>
           ) : (
             <>
-              <a href={alternatePath} class="rounded-full px-2.5 py-1 text-xs font-bold text-muted transition hover:text-ink">DE</a>
+              <a href={altPath} class="rounded-full px-2.5 py-1 text-xs font-bold text-muted transition hover:text-ink">DE</a>
               <span class="rounded-full bg-electric px-2.5 py-1 text-xs font-bold text-white">EN</span>
             </>
           )}
@@ -117,11 +118,11 @@ const isActive = (href: string) => path === href || (href !== '/' && href !== '/
           {lang === 'de' ? (
             <>
               <span class="rounded-full bg-electric px-2 py-0.5 text-xs font-bold text-white">DE</span>
-              <a href={alternatePath} class="rounded-full px-2 py-0.5 text-xs font-bold text-muted">EN</a>
+              <a href={altPath} class="rounded-full px-2 py-0.5 text-xs font-bold text-muted">EN</a>
             </>
           ) : (
             <>
-              <a href={alternatePath} class="rounded-full px-2 py-0.5 text-xs font-bold text-muted">DE</a>
+              <a href={altPath} class="rounded-full px-2 py-0.5 text-xs font-bold text-muted">DE</a>
               <span class="rounded-full bg-electric px-2 py-0.5 text-xs font-bold text-white">EN</span>
             </>
           )}

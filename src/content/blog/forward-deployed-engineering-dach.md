@@ -39,4 +39,4 @@ Der DACH-Beratungsmarkt ist auf Tagessätze und Deliverables optimiert, nicht au
 2. Frag dich ehrlich, ob dein Team die Production-Lücke allein schließen kann.
 3. Wenn nicht: lass uns 30 Minuten über das FDE-Modell sprechen.
 
-Mehr dazu auf der [FDE-Service-Seite](/forward-deployed-engineer).
+Mehr dazu auf der [FDE-Service-Seite](/forward-deployed-engineer/).

@@ -45,7 +45,7 @@ const letters = Object.keys(groups).sort();
               <h2 class="text-2xl font-extrabold text-electric">{letter}</h2>
               <div class="mt-4 grid gap-4 md:grid-cols-2">
                 {groups[letter].map((e) => (
-                  <a href={`/en/glossary/${e.id}`} class="card-line block p-5 transition hover:border-electric">
+                  <a href={`/en/glossary/${e.id}/`} class="card-line block p-5 transition hover:border-electric">
                     <h3 class="font-bold text-ink">
                       {e.data.term}
                       {e.data.abbr && <span class="text-muted"> ({e.data.abbr})</span>}

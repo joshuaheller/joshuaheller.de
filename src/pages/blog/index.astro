@@ -36,7 +36,7 @@ const fmt = (d: Date) => d.toLocaleDateString('de-DE', { day: 'numeric', month: 
         <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
             <article class="card-line overflow-hidden transition hover:border-electric">
-              <a href={`/blog/${post.id}`}>
+              <a href={`/blog/${post.id}/`}>
                 <BlogCover name={post.data.heroImage} alt={post.data.title} ratio="16/9" rounded="rounded-none" />
                 <div class="p-6">
                   <p class="text-xs text-muted">

@@ -39,4 +39,4 @@ The DACH consulting market is optimized for day rates and deliverables, not outc
 2. Ask yourself honestly whether your team can close the production gap alone.
 3. If not: let's spend 30 minutes talking about the FDE model.
 
-More on the [FDE service page](/en/forward-deployed-engineer).
+More on the [FDE service page](/en/forward-deployed-engineer/).

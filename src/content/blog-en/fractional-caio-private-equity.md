@@ -39,17 +39,17 @@ A Fractional CAIO (Chief AI Officer) works part-time but with real strategic own
 | Recruiting risk | No 9-month senior AI hire | High risk on senior AI roles |
 | Strategy vs. execution | Focus on decisions & steering | Often implementation without clear prioritization |
 
-A Fractional CAIO doesn't replace engineering — but prevents expensive teams from building the wrong thing. For execution, the model pairs well with a [Forward Deployed Engineer](/en/forward-deployed-engineer) who delivers directly in the codebase.
+A Fractional CAIO doesn't replace engineering — but prevents expensive teams from building the wrong thing. For execution, the model pairs well with a [Forward Deployed Engineer](/en/forward-deployed-engineer/) who delivers directly in the codebase.
 
 ## Typical Use Cases in PE Portfolios
 
 1. **Post-acquisition AI assessment:** In 2–4 weeks, clarify where AI moves EBITDA in the next 12 months — or deliberately doesn't.
 2. **Shared AI operating model:** Common eval standards, vendor contracts, and architecture principles across 3–5 holdings.
 3. **Management support:** Quarterly AI reviews with the board or operating partner — with clear KPIs instead of buzzword slides.
-4. **Build vs. buy decisions:** When an [MVP Service](/en/mvp) is enough, when an FDE retainer makes sense, when to do nothing.
+4. **Build vs. buy decisions:** When an [MVP Service](/en/mvp/) is enough, when an FDE retainer makes sense, when to do nothing.
 
 ## What You Can Do Now
 
 1. List your top 3 holdings with the highest AI potential — not "all of them," but those with a clear business case.
 2. Check whether you have shared AI governance today — or whether every company experiments alone.
-3. If you want to approach this structurally: a 30-minute intro call about the [Fractional CAIO](/en/fractional-caio) model.
+3. If you want to approach this structurally: a 30-minute intro call about the [Fractional CAIO](/en/fractional-caio/) model.

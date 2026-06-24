@@ -109,8 +109,8 @@ const faqs = [
           <strong class="text-ink">Fractional CAIO</strong> führe ich deine KI-Strategie. Keine Slide-Decks. Echte Systeme.
         </p>
         <div class="mt-8 flex flex-wrap gap-4">
-          <a href="/kontakt" class="btn btn-primary">Erstgespräch vereinbaren →</a>
-          <a href="/leistungen" class="btn btn-ghost">Alle Leistungen</a>
+          <a href="/kontakt/" class="btn btn-primary">Erstgespräch vereinbaren →</a>
+          <a href="/leistungen/" class="btn btn-ghost">Alle Leistungen</a>
         </div>
       </div>
       <Photo name="cafe.jpg" alt="Joshua Heller, AI Engineer und Fractional CAIO, am Laptop" ratio="4/3" priority />
@@ -142,7 +142,7 @@ const faqs = [
           wettbewerbsfähiger machen.</strong> Nicht durch Buzzwords. Durch Code, der läuft.
         </p>
       </div>
-      <a href="/ueber-mich" class="btn btn-ghost mt-8">Mehr über mich</a>
+      <a href="/ueber-mich/" class="btn btn-ghost mt-8">Mehr über mich</a>
     </div>
     <Photo name="event.jpg" alt="Joshua Heller bei einem KI-Event auf der Bühne" ratio="4/3" />
   </section>
@@ -156,7 +156,7 @@ const faqs = [
           <div class="card-line flex flex-col p-7">
             <h3 class="text-xl font-bold text-ink">{c.title}</h3>
             <p class="mt-3 flex-1 text-body">{c.body}</p>
-            <a href={c.href} class="mt-6 inline-flex items-center gap-1 font-semibold text-electric">{c.cta} →</a>
+            <a href={`${c.href}/`} class="mt-6 inline-flex items-center gap-1 font-semibold text-electric">{c.cta} →</a>
           </div>
         ))
       }
@@ -224,7 +224,7 @@ const faqs = [
               <p class="mt-3 text-body">{t.body}</p>
               <div class="mt-6 flex flex-wrap items-center gap-4">
                 <span class="pill">{t.price}</span>
-                <a href={t.href} class="font-semibold text-electric">Mehr erfahren →</a>
+                <a href={`${t.href}/`} class="font-semibold text-electric">Mehr erfahren →</a>
               </div>
             </div>
           ))

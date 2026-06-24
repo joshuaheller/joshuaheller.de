@@ -107,8 +107,8 @@ const faqs = [
           <strong class="text-ink">Fractional CAIO</strong> I lead your AI strategy. No slide decks. Real systems.
         </p>
         <div class="mt-8 flex flex-wrap gap-4">
-          <a href="/en/contact" class="btn btn-primary">Book a Call →</a>
-          <a href="/en/services" class="btn btn-ghost">All Services</a>
+          <a href="/en/contact/" class="btn btn-primary">Book a Call →</a>
+          <a href="/en/services/" class="btn btn-ghost">All Services</a>
         </div>
       </div>
       <Photo name="cafe.jpg" alt="Joshua Heller, AI Engineer and Fractional CAIO, at his laptop" ratio="4/3" priority />
@@ -136,7 +136,7 @@ const faqs = [
           My mission: <strong class="text-ink">making mid-market companies, enterprises, and software firms more competitive with AI.</strong> Not through buzzwords. Through code that runs.
         </p>
       </div>
-      <a href="/en/about" class="btn btn-ghost mt-8">More about me</a>
+      <a href="/en/about/" class="btn btn-ghost mt-8">More about me</a>
     </div>
     <Photo name="event.jpg" alt="Joshua Heller speaking at an AI event" ratio="4/3" />
   </section>
@@ -150,7 +150,7 @@ const faqs = [
           <div class="card-line flex flex-col p-7">
             <h3 class="text-xl font-bold text-ink">{c.title}</h3>
             <p class="mt-3 flex-1 text-body">{c.body}</p>
-            <a href={c.href} class="mt-6 inline-flex items-center gap-1 font-semibold text-electric">{c.cta} →</a>
+            <a href={`${c.href}/`} class="mt-6 inline-flex items-center gap-1 font-semibold text-electric">{c.cta} →</a>
           </div>
         ))
       }
@@ -215,7 +215,7 @@ const faqs = [
               <p class="mt-3 text-body">{t.body}</p>
               <div class="mt-6 flex flex-wrap items-center gap-4">
                 <span class="pill">{t.price}</span>
-                <a href={t.href} class="font-semibold text-electric">Learn more →</a>
+                <a href={`${t.href}/`} class="font-semibold text-electric">Learn more →</a>
               </div>
             </div>
           ))

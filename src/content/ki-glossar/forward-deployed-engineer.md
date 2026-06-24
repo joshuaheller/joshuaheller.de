@@ -19,4 +19,4 @@ Ein deutsches B2B-SaaS-Unternehmen will einen KI-Co-Piloten in sein Produkt einb
 
 ## Wann das bei mir relevant ist
 
-Ich arbeite genau in diesem Modell — als Forward Deployed Engineer für Software-Firmen, Scaleups und Mittelständler im DACH-Raum. Mehr dazu auf der [FDE-Service-Seite](/forward-deployed-engineer).
+Ich arbeite genau in diesem Modell — als Forward Deployed Engineer für Software-Firmen, Scaleups und Mittelständler im DACH-Raum. Mehr dazu auf der [FDE-Service-Seite](/forward-deployed-engineer/).

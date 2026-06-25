@@ -33,9 +33,9 @@ const altPath = alternatePath && !alternatePath.endsWith('/') ? alternatePath + 
           <Icon name="lucide:chevron-down" class="size-4 transition group-hover:rotate-180" />
         </button>
         <div
-          class="invisible absolute left-1/2 top-full z-50 w-[44rem] -translate-x-1/2 pt-3 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
+          class="invisible absolute left-1/2 top-full z-50 w-[54rem] -translate-x-1/2 pt-3 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
         >
-          <div class="card-glass grid grid-cols-3 gap-5 p-6">
+          <div class="grid grid-cols-4 gap-5 rounded-[20px] border border-line bg-white p-6 shadow-2xl">
             {
               t.megaMenu.map((col) => (
                 <div>
@@ -43,7 +43,7 @@ const altPath = alternatePath && !alternatePath.endsWith('/') ? alternatePath + 
                   <ul class="space-y-3">
                     {col.items.map((item) => (
                       <li>
-                        <a href={item.href} class="block rounded-xl px-2 py-1.5 transition hover:bg-white/70">
+                        <a href={item.href} class="block rounded-xl px-2 py-1.5 transition hover:bg-surface-3">
                           <span class="block text-sm font-semibold text-ink">{item.label}</span>
                           <span class="block text-xs text-muted">{item.desc}</span>
                         </a>
@@ -67,12 +67,12 @@ const altPath = alternatePath && !alternatePath.endsWith('/') ? alternatePath + 
           <Icon name="lucide:chevron-down" class="size-4 transition group-hover:rotate-180" />
         </button>
         <div class="invisible absolute left-0 top-full z-50 w-56 pt-3 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-          <div class="card-glass p-3">
+          <div class="rounded-[20px] border border-line bg-white p-3 shadow-xl">
             <ul class="space-y-1">
               {
                 t.resources.map((r) => (
                   <li>
-                    <a href={r.href} class="block rounded-lg px-3 py-2 text-sm font-medium text-ink transition hover:bg-white/70">
+                    <a href={r.href} class="block rounded-lg px-3 py-2 text-sm font-medium text-ink transition hover:bg-surface-3">
                       {r.label}
                     </a>
                   </li>

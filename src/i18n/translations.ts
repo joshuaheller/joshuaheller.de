@@ -21,7 +21,7 @@ export const translations = {
       {
         title: 'Ich suche KI-Beratung',
         items: [
-          { label: 'KI-Beratung', href: '/ki-beratung/', desc: 'Strategie & Umsetzung — ohne Agentur-Overhead' },
+          { label: 'KI-Beratung', href: '/ki-beratung/', desc: 'Strategie & Umsetzung ohne Agentur-Overhead' },
         ],
       },
       {

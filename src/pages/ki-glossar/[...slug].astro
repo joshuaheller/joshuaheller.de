@@ -19,6 +19,16 @@ const defLd = {
   description: entry.data.tldr,
   inDefinedTermSet: `${SITE.url}/ki-glossar`,
 };
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+    { '@type': 'ListItem', position: 2, name: 'KI-Glossar', item: `${SITE.url}/ki-glossar/` },
+    { '@type': 'ListItem', position: 3, name: entry.data.term, item: `${SITE.url}/ki-glossar/${entry.id}/` },
+  ],
+};
 ---
 
 <Layout
@@ -27,7 +37,7 @@ const defLd = {
   path={`/ki-glossar/${entry.id}`}
   lang="de"
   alternatePath={`/en/glossary/${entry.id}`}
-  jsonLd={[defLd]}
+  jsonLd={[defLd, breadcrumbLd]}
 >
   <article class="container-page max-w-3xl py-16">
     <p class="text-sm text-muted"><a href="/ki-glossar/" class="hover:text-electric">KI-Glossar</a></p>

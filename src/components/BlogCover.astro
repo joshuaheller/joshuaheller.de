@@ -27,12 +27,25 @@ const {
   position = 'center',
 } = Astro.props;
 
-const entry = name ? images[`../assets/blog/${name}`] : undefined;
+// `name` is either a local filename under src/assets/blog/ (optimized via astro:assets)
+// or an absolute URL (e.g. a generated image), rendered as a plain <img>.
+const isRemote = name?.startsWith('http');
+const entry = !isRemote && name ? images[`../assets/blog/${name}`] : undefined;
 const img = entry?.default;
 ---
 
 {
-  img ? (
+  isRemote ? (
+    <div class:list={['overflow-hidden border border-line', rounded, cls]} style={`aspect-ratio:${ratio}`}>
+      <img
+        src={name}
+        alt={alt}
+        loading={priority ? 'eager' : 'lazy'}
+        class="h-full w-full object-cover"
+        style={`object-position:${position}`}
+      />
+    </div>
+  ) : img ? (
     <div class:list={['overflow-hidden border border-line', rounded, cls]} style={`aspect-ratio:${ratio}`}>
       <Image
         src={img}

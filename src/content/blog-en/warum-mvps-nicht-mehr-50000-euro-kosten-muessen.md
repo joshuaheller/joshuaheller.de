@@ -4,7 +4,7 @@ description: "An honest take on why I price MVPs at TAISC for a fraction of clas
 pubDate: 2026-07-01
 category: 'Build in Public'
 readingTime: '9 min.'
-heroImage: 'https://replicate.delivery/xezq/y9U20cPmegxQUa813RYwXeumdVFbo74ojIfHv1Z2a3eGn7SbB/tmpdtwi13so.webp'
+heroImage: 'mvp-preis-warum-anders-kalkuliert.png'
 draft: false
 ---
 
